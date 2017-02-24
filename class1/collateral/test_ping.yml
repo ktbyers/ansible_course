@@ -1,0 +1,11 @@
+---
+
+- name: Ping pynet-rtr1
+  hosts: pynet-rtr1
+  tasks:
+   - ping:
+
+- name: Ping pynet-rtr2
+  hosts: pynet-rtr2
+  tasks:
+   - ping:
