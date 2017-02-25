@@ -1,0 +1,41 @@
+---
+
+- name: Module testing
+  hosts: servers
+  tasks:
+    - name: Ping server
+      ping:
+
+    - name: Create my_test virtualenv
+      pip: 
+        name: pysnmp
+        virtualenv: /home/kbyers/my_test
+
+#    - name: Install Netmiko
+#      pip:
+#        name: netmiko 
+#        version: 1.2.8
+#        virtualenv: /home/kbyers/my_test
+
+    - name: Install Netmiko (develop branch)
+      pip:
+        name: git+https://github.com/ktbyers/netmiko
+        editable: false
+        virtualenv: /home/kbyers/my_test
+
+    # Copy files from control machine to remote system
+#    - copy: 
+#        src: ansible-hosts 
+#        dest: /home/kbyers/ansible-hosts 
+#        owner: kbyers
+#        group: kbyers
+#        mode: 0644
+#
+#    - name: Create .bashrc for each user
+#      template: 
+#        src: bashrc.j2 
+#        dest: /home/kbyers/.bashrc
+#      sudo_user: kbyers
+
+    - name: Execute ls
+      command: ls -al
