@@ -1,0 +1,8 @@
+---
+
+- name: Variable testing
+  hosts: pynet-rtr1:pynet-rtr2
+  tasks:
+    - debug: msg="{{ username }}"
+    - debug: msg="{{ ansible_python_interpreter }}"
+    - debug: msg="{{ some_var }}"

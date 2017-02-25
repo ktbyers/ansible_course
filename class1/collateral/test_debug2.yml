@@ -1,0 +1,6 @@
+---
+
+- name: Variable testing
+  hosts: servers
+  tasks:
+    - debug: msg="{{ ansible_all_ipv4_addresses }}"

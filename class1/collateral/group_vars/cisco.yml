@@ -1,0 +1,5 @@
+---
+ansible_connection: local
+ansible_python_interpreter: /home/kbyers/VENV/ansible/bin/python
+username: pyclass
+password: invalid
