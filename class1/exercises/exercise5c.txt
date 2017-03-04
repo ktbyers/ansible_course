@@ -1,0 +1,40 @@
+$ ansible-playbook exercise5c.yml -i ~/my-inventory 
+
+PLAY [Exercise 5c (testing host_vars)] *****************************************
+
+TASK [setup] *******************************************************************
+ok: [pynet-rtr2]
+ok: [pynet-rtr1]
+
+TASK [debug] *******************************************************************
+ok: [pynet-rtr1] => {
+    "msg": 200
+}
+ok: [pynet-rtr2] => {
+    "msg": 300
+}
+
+PLAY RECAP *********************************************************************
+pynet-rtr1                 : ok=2    changed=0    unreachable=0    failed=0   
+pynet-rtr2                 : ok=2    changed=0    unreachable=0    failed=0   
+
+
+
+$ cd ~
+$ tree host_vars
+host_vars
+├── pynet-rtr1
+│   └── bgp_vars.yml
+└── pynet-rtr2
+    └── bgp_vars.yml
+
+2 directories, 2 files
+
+$ cat host_vars/pynet-rtr1/bgp_vars.yml 
+---
+remote_as_number: 200
+
+$ cat host_vars/pynet-rtr2/bgp_vars.yml 
+---
+remote_as_number: 300
+

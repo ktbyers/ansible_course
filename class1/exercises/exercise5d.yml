@@ -1,0 +1,30 @@
+---
+# Add two new variables directly into your playbook. These variables should correspond to
+# ntp_server1 and ntp_server2 and have values of 20.20.20.20 and 20.20.20.30, respectively. Create
+# a final playbook that properly prints out the following variables: inventory_hostname,
+# ansible_host, local_as_number, remote_as_number, ntp_server1, and ntp_server2.
+
+- name: Exercise 5d (Variable testing)
+  hosts: cisco
+  vars:
+    ntp_server1: 20.20.20.20
+    ntp_server2: 20.20.20.30
+  tasks:
+    - name: inventory_hostname
+      debug:
+        msg: "{{ inventory_hostname }}"
+    - name: ansible_host
+      debug:
+        msg: "{{ ansible_host }}"
+    - name: local_as_number
+      debug:
+        msg: "{{ local_as_number }}"
+    - name: remote_as_number
+      debug:
+        msg: "{{ remote_as_number }}"
+    - name: ntp_server1
+      debug:
+        msg: "{{ ntp_server1 }}"
+    - name: ntp_server2
+      debug:
+        msg: "{{ ntp_server2 }}"

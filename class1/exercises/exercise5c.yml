@@ -1,0 +1,9 @@
+---
+# Add a "Host Var" for the variable remote_as_number. This variable should have a value of 200 for 
+# pynet-rtr1 and a value of 300 for pynet-rtr2. 
+
+- name: Exercise 5c (testing host_vars)
+  hosts: cisco
+  tasks:
+    - debug:
+        msg: "{{ remote_as_number }}"
