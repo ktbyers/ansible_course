@@ -1,0 +1,33 @@
+$ ansible-playbook exercise5b.yml -i ~/my-inventory 
+
+PLAY [Exercise 5b] *************************************************************
+
+TASK [setup] *******************************************************************
+ok: [pynet-rtr2]
+ok: [pynet-rtr1]
+
+TASK [debug] *******************************************************************
+ok: [pynet-rtr1] => {
+    "msg": 100
+}
+ok: [pynet-rtr2] => {
+    "msg": 100
+}
+
+PLAY RECAP *********************************************************************
+pynet-rtr1                 : ok=2    changed=0    unreachable=0    failed=0   
+pynet-rtr2                 : ok=2    changed=0    unreachable=0    failed=0   
+
+
+
+$ cd ~
+$ tree group_vars
+group_vars
+└── cisco.yml
+
+0 directories, 1 file
+
+$ cat group_vars/cisco.yml 
+---
+local_as_number: 100
+

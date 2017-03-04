@@ -1,0 +1,15 @@
+
+$ ansible all -m ping -i ~/my-inventory 
+localhost | SUCCESS => {
+    "changed": false, 
+    "ping": "pong"
+}
+pynet-rtr2 | SUCCESS => {
+    "changed": false, 
+    "ping": "pong"
+}
+pynet-rtr1 | SUCCESS => {
+    "changed": false, 
+    "ping": "pong"
+}
+

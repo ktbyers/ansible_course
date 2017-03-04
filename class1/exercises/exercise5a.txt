@@ -1,0 +1,21 @@
+$ ansible-playbook exercise5a.yml -i ~/my-inventory 
+
+PLAY [Exercise 5a] *************************************************************
+
+TASK [setup] *******************************************************************
+ok: [pynet-rtr1]
+ok: [pynet-rtr2]
+
+TASK [debug] *******************************************************************
+ok: [pynet-rtr1] => {
+    "msg": "184.105.247.70"
+}
+ok: [pynet-rtr2] => {
+    "msg": "184.105.247.71"
+}
+
+PLAY RECAP *********************************************************************
+pynet-rtr1                 : ok=2    changed=0    unreachable=0    failed=0   
+pynet-rtr2                 : ok=2    changed=0    unreachable=0    failed=0   
+
+

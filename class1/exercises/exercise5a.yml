@@ -1,0 +1,10 @@
+---
+# Create a new playbook that uses the debug module to print out Ansible variables. 
+# Run this playbook against the two Cisco routers and print out the {{ ansible_host }} variable 
+# which should map to the IP address.
+
+- name: Exercise 5a
+  hosts: cisco
+  tasks:
+    - debug:
+        msg: "{{ ansible_host }}"

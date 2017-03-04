@@ -1,0 +1,10 @@
+---
+# Add a "Group Var" for the variable local_as_number with a value of 100. This variable should 
+# exist for all members of the cisco group. Once again use the debug task from exercise5 to verify
+# you properly see this variable when you execute a playbook.
+
+- name: Exercise 5b
+  hosts: cisco
+  tasks:
+    - debug:
+        msg: "{{ local_as_number }}"
