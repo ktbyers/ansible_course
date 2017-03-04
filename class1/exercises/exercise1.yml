@@ -1,0 +1,13 @@
+---
+# Create a YAML list in a file.
+# Use Python to read it and print it to the screen. The list should have at least four elements.
+
+- 0
+- some string
+- true
+- off
+- some other string
+- key1: value1
+  key2: value2
+  key3: value3
+- last string

@@ -1,0 +1,16 @@
+
+$ ansible-playbook exercise3c.yml -i ~/my-inventory -v
+Using /home/kbyers/.ansible.cfg as config file
+
+PLAY [Exercise 3c] *************************************************************
+
+TASK [setup] *******************************************************************
+ok: [localhost]
+
+TASK [ping] ********************************************************************
+ok: [localhost] => {"changed": false, "ping": "pong"}
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=2    changed=0    unreachable=0    failed=0   
+
+
