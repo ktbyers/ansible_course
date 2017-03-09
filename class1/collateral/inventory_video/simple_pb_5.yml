@@ -1,0 +1,6 @@
+---
+- name: Print out variables
+  hosts: cisco:pynet-sw1
+  tasks:
+    - debug:
+        msg: "{{ ansible_host }}"

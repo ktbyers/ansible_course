@@ -1,0 +1,6 @@
+---
+
+ip_addr: 10.10.10.1
+username: admin
+password: whatever
+device_type: cisco_ios

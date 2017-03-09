@@ -1,0 +1,6 @@
+---
+- name: Print out variables
+  hosts: cisco:arista
+  tasks:
+    - debug:
+        msg: "{{ ansible_host }}"

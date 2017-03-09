@@ -1,0 +1,11 @@
+---
+- name: Print out variables
+  hosts: local
+  vars:
+    dns1: 8.8.8.8
+    dns2: 8.8.4.4
+  vars_files:
+    - my_vars.yml
+  tasks:
+    - debug:
+        msg: "{{ ansible_all_ipv6_addresses }}"

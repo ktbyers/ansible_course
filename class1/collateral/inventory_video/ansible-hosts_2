@@ -1,15 +1,13 @@
 [local]
 localhost ansible_connection=local
 
-[servers]
-pylab10b ansible_host=pylab10b.twb-tech.com
-
 [cisco]
 pynet-rtr1 ansible_host=184.105.247.70
 pynet-rtr2 ansible_host=184.105.247.71 
 
 [cisco:vars]
-ansible_connection=local
-ansible_python_interpreter=/home/kbyers/VENV/ansible/bin/python
 username=pyclass
-password=88newclass
+password=invalid
+ansible_connection=local
+# You will need to update this to your Python
+ansible_python_interpreter=/home/kbyers/VENV/ansible/bin/python

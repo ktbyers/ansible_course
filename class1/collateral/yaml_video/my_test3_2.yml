@@ -1,0 +1,4 @@
+---
+
+# Showing YAML in compressed form
+[ whatever, 10, 10.1, false, true, some string ]

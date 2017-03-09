@@ -1,0 +1,5 @@
+---
+- name: Simple ping
+  hosts: cisco
+  tasks:
+    - ping:
