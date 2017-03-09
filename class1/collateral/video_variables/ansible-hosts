@@ -1,0 +1,25 @@
+[all:vars]
+ansible_connection=local
+# You will need to update this to your Python
+ansible_python_interpreter=/home/kbyers/VENV/ansible/bin/python
+
+[local]
+localhost ansible_connection=local
+
+[cisco]
+pynet-rtr1 ansible_host=184.105.247.70
+pynet-rtr2 ansible_host=184.105.247.71 
+
+[cisco:vars]
+username=pyclass
+password=invalid
+
+[arista]
+pynet-sw1 ansible_host=184.105.247.72
+pynet-sw2 ansible_host=184.105.247.73
+pynet-sw3 ansible_host=184.105.247.74
+pynet-sw4 ansible_host=184.105.247.75
+
+[arista:vars]
+username=pyclass
+password=invalid
