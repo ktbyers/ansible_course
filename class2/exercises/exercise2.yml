@@ -1,0 +1,33 @@
+---
+# Add a second task onto the playbook where you execute ‘ios_command’ and execute ‘show arp’ on the two routers.
+# ‘Register’ the output of ‘show arp’ and save this to a show_arp variable
+# Strip out the stdout_lines from this registered variable.
+# Inspect the variable that you have remaining. It should be a list inside a list. Strip off the
+# outer most list and save what is remaining to show_arp_new (using set_fact)
+# Print out show_arp_new to the screen.
+
+- name: Gather facts (Cisco)
+  gather_facts: no
+  hosts: cisco
+  vars:
+    creds:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+
+  tasks:
+
+    - ios_command:
+        provider: "{{ creds }}"
+        commands: show arp
+      register: show_arp
+
+    - debug:
+        msg: "{{ show_arp.stdout_lines }}"
+
+    - set_fact:
+        show_arp_new: "{{ show_arp.stdout_lines[0] }}"
+
+    - debug:
+        var: show_arp_new
+        

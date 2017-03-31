@@ -1,0 +1,34 @@
+---
+# Construct a new playbook using the ‘eos_command’ module. Run this against the four Arista switches. Will need to mention transport
+# Add three tasks, one that executes ‘show version’, one that executes ‘show switch’, and one execute ‘show ip int brief’
+# Assign the following tags to each task “show_version”, “show_switch”, and “show_ip”
+# Execute the playbook using tags to only cause the one task to execute.
+# Use the --limit option to run the playbook only against arista-sw2
+
+- name: EOS exercise3
+  hosts: arista
+  tasks: 
+    - eos_command:
+        host: "{{ ansible_host }}" 
+        username: "{{ username }}" 
+        password: "{{ password }}" 
+        transport: https
+        commands: show arp
+      tags: show_arp
+
+    - eos_command:
+        host: "{{ ansible_host }}" 
+        username: "{{ username }}" 
+        password: "{{ password }}" 
+        transport: https
+        commands: show mac address-table
+      tags: show_switch
+
+    - eos_command:
+        host: "{{ ansible_host }}" 
+        username: "{{ username }}" 
+        password: "{{ password }}" 
+        transport: https
+        commands: show ip int brief
+      tags: show_ip
+
