@@ -1,5 +1,5 @@
 ---
-# Create a simple Playbook that uses this Inventory file and calls the ping module. Verify you can
+# Create a simple Playbook that uses the ./my-inventory file and calls the ping module. Verify you can
 # execute this playbook successfully.
 
 - name: Exercise 3c

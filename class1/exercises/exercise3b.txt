@@ -1,9 +1,8 @@
 # Using the command-line ansible command, make sure you can execute the ping module against the
-# Inventory file that you created in step 3a. Use the '-i ~/my-inventory' arguments to specify 
+# Inventory file that you created in step 3a. Use the '-i ./my-inventory' arguments to specify 
 # the inventory file to use.
 
-$ ansible local -m ping -i ~/my-inventory 
-
+$ ansible local -m ping -i ./ex3a_my-inventory 
 localhost | SUCCESS => {
     "changed": false, 
     "ping": "pong"
