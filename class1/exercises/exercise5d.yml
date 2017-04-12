@@ -13,18 +13,23 @@
     - name: inventory_hostname
       debug:
         msg: "{{ inventory_hostname }}"
+
     - name: ansible_host
       debug:
         msg: "{{ ansible_host }}"
+
     - name: local_as_number
       debug:
         msg: "{{ local_as_number }}"
+
     - name: remote_as_number
       debug:
         msg: "{{ remote_as_number }}"
+
     - name: ntp_server1
       debug:
         msg: "{{ ntp_server1 }}"
+
     - name: ntp_server2
       debug:
         msg: "{{ ntp_server2 }}"

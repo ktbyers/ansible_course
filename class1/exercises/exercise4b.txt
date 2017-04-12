@@ -1,10 +1,10 @@
 
-$ ansible all -m ping -i ~/my-inventory 
-localhost | SUCCESS => {
+$ ansible all -m ping -i ./ex4a_my-inventory 
+pynet-rtr2 | SUCCESS => {
     "changed": false, 
     "ping": "pong"
 }
-pynet-rtr2 | SUCCESS => {
+localhost | SUCCESS => {
     "changed": false, 
     "ping": "pong"
 }

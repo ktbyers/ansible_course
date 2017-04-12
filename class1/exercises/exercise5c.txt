@@ -1,28 +1,28 @@
-$ ansible-playbook exercise5c.yml -i ~/my-inventory 
+$ ansible-playbook exercise5c.yml -i ./ex5_inventory 
 
-PLAY [Exercise 5c (testing host_vars)] *****************************************
+PLAY [Exercise 5c (testing host_vars)] ***********************************************************************************************************************************************************
 
-TASK [setup] *******************************************************************
-ok: [pynet-rtr2]
+TASK [Gathering Facts] ***************************************************************************************************************************************************************************
 ok: [pynet-rtr1]
+ok: [pynet-rtr2]
 
-TASK [debug] *******************************************************************
+TASK [debug] *************************************************************************************************************************************************************************************
 ok: [pynet-rtr1] => {
+    "changed": false, 
     "msg": 200
 }
 ok: [pynet-rtr2] => {
+    "changed": false, 
     "msg": 300
 }
 
-PLAY RECAP *********************************************************************
+PLAY RECAP ***************************************************************************************************************************************************************************************
 pynet-rtr1                 : ok=2    changed=0    unreachable=0    failed=0   
 pynet-rtr2                 : ok=2    changed=0    unreachable=0    failed=0   
 
 
-
-$ cd ~
-$ tree host_vars
-host_vars
+$ tree host_vars/
+host_vars/
 ├── pynet-rtr1
 │   └── bgp_vars.yml
 └── pynet-rtr2
@@ -30,9 +30,11 @@ host_vars
 
 2 directories, 2 files
 
+
 $ cat host_vars/pynet-rtr1/bgp_vars.yml 
 ---
 remote_as_number: 200
+
 
 $ cat host_vars/pynet-rtr2/bgp_vars.yml 
 ---

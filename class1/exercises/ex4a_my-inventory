@@ -1,5 +1,5 @@
 [local]
-localhost ansible_connection=local
+localhost ansible_connection=local ansible_python_interpreter=/home/kbyers/VENV/ansible/bin/python
 
 [cisco]
 pynet-rtr1 ansible_host=184.105.247.70
