@@ -1,0 +1,8 @@
+---
+- name: Simple Playbook
+  hosts: servers
+  tasks:
+    - ping:
+
+    - debug:
+        msg: Hello World

@@ -1,0 +1,5 @@
+---
+- name: Simple Playbook
+  hosts: local
+  tasks:
+    - ping:

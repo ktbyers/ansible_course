@@ -1,0 +1,14 @@
+---
+- name: Simple Playbook
+  hosts: servers
+  tasks:
+    - ping:
+
+    - debug:
+        msg: Hello World
+
+    - name: Install Netmiko
+      pip: 
+        name: netmiko
+        virtualenv: /home/kbyers/applied_python
+        version: 1.2.8
