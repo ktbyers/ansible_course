@@ -1,0 +1,12 @@
+---
+- name: IOS Example
+  hosts: pynet-rtr1
+  vars:
+    creds:
+      host: 184.105.247.70
+      username: pyclass
+      password: 88newclass
+  tasks:
+    - ios_facts:
+        provider: "{{ creds }}"
+

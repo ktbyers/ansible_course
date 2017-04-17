@@ -1,0 +1,19 @@
+---
+- name: IOS Example
+  hosts: cisco
+  vars:
+    creds:
+      host: "{{ ansible_host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+  tasks:
+    - ios_facts:
+        provider: "{{ creds }}"
+      tags: facts_only
+
+    - debug:
+        var: ansible_net_model
+
+    - ios_command:
+        provider: "{{ creds }}"
+        commands: show ip int brief
