@@ -1,0 +1,32 @@
+---
+- name: EOS Example
+  hosts: arista
+  vars:
+    ssh:
+      host: "{{ ansible_host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      transport: cli
+      timeout: 60
+
+    eapi:
+      host: "{{ ansible_host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      transport: eapi
+      validate_certs: no
+
+  tasks:
+    - name: SSH Fact Gathering
+      eos_facts:
+        provider: "{{ ssh }}"
+
+    - name: EAPI Fact Gathering
+      eos_facts:
+        provider: "{{ eapi }}"
+
+    - name: Execute Show Command
+      eos_command:
+        provider: "{{ eapi }}"
+        commands: show arp
+      tags: show_cmd
