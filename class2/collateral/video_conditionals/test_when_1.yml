@@ -1,0 +1,8 @@
+---
+- name: When Testing
+  hosts: local
+
+  tasks:
+    - debug:
+        msg: Hello World
+

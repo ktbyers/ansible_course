@@ -1,0 +1,21 @@
+---
+- name: When Testing
+  hosts: local
+  vars:
+    my_str: whatever
+
+  tasks:
+    - name: Hard-coded to False
+      debug:
+        msg: Hello World is False
+      when: False
+
+    - name: Hard-coded to True
+      debug:
+        msg: Hello World is True
+      when: True
+
+    - name: Testing string equality
+      debug:
+        msg: whatever
+      when: my_str != 'whatever'

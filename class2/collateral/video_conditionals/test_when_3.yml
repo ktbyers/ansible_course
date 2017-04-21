@@ -1,0 +1,15 @@
+---
+- name: When Testing
+  hosts: local
+
+  tasks:
+    - name: Hard-coded to False
+      debug:
+        msg: Hello World is False
+      when: False
+
+    - name: Hard-coded to True
+      debug:
+        msg: Hello World is True
+      when: True
+
