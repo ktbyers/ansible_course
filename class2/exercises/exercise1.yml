@@ -14,7 +14,8 @@
   tasks:
     - ios_facts:
         provider: "{{ creds }}"
+      tags: facts_only
 
     - debug:
-        msg: "SN   {{ ansible_net_serialnum }}"
+        msg: "SN:   {{ ansible_net_serialnum }}"
 
