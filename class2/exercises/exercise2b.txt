@@ -1,4 +1,4 @@
-$ ansible-playbook exercise2.yml -i ./ansible-hosts --tags task2
+$ ansible-playbook exercise2.yml -i ./ansible-hosts --tags 2b
 
 PLAY [Gather facts (Cisco)] *****************************************************************************************************************************************
 

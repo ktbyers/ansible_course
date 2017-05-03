@@ -13,33 +13,33 @@
     - ios_facts:
         provider: "{{ creds }}"
       tags: 
-        - task1
-        - task2
-        - task3
-        - task4
+        - 2a
+        - 2b
+        - 2c
+        - 2d
 
     - name: Exercise 2a
       debug:
         var: ansible_net_all_ipv4_addresses
       when: ansible_net_all_ipv4_addresses[0] == '10.220.88.21'
-      tags: task1
+      tags: 2a
 
     - name: Exercise 2b
       debug:
         msg: "{{ item.key }}"
       with_dict: "{{ ansible_net_interfaces }}"
-      tags: task2
+      tags: 2b
 
     - name: Exercise 2c
       debug:
         msg: "Active Interface: {{ item.key }}"
       with_dict: "{{ ansible_net_interfaces }}"
       when: item.value.operstatus == 'up'
-      tags: task3
+      tags: 2c
 
     - name: Exercise 2d
       debug:
         var: ansible_net_model
       when: "'881' in ansible_net_model"
-      tags: task4
+      tags: 2d
 
