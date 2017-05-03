@@ -1,0 +1,128 @@
+$ ansible-playbook exercise3.yml -i ./ansible-hosts 
+
+PLAY [Exercise3 (show arp)] *****************************************************************************************************************************************
+
+TASK [Obtain show arp output] ***************************************************************************************************************************************
+ok: [pynet-rtr1]
+ok: [pynet-rtr2]
+
+TASK [Print show arp to screen] *************************************************************************************************************************************
+ok: [pynet-rtr1] => {
+    "changed": false, 
+    "show_arp": {
+        "changed": false, 
+        "stdout": [
+            "Protocol  Address          Age (min)  Hardware Addr   Type   Interface\nInternet  10.220.88.1             0   0062.ec29.70fe  ARPA   FastEthernet4\nInternet  10.220.88.20            -   c89c.1dea.0eb6  ARPA   FastEthernet4\nInternet  10.220.88.21            8   1c6a.7aaf.576c  ARPA   FastEthernet4\nInternet  10.220.88.28           71   5254.aba8.9aea  ARPA   FastEthernet4\nInternet  10.220.88.29          100   5254.abbe.5b7b  ARPA   FastEthernet4\nInternet  10.220.88.30            2   5254.ab71.e119  ARPA   FastEthernet4\nInternet  10.220.88.32          111   5254.abc7.26aa  ARPA   FastEthernet4\nInternet  10.220.88.37          171   0001.00ff.0001  ARPA   FastEthernet4\nInternet  10.220.88.38           43   0002.00ff.0001  ARPA   FastEthernet4\nInternet  10.220.88.39            6   6464.9be8.08c8  ARPA   FastEthernet4\nInternet  10.220.88.40          146   001c.c4bf.826a  ARPA   FastEthernet4\nInternet  10.220.88.41          102   001b.7873.5634  ARPA   FastEthernet4"
+        ], 
+        "stdout_lines": [
+            [
+                "Protocol  Address          Age (min)  Hardware Addr   Type   Interface", 
+                "Internet  10.220.88.1             0   0062.ec29.70fe  ARPA   FastEthernet4", 
+                "Internet  10.220.88.20            -   c89c.1dea.0eb6  ARPA   FastEthernet4", 
+                "Internet  10.220.88.21            8   1c6a.7aaf.576c  ARPA   FastEthernet4", 
+                "Internet  10.220.88.28           71   5254.aba8.9aea  ARPA   FastEthernet4", 
+                "Internet  10.220.88.29          100   5254.abbe.5b7b  ARPA   FastEthernet4", 
+                "Internet  10.220.88.30            2   5254.ab71.e119  ARPA   FastEthernet4", 
+                "Internet  10.220.88.32          111   5254.abc7.26aa  ARPA   FastEthernet4", 
+                "Internet  10.220.88.37          171   0001.00ff.0001  ARPA   FastEthernet4", 
+                "Internet  10.220.88.38           43   0002.00ff.0001  ARPA   FastEthernet4", 
+                "Internet  10.220.88.39            6   6464.9be8.08c8  ARPA   FastEthernet4", 
+                "Internet  10.220.88.40          146   001c.c4bf.826a  ARPA   FastEthernet4", 
+                "Internet  10.220.88.41          102   001b.7873.5634  ARPA   FastEthernet4"
+            ]
+        ]
+    }
+}
+ok: [pynet-rtr2] => {
+    "changed": false, 
+    "show_arp": {
+        "changed": false, 
+        "stdout": [
+            "Protocol  Address          Age (min)  Hardware Addr   Type   Interface\nInternet  10.220.88.1             0   0062.ec29.70fe  ARPA   FastEthernet4\nInternet  10.220.88.20            8   c89c.1dea.0eb6  ARPA   FastEthernet4\nInternet  10.220.88.21            -   1c6a.7aaf.576c  ARPA   FastEthernet4\nInternet  10.220.88.28           71   5254.aba8.9aea  ARPA   FastEthernet4\nInternet  10.220.88.29          109   5254.abbe.5b7b  ARPA   FastEthernet4\nInternet  10.220.88.30          232   5254.ab71.e119  ARPA   FastEthernet4\nInternet  10.220.88.40          198   001c.c4bf.826a  ARPA   FastEthernet4\nInternet  10.220.88.41          173   001b.7873.5634  ARPA   FastEthernet4"
+        ], 
+        "stdout_lines": [
+            [
+                "Protocol  Address          Age (min)  Hardware Addr   Type   Interface", 
+                "Internet  10.220.88.1             0   0062.ec29.70fe  ARPA   FastEthernet4", 
+                "Internet  10.220.88.20            8   c89c.1dea.0eb6  ARPA   FastEthernet4", 
+                "Internet  10.220.88.21            -   1c6a.7aaf.576c  ARPA   FastEthernet4", 
+                "Internet  10.220.88.28           71   5254.aba8.9aea  ARPA   FastEthernet4", 
+                "Internet  10.220.88.29          109   5254.abbe.5b7b  ARPA   FastEthernet4", 
+                "Internet  10.220.88.30          232   5254.ab71.e119  ARPA   FastEthernet4", 
+                "Internet  10.220.88.40          198   001c.c4bf.826a  ARPA   FastEthernet4", 
+                "Internet  10.220.88.41          173   001b.7873.5634  ARPA   FastEthernet4"
+            ]
+        ]
+    }
+}
+
+TASK [Create new fact from show arp (3a)] ***************************************************************************************************************************
+ok: [pynet-rtr1]
+ok: [pynet-rtr2]
+
+TASK [Print show_arp_new to screen (3b)] ****************************************************************************************************************************
+ok: [pynet-rtr1] => {
+    "changed": false, 
+    "show_arp_new": [
+        "Protocol  Address          Age (min)  Hardware Addr   Type   Interface", 
+        "Internet  10.220.88.1             0   0062.ec29.70fe  ARPA   FastEthernet4", 
+        "Internet  10.220.88.20            -   c89c.1dea.0eb6  ARPA   FastEthernet4", 
+        "Internet  10.220.88.21            8   1c6a.7aaf.576c  ARPA   FastEthernet4", 
+        "Internet  10.220.88.28           71   5254.aba8.9aea  ARPA   FastEthernet4", 
+        "Internet  10.220.88.29          100   5254.abbe.5b7b  ARPA   FastEthernet4", 
+        "Internet  10.220.88.30            2   5254.ab71.e119  ARPA   FastEthernet4", 
+        "Internet  10.220.88.32          111   5254.abc7.26aa  ARPA   FastEthernet4", 
+        "Internet  10.220.88.37          171   0001.00ff.0001  ARPA   FastEthernet4", 
+        "Internet  10.220.88.38           43   0002.00ff.0001  ARPA   FastEthernet4", 
+        "Internet  10.220.88.39            6   6464.9be8.08c8  ARPA   FastEthernet4", 
+        "Internet  10.220.88.40          146   001c.c4bf.826a  ARPA   FastEthernet4", 
+        "Internet  10.220.88.41          102   001b.7873.5634  ARPA   FastEthernet4"
+    ]
+}
+ok: [pynet-rtr2] => {
+    "changed": false, 
+    "show_arp_new": [
+        "Protocol  Address          Age (min)  Hardware Addr   Type   Interface", 
+        "Internet  10.220.88.1             0   0062.ec29.70fe  ARPA   FastEthernet4", 
+        "Internet  10.220.88.20            8   c89c.1dea.0eb6  ARPA   FastEthernet4", 
+        "Internet  10.220.88.21            -   1c6a.7aaf.576c  ARPA   FastEthernet4", 
+        "Internet  10.220.88.28           71   5254.aba8.9aea  ARPA   FastEthernet4", 
+        "Internet  10.220.88.29          109   5254.abbe.5b7b  ARPA   FastEthernet4", 
+        "Internet  10.220.88.30          232   5254.ab71.e119  ARPA   FastEthernet4", 
+        "Internet  10.220.88.40          198   001c.c4bf.826a  ARPA   FastEthernet4", 
+        "Internet  10.220.88.41          173   001b.7873.5634  ARPA   FastEthernet4"
+    ]
+}
+
+TASK [Only print gateway (3c)] **************************************************************************************************************************************
+skipping: [pynet-rtr1] => (item=Protocol  Address          Age (min)  Hardware Addr   Type   Interface) 
+skipping: [pynet-rtr2] => (item=Protocol  Address          Age (min)  Hardware Addr   Type   Interface) 
+ok: [pynet-rtr1] => (item=Internet  10.220.88.1             0   0062.ec29.70fe  ARPA   FastEthernet4) => {
+    "item": "Internet  10.220.88.1             0   0062.ec29.70fe  ARPA   FastEthernet4"
+}
+ok: [pynet-rtr2] => (item=Internet  10.220.88.1             0   0062.ec29.70fe  ARPA   FastEthernet4) => {
+    "item": "Internet  10.220.88.1             0   0062.ec29.70fe  ARPA   FastEthernet4"
+}
+skipping: [pynet-rtr1] => (item=Internet  10.220.88.20            -   c89c.1dea.0eb6  ARPA   FastEthernet4) 
+skipping: [pynet-rtr2] => (item=Internet  10.220.88.20            8   c89c.1dea.0eb6  ARPA   FastEthernet4) 
+skipping: [pynet-rtr1] => (item=Internet  10.220.88.21            8   1c6a.7aaf.576c  ARPA   FastEthernet4) 
+skipping: [pynet-rtr2] => (item=Internet  10.220.88.21            -   1c6a.7aaf.576c  ARPA   FastEthernet4) 
+skipping: [pynet-rtr1] => (item=Internet  10.220.88.28           71   5254.aba8.9aea  ARPA   FastEthernet4) 
+skipping: [pynet-rtr2] => (item=Internet  10.220.88.28           71   5254.aba8.9aea  ARPA   FastEthernet4) 
+skipping: [pynet-rtr1] => (item=Internet  10.220.88.29          100   5254.abbe.5b7b  ARPA   FastEthernet4) 
+skipping: [pynet-rtr2] => (item=Internet  10.220.88.29          109   5254.abbe.5b7b  ARPA   FastEthernet4) 
+skipping: [pynet-rtr1] => (item=Internet  10.220.88.30            2   5254.ab71.e119  ARPA   FastEthernet4) 
+skipping: [pynet-rtr2] => (item=Internet  10.220.88.30          232   5254.ab71.e119  ARPA   FastEthernet4) 
+skipping: [pynet-rtr1] => (item=Internet  10.220.88.32          111   5254.abc7.26aa  ARPA   FastEthernet4) 
+skipping: [pynet-rtr2] => (item=Internet  10.220.88.40          198   001c.c4bf.826a  ARPA   FastEthernet4) 
+skipping: [pynet-rtr1] => (item=Internet  10.220.88.37          171   0001.00ff.0001  ARPA   FastEthernet4) 
+skipping: [pynet-rtr2] => (item=Internet  10.220.88.41          173   001b.7873.5634  ARPA   FastEthernet4) 
+skipping: [pynet-rtr1] => (item=Internet  10.220.88.38           43   0002.00ff.0001  ARPA   FastEthernet4) 
+skipping: [pynet-rtr1] => (item=Internet  10.220.88.39            6   6464.9be8.08c8  ARPA   FastEthernet4) 
+skipping: [pynet-rtr1] => (item=Internet  10.220.88.40          146   001c.c4bf.826a  ARPA   FastEthernet4) 
+skipping: [pynet-rtr1] => (item=Internet  10.220.88.41          102   001b.7873.5634  ARPA   FastEthernet4) 
+
+PLAY RECAP **********************************************************************************************************************************************************
+pynet-rtr1                 : ok=5    changed=0    unreachable=0    failed=0   
+pynet-rtr2                 : ok=5    changed=0    unreachable=0    failed=0   
+

@@ -1,0 +1,30 @@
+---
+
+- name: Arista process show arp
+  hosts: pynet-sw3
+  vars:
+    eapi:
+      host: "{{ ansible_host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      transport: eapi
+      validate_certs: no
+    
+  tasks: 
+    - name: Run show arp
+      eos_command:
+        provider: "{{ eapi }}"
+        commands: show arp
+      register: show_arp
+
+    - name: Create mac_table variable
+      set_fact:
+        mac_table: "{{ show_arp.stdout_lines[0].ipV4Neighbors }}"
+
+    - set_fact:
+        gateway_mac: "{{ item.hwAddress }}"
+      with_items: "{{ mac_table }}"
+      when: item.address == '10.220.88.1'
+
+    - debug:
+        var: gateway_mac

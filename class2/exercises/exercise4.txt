@@ -1,0 +1,34 @@
+$ ansible-playbook exercise4.yml -i ./ansible-hosts 
+
+PLAY [Arista process show arp] **************************************************************************************************************************************
+
+TASK [Gathering Facts] **********************************************************************************************************************************************
+ok: [pynet-sw3]
+
+TASK [Run show arp] *************************************************************************************************************************************************
+ [WARNING]: argument use_ssl has been deprecated and will be removed in a future version
+
+ [WARNING]: argument port has been deprecated and will be removed in a future version
+
+ [WARNING]: argument validate_certs has been deprecated and will be removed in a future version
+
+ok: [pynet-sw3]
+
+TASK [Create mac_table variable] ************************************************************************************************************************************
+ok: [pynet-sw3]
+
+TASK [set_fact] *****************************************************************************************************************************************************
+skipping: [pynet-sw3] => (item={u'hwAddress': u'c89c.1dea.0eb6', u'interface': u'Vlan1, not learned', u'age': 0, u'address': u'10.220.88.20'}) 
+ok: [pynet-sw3] => (item={u'hwAddress': u'0062.ec29.70fe', u'interface': u'Vlan1, Ethernet1', u'age': 0, u'address': u'10.220.88.1'})
+skipping: [pynet-sw3] => (item={u'hwAddress': u'1c6a.7aaf.576c', u'interface': u'Vlan1, Ethernet1', u'age': 0, u'address': u'10.220.88.21'}) 
+skipping: [pynet-sw3] => (item={u'hwAddress': u'0002.00ff.0001', u'interface': u'Vlan1, not learned', u'age': 0, u'address': u'10.220.88.38'}) 
+
+TASK [debug] ********************************************************************************************************************************************************
+ok: [pynet-sw3] => {
+    "changed": false, 
+    "gateway_mac": "0062.ec29.70fe"
+}
+
+PLAY RECAP **********************************************************************************************************************************************************
+pynet-sw3                  : ok=5    changed=0    unreachable=0    failed=0   
+
