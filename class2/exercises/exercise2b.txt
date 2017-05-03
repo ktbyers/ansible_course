@@ -1,0 +1,236 @@
+$ ansible-playbook exercise2.yml -i ./ansible-hosts --tags task2
+
+PLAY [Gather facts (Cisco)] *****************************************************************************************************************************************
+
+TASK [ios_facts] ****************************************************************************************************************************************************
+ok: [pynet-rtr2]
+ok: [pynet-rtr1]
+
+TASK [Exercise 2b] **************************************************************************************************************************************************
+ok: [pynet-rtr1] => (item={'key': u'FastEthernet0', 'value': {u'macaddress': u'c89c.1dea.0eb2', u'lineprotocol': u'down ', u'description': None, u'operstatus': u'down', u'mediatype': None, u'mtu': 1500, u'duplex': None, u'bandwidth': 100000, u'ipv4': None, u'type': u'Fast Ethernet'}}) => {
+    "item": {
+        "key": "FastEthernet0", 
+        "value": {
+            "bandwidth": 100000, 
+            "description": null, 
+            "duplex": null, 
+            "ipv4": null, 
+            "lineprotocol": "down ", 
+            "macaddress": "c89c.1dea.0eb2", 
+            "mediatype": null, 
+            "mtu": 1500, 
+            "operstatus": "down", 
+            "type": "Fast Ethernet"
+        }
+    }, 
+    "msg": "FastEthernet0"
+}
+ok: [pynet-rtr1] => (item={'key': u'FastEthernet4', 'value': {u'macaddress': u'c89c.1dea.0eb6', u'lineprotocol': u'up ', u'description': u"*** LAN connection (don't change) ***", u'operstatus': u'up', u'mediatype': None, u'mtu': 1500, u'duplex': None, u'bandwidth': 100000, u'ipv4': {u'masklen': 24, u'address': u'10.220.88.20'}, u'type': u'PQII_PRO_UEC'}}) => {
+    "item": {
+        "key": "FastEthernet4", 
+        "value": {
+            "bandwidth": 100000, 
+            "description": "*** LAN connection (don't change) ***", 
+            "duplex": null, 
+            "ipv4": {
+                "address": "10.220.88.20", 
+                "masklen": 24
+            }, 
+            "lineprotocol": "up ", 
+            "macaddress": "c89c.1dea.0eb6", 
+            "mediatype": null, 
+            "mtu": 1500, 
+            "operstatus": "up", 
+            "type": "PQII_PRO_UEC"
+        }
+    }, 
+    "msg": "FastEthernet4"
+}
+ok: [pynet-rtr2] => (item={'key': u'FastEthernet0', 'value': {u'macaddress': u'1c6a.7aaf.5768', u'lineprotocol': u'down ', u'description': None, u'operstatus': u'down', u'mediatype': None, u'mtu': 1500, u'duplex': None, u'bandwidth': 100000, u'ipv4': None, u'type': u'Fast Ethernet'}}) => {
+    "item": {
+        "key": "FastEthernet0", 
+        "value": {
+            "bandwidth": 100000, 
+            "description": null, 
+            "duplex": null, 
+            "ipv4": null, 
+            "lineprotocol": "down ", 
+            "macaddress": "1c6a.7aaf.5768", 
+            "mediatype": null, 
+            "mtu": 1500, 
+            "operstatus": "down", 
+            "type": "Fast Ethernet"
+        }
+    }, 
+    "msg": "FastEthernet0"
+}
+ok: [pynet-rtr2] => (item={'key': u'FastEthernet4', 'value': {u'macaddress': u'1c6a.7aaf.576c', u'lineprotocol': u'up ', u'description': u"*** LAN connection (don't change) ***", u'operstatus': u'up', u'mediatype': None, u'mtu': 1500, u'duplex': None, u'bandwidth': 100000, u'ipv4': {u'masklen': 24, u'address': u'10.220.88.21'}, u'type': u'PQII_PRO_UEC'}}) => {
+    "item": {
+        "key": "FastEthernet4", 
+        "value": {
+            "bandwidth": 100000, 
+            "description": "*** LAN connection (don't change) ***", 
+            "duplex": null, 
+            "ipv4": {
+                "address": "10.220.88.21", 
+                "masklen": 24
+            }, 
+            "lineprotocol": "up ", 
+            "macaddress": "1c6a.7aaf.576c", 
+            "mediatype": null, 
+            "mtu": 1500, 
+            "operstatus": "up", 
+            "type": "PQII_PRO_UEC"
+        }
+    }, 
+    "msg": "FastEthernet4"
+}
+ok: [pynet-rtr1] => (item={'key': u'FastEthernet1', 'value': {u'macaddress': u'c89c.1dea.0eb3', u'lineprotocol': u'down ', u'description': None, u'operstatus': u'down', u'mediatype': None, u'mtu': 1500, u'duplex': None, u'bandwidth': 100000, u'ipv4': None, u'type': u'Fast Ethernet'}}) => {
+    "item": {
+        "key": "FastEthernet1", 
+        "value": {
+            "bandwidth": 100000, 
+            "description": null, 
+            "duplex": null, 
+            "ipv4": null, 
+            "lineprotocol": "down ", 
+            "macaddress": "c89c.1dea.0eb3", 
+            "mediatype": null, 
+            "mtu": 1500, 
+            "operstatus": "down", 
+            "type": "Fast Ethernet"
+        }
+    }, 
+    "msg": "FastEthernet1"
+}
+ok: [pynet-rtr2] => (item={'key': u'FastEthernet1', 'value': {u'macaddress': u'1c6a.7aaf.5769', u'lineprotocol': u'down ', u'description': None, u'operstatus': u'down', u'mediatype': None, u'mtu': 1500, u'duplex': None, u'bandwidth': 100000, u'ipv4': None, u'type': u'Fast Ethernet'}}) => {
+    "item": {
+        "key": "FastEthernet1", 
+        "value": {
+            "bandwidth": 100000, 
+            "description": null, 
+            "duplex": null, 
+            "ipv4": null, 
+            "lineprotocol": "down ", 
+            "macaddress": "1c6a.7aaf.5769", 
+            "mediatype": null, 
+            "mtu": 1500, 
+            "operstatus": "down", 
+            "type": "Fast Ethernet"
+        }
+    }, 
+    "msg": "FastEthernet1"
+}
+ok: [pynet-rtr1] => (item={'key': u'FastEthernet2', 'value': {u'macaddress': u'c89c.1dea.0eb4', u'lineprotocol': u'down ', u'description': None, u'operstatus': u'down', u'mediatype': None, u'mtu': 1500, u'duplex': None, u'bandwidth': 100000, u'ipv4': None, u'type': u'Fast Ethernet'}}) => {
+    "item": {
+        "key": "FastEthernet2", 
+        "value": {
+            "bandwidth": 100000, 
+            "description": null, 
+            "duplex": null, 
+            "ipv4": null, 
+            "lineprotocol": "down ", 
+            "macaddress": "c89c.1dea.0eb4", 
+            "mediatype": null, 
+            "mtu": 1500, 
+            "operstatus": "down", 
+            "type": "Fast Ethernet"
+        }
+    }, 
+    "msg": "FastEthernet2"
+}
+ok: [pynet-rtr2] => (item={'key': u'FastEthernet2', 'value': {u'macaddress': u'1c6a.7aaf.576a', u'lineprotocol': u'down ', u'description': None, u'operstatus': u'down', u'mediatype': None, u'mtu': 1500, u'duplex': None, u'bandwidth': 100000, u'ipv4': None, u'type': u'Fast Ethernet'}}) => {
+    "item": {
+        "key": "FastEthernet2", 
+        "value": {
+            "bandwidth": 100000, 
+            "description": null, 
+            "duplex": null, 
+            "ipv4": null, 
+            "lineprotocol": "down ", 
+            "macaddress": "1c6a.7aaf.576a", 
+            "mediatype": null, 
+            "mtu": 1500, 
+            "operstatus": "down", 
+            "type": "Fast Ethernet"
+        }
+    }, 
+    "msg": "FastEthernet2"
+}
+ok: [pynet-rtr1] => (item={'key': u'FastEthernet3', 'value': {u'macaddress': u'c89c.1dea.0eb5', u'lineprotocol': u'down ', u'description': None, u'operstatus': u'down', u'mediatype': None, u'mtu': 1500, u'duplex': None, u'bandwidth': 100000, u'ipv4': None, u'type': u'Fast Ethernet'}}) => {
+    "item": {
+        "key": "FastEthernet3", 
+        "value": {
+            "bandwidth": 100000, 
+            "description": null, 
+            "duplex": null, 
+            "ipv4": null, 
+            "lineprotocol": "down ", 
+            "macaddress": "c89c.1dea.0eb5", 
+            "mediatype": null, 
+            "mtu": 1500, 
+            "operstatus": "down", 
+            "type": "Fast Ethernet"
+        }
+    }, 
+    "msg": "FastEthernet3"
+}
+ok: [pynet-rtr2] => (item={'key': u'FastEthernet3', 'value': {u'macaddress': u'1c6a.7aaf.576b', u'lineprotocol': u'down ', u'description': None, u'operstatus': u'down', u'mediatype': None, u'mtu': 1500, u'duplex': None, u'bandwidth': 100000, u'ipv4': None, u'type': u'Fast Ethernet'}}) => {
+    "item": {
+        "key": "FastEthernet3", 
+        "value": {
+            "bandwidth": 100000, 
+            "description": null, 
+            "duplex": null, 
+            "ipv4": null, 
+            "lineprotocol": "down ", 
+            "macaddress": "1c6a.7aaf.576b", 
+            "mediatype": null, 
+            "mtu": 1500, 
+            "operstatus": "down", 
+            "type": "Fast Ethernet"
+        }
+    }, 
+    "msg": "FastEthernet3"
+}
+ok: [pynet-rtr1] => (item={'key': u'Vlan1', 'value': {u'macaddress': u'c89c.1dea.0eb2', u'lineprotocol': u'down ', u'description': None, u'operstatus': u'down', u'mediatype': None, u'mtu': 1500, u'duplex': None, u'bandwidth': 100000, u'ipv4': None, u'type': u'EtherSVI'}}) => {
+    "item": {
+        "key": "Vlan1", 
+        "value": {
+            "bandwidth": 100000, 
+            "description": null, 
+            "duplex": null, 
+            "ipv4": null, 
+            "lineprotocol": "down ", 
+            "macaddress": "c89c.1dea.0eb2", 
+            "mediatype": null, 
+            "mtu": 1500, 
+            "operstatus": "down", 
+            "type": "EtherSVI"
+        }
+    }, 
+    "msg": "Vlan1"
+}
+ok: [pynet-rtr2] => (item={'key': u'Vlan1', 'value': {u'macaddress': u'1c6a.7aaf.5768', u'lineprotocol': u'down ', u'description': None, u'operstatus': u'down', u'mediatype': None, u'mtu': 1500, u'duplex': None, u'bandwidth': 100000, u'ipv4': None, u'type': u'EtherSVI'}}) => {
+    "item": {
+        "key": "Vlan1", 
+        "value": {
+            "bandwidth": 100000, 
+            "description": null, 
+            "duplex": null, 
+            "ipv4": null, 
+            "lineprotocol": "down ", 
+            "macaddress": "1c6a.7aaf.5768", 
+            "mediatype": null, 
+            "mtu": 1500, 
+            "operstatus": "down", 
+            "type": "EtherSVI"
+        }
+    }, 
+    "msg": "Vlan1"
+}
+
+PLAY RECAP **********************************************************************************************************************************************************
+pynet-rtr1                 : ok=2    changed=0    unreachable=0    failed=0   
+pynet-rtr2                 : ok=2    changed=0    unreachable=0    failed=0   
+
