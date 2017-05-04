@@ -1,0 +1,7 @@
+---
+- name: With Testing
+  hosts: local
+  tasks:
+    - name: Test with_items
+      debug:
+        msg: Hello world

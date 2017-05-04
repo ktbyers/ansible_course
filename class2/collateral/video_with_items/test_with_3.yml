@@ -1,0 +1,16 @@
+---
+- name: With Testing
+  hosts: local
+  vars:
+    my_devices:
+        - 10.10.10.1
+        - 10.10.20.1
+        - 10.10.30.1
+        - 10.10.40.1
+        - 10.10.50.1
+  tasks:
+    - name: Test with_items
+      debug:
+        msg: "{{ item }}"
+      with_items: "{{ my_devices }}"
+      when: "item == '10.10.10.1'"
