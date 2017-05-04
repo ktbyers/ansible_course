@@ -1,0 +1,19 @@
+---
+- name: With Testing
+  hosts: local
+  vars:
+    my_devices:
+      device1:
+        ip_addr: 10.10.10.1
+        device_type: cisco_ios
+      device2:
+        ip_addr: 10.10.20.1
+        device_type: cisco_ios
+      device3:
+        ip_addr: 10.10.30.1
+        device_type: juniper_junos
+  tasks:
+    - name: Test with_dict
+      debug:
+        msg: "{{ item.value.ip_addr }}"
+      with_dict: "{{ my_devices }}"
