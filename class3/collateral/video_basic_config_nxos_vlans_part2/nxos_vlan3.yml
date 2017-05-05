@@ -1,0 +1,11 @@
+---
+- name: NXOS Example
+  hosts: nxos
+  tasks:
+    - name: Configure NEXUS VLANs
+      nxos_vlan:
+        provider: "{{ provider_nxapi }}"
+        vlan_id: "{{ item.vlan_id }}"
+        admin_state: "{{ item.admin_state }}"
+        name: "{{ item.name }}"
+      with_items: "{{ vlans }}"
