@@ -1,0 +1,32 @@
+---
+provider_ssh:
+  host: "{{ ansible_host }}"
+  username: "{{ username }}"
+  password: "{{ password }}"
+  transport: cli 
+  timeout: 30
+
+provider_nxapi:
+  host: "{{ ansible_host }}"
+  username: "{{ username }}"
+  password: "{{ password }}"
+  transport: nxapi
+  use_ssl: yes 
+  validate_certs: no
+  port: 8443
+  timeout: 30
+
+vlans_common:
+  - vlan_id: 550 
+    admin_state: up
+    name: BLACK
+  - vlan_id: 551 
+    admin_state: up
+    name: ORANGE
+  - vlan_id: 552 
+    admin_state: up
+    name: PINK
+
+vlans: "{{ vlans_common }} + {{ vlans_unique|default([]) }}"
+
+uplink_a: "UplinkA desc"
