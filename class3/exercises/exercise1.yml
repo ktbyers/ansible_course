@@ -1,1 +1,10 @@
 ---
+- name: Exercise1
+  hosts: nxos
+  tasks:
+    - name: Configure NEXUS VLANs
+      nxos_vlan:
+        provider: "{{ provider_nxapi }}"
+        vlan_id: "{{ item.vlan_id }}"
+        name: "{{ item.name }}"
+      with_items: "{{ vlans }}"

@@ -1,0 +1,6 @@
+vlans_unique:
+  - vlan_id: 305
+    name: orange
+  - vlan_id: 306
+    name: gray
+

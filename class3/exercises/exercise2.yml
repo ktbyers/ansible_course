@@ -1,0 +1,20 @@
+---
+- name: Exercise2
+  hosts: nxos
+  tasks:
+    - name: Configure IPv4 and IPv6 interfaces
+      nxos_ip_interface:
+        provider: "{{ provider_ssh }}"
+        interface: "{{ item.name }}"
+        version: "{{ item.type }}"
+        addr: "{{ item.addr }}"
+        mask: "{{ item.mask }}"
+      with_items: "{{ ip_interfaces }}"
+      notify: write mem
+
+  handlers:
+    - name: write mem
+      nxos_command:
+        provider: "{{ provider_ssh }}"
+        commands: copy run start
+      changed_when: True

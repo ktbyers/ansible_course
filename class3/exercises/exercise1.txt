@@ -1,0 +1,22 @@
+$ ansible-playbook exercise1.yml -i ./ansible-hosts 
+
+PLAY [Exercise1] ************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ******************************************************************************************************************************************************
+ok: [nxos1]
+ok: [nxos2]
+
+TASK [Configure NEXUS VLANs] ************************************************************************************************************************************************
+changed: [nxos2] => (item={u'name': u'blue', u'vlan_id': 301})
+changed: [nxos1] => (item={u'name': u'blue', u'vlan_id': 301})
+changed: [nxos2] => (item={u'name': u'red', u'vlan_id': 302})
+changed: [nxos1] => (item={u'name': u'red', u'vlan_id': 302})
+changed: [nxos2] => (item={u'name': u'green', u'vlan_id': 303})
+changed: [nxos1] => (item={u'name': u'green', u'vlan_id': 303})
+changed: [nxos2] => (item={u'name': u'orange', u'vlan_id': 305})
+changed: [nxos1] => (item={u'name': u'yellow', u'vlan_id': 304})
+changed: [nxos2] => (item={u'name': u'gray', u'vlan_id': 306})
+
+PLAY RECAP ******************************************************************************************************************************************************************
+nxos1                      : ok=2    changed=1    unreachable=0    failed=0   
+nxos2                      : ok=2    changed=1    unreachable=0    failed=0   

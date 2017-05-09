@@ -1,0 +1,4 @@
+vlans_unique:
+  - vlan_id: 304
+    name: yellow
+

@@ -1,0 +1,26 @@
+$ ansible-playbook exercise3.yml -i ./ansible-hosts -vv
+Using /home/kbyers/.ansible.cfg as config file
+
+PLAYBOOK: exercise3.yml *******************************************************************************************************************************************************
+1 plays in exercise3.yml
+
+PLAY [Exercise3] **************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************************************************************
+ok: [nxos2]
+ok: [nxos1]
+META: ran handlers
+
+TASK [Ping remote device] *****************************************************************************************************************************************************
+task path: /home/kbyers/ansible_course/class3/exercises/exercise3.yml:5
+skipping: [nxos2] => (item={u'type': u'v6', u'mask': 64, u'addr': u'2001::db8:800:200c:2', u'name': u'Ethernet 2/4', u'remote_addr': u'2001::db8:800:200c:1'})  => {"changed": false, "item": {"addr": "2001::db8:800:200c:2", "mask": 64, "name": "Ethernet 2/4", "remote_addr": "2001::db8:800:200c:1", "type": "v6"}, "skip_reason": "Conditional result was False", "skipped": true}
+ok: [nxos2] => (item={u'type': u'v4', u'mask': 24, u'addr': u'10.1.1.2', u'name': u'Ethernet 2/4', u'remote_addr': u'10.1.1.1'}) => {"action": "64 bytes from 10.1.1.1: icmp_seq=0 ttl=254 time=5.127 ms", "changed": false, "count": "2", "dest": "10.1.1.1", "item": {"addr": "10.1.1.2", "mask": 24, "name": "Ethernet 2/4", "remote_addr": "10.1.1.1", "type": "v4"}, "packet_loss": "0.00%", "packets_rx": "2", "packets_tx": "2", "rtt": {"avg": "4.583", "max": "5.127", "min": "4.04"}, "state": "absent", "updates": ["ping 10.1.1.1 count 2 vrf default"]}
+ok: [nxos1] => (item={u'type': u'v4', u'mask': 24, u'addr': u'10.1.1.1', u'name': u'Ethernet 2/4', u'remote_addr': u'10.1.1.2'}) => {"action": "64 bytes from 10.1.1.2: icmp_seq=0 ttl=254 time=5.255 ms", "changed": false, "count": "2", "dest": "10.1.1.2", "item": {"addr": "10.1.1.1", "mask": 24, "name": "Ethernet 2/4", "remote_addr": "10.1.1.2", "type": "v4"}, "packet_loss": "0.00%", "packets_rx": "2", "packets_tx": "2", "rtt": {"avg": "4.482", "max": "5.255", "min": "3.71"}, "state": "absent", "updates": ["ping 10.1.1.2 count 2 vrf default"]}
+skipping: [nxos1] => (item={u'type': u'v6', u'mask': 64, u'addr': u'2001::db8:800:200c:1', u'name': u'Ethernet 2/4', u'remote_addr': u'2001::db8:800:200c:2'})  => {"changed": false, "item": {"addr": "2001::db8:800:200c:1", "mask": 64, "name": "Ethernet 2/4", "remote_addr": "2001::db8:800:200c:2", "type": "v6"}, "skip_reason": "Conditional result was False", "skipped": true}
+META: ran handlers
+META: ran handlers
+
+PLAY RECAP ********************************************************************************************************************************************************************
+nxos1                      : ok=2    changed=0    unreachable=0    failed=0   
+nxos2                      : ok=2    changed=0    unreachable=0    failed=0   
+

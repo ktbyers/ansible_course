@@ -1,0 +1,28 @@
+---
+provider_ssh:
+  host: "{{ ansible_host }}"
+  username: "{{ username }}"
+  password: "{{ password }}"
+  transport: cli
+  timeout: 30
+
+provider_nxapi:
+  host: "{{ ansible_host }}"
+  username: "{{ username }}"
+  password: "{{ password }}"
+  transport: nxapi
+  use_ssl: yes
+  validate_certs: no
+  port: 8443
+  timeout: 30
+
+vlans_common:
+    - vlan_id: 301
+      name: blue
+    - vlan_id: 302
+      name: red
+    - vlan_id: 303
+      name: green
+
+vlans: "{{ vlans_common }} + {{ vlans_unique | default([]) }}"
+

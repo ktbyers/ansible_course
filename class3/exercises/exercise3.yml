@@ -1,0 +1,11 @@
+---
+- name: Exercise3
+  hosts: nxos
+  tasks:
+    - name: Ping remote device
+      nxos_ping:
+        provider: "{{ provider_ssh }}"
+        dest: "{{ item.remote_addr }}"
+        vrf: default
+      with_items: "{{ ip_interfaces }}"
+      when: item.type == 'v4'

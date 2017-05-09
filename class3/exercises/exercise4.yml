@@ -1,0 +1,23 @@
+---
+- name: Exercise4
+  hosts: nxos
+  tasks:
+    - name: Configure SNMP Location
+      nxos_snmp_location:
+        provider: "{{ provider_ssh }}"
+        location: "2nd Street, San Francisco"
+      notify: write mem
+
+    - name: Configure SNMP Contact
+      nxos_snmp_contact:
+        provider: "{{ provider_ssh }}"
+        contact: "IT Operations x7777"
+      notify: write mem
+
+  handlers:
+    - name: write mem
+      nxos_command:
+        provider: "{{ provider_ssh }}"
+        commands: copy run start
+      changed_when: True
+
