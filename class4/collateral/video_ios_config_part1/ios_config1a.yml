@@ -1,0 +1,22 @@
+---
+- name: IOS Example
+  hosts: pynet-rtr1
+  vars:
+    creds:
+      host: "{{ ansible_host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+
+  tasks:
+    - ios_facts:
+        provider: "{{ creds }}"
+      tags: facts_only
+
+    - ios_config:
+        provider: "{{ creds }}"
+        lines: 
+          - ip domain name bogus.com
+          - ip name-server 8.8.8.8
+          - ip name-server 8.8.4.4
+          - ntp server 130.126.24.24
+          - ntp server 152.2.21.1
