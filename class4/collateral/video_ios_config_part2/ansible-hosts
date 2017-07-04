@@ -1,0 +1,29 @@
+[all:vars]
+ansible_connection=local
+ansible_python_interpreter=/home/kbyers/VENV/ansible/bin/python
+username=pyclass
+password=bogus
+
+[local]
+localhost ansible_connection=local
+
+[arista]
+pynet-sw5 ansible_host=arista5.twb-tech.com
+pynet-sw6 ansible_host=arista6.twb-tech.com
+pynet-sw7 ansible_host=arista7.twb-tech.com
+pynet-sw8 ansible_host=arista8.twb-tech.com
+
+[arista:vars]
+eapi_post=443
+
+[cisco]
+pynet-rtr1 ansible_host=cisco1.twb-tech.com
+pynet-rtr2 ansible_host=cisco2.twb-tech.com
+
+[juniper]
+srx1 ansible_host=srx1.twb-tech.com
+
+[nxos]
+nxos1 ansible_host=nxos1.twb-tech.com
+nxos2 ansible_host=nxos2.twb-tech.com
+

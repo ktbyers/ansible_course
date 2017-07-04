@@ -1,0 +1,240 @@
+Building configuration...
+
+Current configuration : 5700 bytes
+!
+! Last configuration change at 16:49:55 PDT Mon Jul 3 2017 by pyclass
+! NVRAM config last updated at 15:16:16 PDT Mon Jul 3 2017 by pyclass
+!
+version 15.4
+no service pad
+service timestamps debug datetime msec localtime show-timezone
+service timestamps log datetime msec localtime show-timezone
+no service password-encryption
+!
+hostname pynet-rtr1
+!
+boot-start-marker
+boot system flash c880data-universalk9-mz.154-2.T1.bin
+boot-end-marker
+!
+!
+logging buffered 10000
+no logging console
+enable secret 5 $1$39ck$mpfZ3sWVn10YCXhSWI48R/
+!
+aaa new-model
+!
+!
+aaa authentication login default local
+aaa authorization exec default local if-authenticated 
+!
+!
+!
+!
+!
+aaa session-id common
+memory-size iomem 10
+clock timezone PST -8 0
+clock summer-time PDT recurring
+!
+crypto pki trustpoint TP-self-signed-1429897839
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-1429897839
+ revocation-check none
+ rsakeypair TP-self-signed-1429897839
+!
+!
+crypto pki certificate chain TP-self-signed-1429897839
+ certificate self-signed 01
+  3082022B 30820194 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 31343239 38393738 3339301E 170D3134 30383136 32313234 
+  32325A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D31 34323938 
+  39373833 3930819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  8100AC47 6783F27A B922F989 A6874EA9 ADD9588A 7DD3CA09 F0B7DD17 7F03B601 
+  12581AD7 ABD0A23A 4BAD6B58 B1267A4B 4AE42150 87B015E6 1E7F96FD 7B406487 
+  04869E6C 7E0CE0D2 2220D091 DD74A504 A407736D ED12436C 15AC597E FCCB266D 
+  D15374C5 45C71067 DE056874 CA42B5B0 AFFCDAC0 1D379BFB C9611126 A5B5441A 
+  8D0F0203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 301F0603 
+  551D2304 18301680 144ECEF2 746C1242 E5735ACE 876732FC 7D1C76A5 0E301D06 
+  03551D0E 04160414 4ECEF274 6C1242E5 735ACE87 6732FC7D 1C76A50E 300D0609 
+  2A864886 F70D0101 05050003 81810029 05BF34D7 8144226E 11BFCA34 F3CCBAF5 
+  0B821135 E15CD2D7 3FEF0292 8498C50D 52B65EAE 1C4695F5 5B6053E0 9CCF8611 
+  03BCEDA5 DF8343C6 F5AE8D47 85103D8D 9F2128CF 2A609491 B8BF0F94 ECF62781 
+  9353BD17 C345E1D7 71AFD125 D23D7940 2DECBE8E 46553314 396ACC63 34839EF7 
+  3C056A00 7E129168 F0CD3692 F53C62
+  	quit
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+ip domain name bogus.com
+ip name-server 8.8.8.8
+ip name-server 8.8.4.4
+ip name-server 8.8.3.3
+ip name-server 8.8.5.5
+ip cef
+no ipv6 cef
+!
+!
+multilink bundle-name authenticated
+license udi pid CISCO881-SEC-K9 sn FTX1512038X
+!
+!
+archive
+ path flash:pynet-rtr1-cfg
+username pyclass privilege 15 secret 5 $1$CQCe$poonB1jFHYQAWt/3eXub41
+username testuser privilege 15 secret 5 $1$A5eB$6XIBwB/8iwj4U
+username test9 secret 5 $1$CQCe$poonB1jFHYQAWt/3eXub41
+!
+!
+!
+!
+lldp run
+!
+ip ssh version 2
+ip ssh pubkey-chain
+  username testuser
+   key-hash ssh-rsa E5D7E26A603DD18923113E45F29BDF22 ktbyers@twb-tech.com
+ip scp server enable
+! 
+!
+crypto isakmp policy 10
+ encr aes
+ authentication pre-share
+ group 5
+crypto isakmp key KEY address 1.1.1.1         no-xauth
+crypto isakmp key KEY address 2.2.2.1         no-xauth
+crypto isakmp key KEY address 3.3.3.1         no-xauth
+crypto isakmp key KEY address 4.4.4.1         no-xauth
+crypto isakmp key KEY address 5.5.5.1         no-xauth
+crypto isakmp keepalive 10 periodic
+!
+!
+crypto ipsec transform-set AES192-SHA esp-aes 192 esp-sha-hmac 
+ mode tunnel
+crypto ipsec transform-set AES-SHA esp-aes esp-sha-hmac 
+ mode tunnel
+crypto ipsec transform-set 3DES-SHA esp-3des esp-sha-hmac 
+ mode tunnel
+!
+!
+!
+crypto map CRYPTO 10 ipsec-isakmp 
+ ! Incomplete
+ set peer 1.1.1.1
+ set transform-set AES-SHA 
+ set pfs group5
+ match address VPN-TEST1
+crypto map CRYPTO 20 ipsec-isakmp 
+ ! Incomplete
+ set peer 2.2.2.1
+ set transform-set AES-SHA 
+ set pfs group2
+ match address VPN-TEST2
+crypto map CRYPTO 30 ipsec-isakmp 
+ ! Incomplete
+ set peer 3.3.3.1
+ set transform-set AES-SHA 
+ set pfs group2
+ match address VPN-TEST3
+crypto map CRYPTO 40 ipsec-isakmp 
+ ! Incomplete
+ set peer 4.4.4.1
+ set transform-set AES-SHA 
+ set pfs group5
+ match address VPN-TEST4
+crypto map CRYPTO 50 ipsec-isakmp 
+ ! Incomplete
+ set peer 5.5.5.1
+ set transform-set AES-SHA 
+ set pfs group5
+ match address VPN-TEST5
+!
+!
+!
+!
+!
+interface FastEthernet0
+ no ip address
+!
+interface FastEthernet1
+ no ip address
+!
+interface FastEthernet2
+ no ip address
+!
+interface FastEthernet3
+ no ip address
+!
+interface FastEthernet4
+ description *** LAN connection (don't change) ***
+ ip address 10.220.88.20 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+!
+router bgp 42
+ bgp router-id 10.220.88.20
+ bgp log-neighbor-changes
+ neighbor 10.220.88.38 remote-as 44
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+ip route 0.0.0.0 0.0.0.0 10.220.88.1
+ip route 1.1.99.2 255.255.255.255 10.220.88.1
+!
+ip access-list extended VPN-TEST1
+ip access-list extended VPN-TEST2
+ip access-list extended VPN-TEST3
+ip access-list extended VPN-TEST4
+ip access-list extended VPN-TEST5
+!
+!
+snmp-server group READONLY v3 priv read VIEWSTD access 98
+snmp-server view VIEWSTD iso included
+snmp-server community galileo RO 98
+snmp-server ifindex persist
+snmp-server location Freemont, CA
+snmp-server contact Kirk Byers
+access-list 98 remark *** SNMP ***
+access-list 98 permit any
+!
+!
+!
+control-plane
+!
+!
+!
+line con 0
+ logging synchronous
+ no modem enable
+line aux 0
+line vty 0 4
+ exec-timeout 20 0
+ transport input telnet ssh
+!
+scheduler max-task-time 5000
+ntp server 130.126.24.24
+ntp server 152.2.21.1
+onep
+ transport type tls localcert TP-self-signed-1429897839 disable-remotecert-validation
+ service set vty
+!
+end
