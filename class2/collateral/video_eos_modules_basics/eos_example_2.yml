@@ -12,6 +12,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       transport: eapi
+      use_ssl: True
       validate_certs: no
 
   tasks:
