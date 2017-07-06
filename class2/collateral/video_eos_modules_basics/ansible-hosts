@@ -22,10 +22,10 @@ username=pyclass
 password=invalid
 
 [arista]
-pynet-sw1 ansible_host=184.105.247.72
-pynet-sw2 ansible_host=184.105.247.73
-pynet-sw3 ansible_host=184.105.247.74
-pynet-sw4 ansible_host=184.105.247.75
+pynet-sw5 ansible_host=184.105.247.83
+pynet-sw6 ansible_host=184.105.247.84
+pynet-sw7 ansible_host=184.105.247.85
+pynet-sw8 ansible_host=184.105.247.86
 
 [arista:vars]
 username=pyclass
