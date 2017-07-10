@@ -11,4 +11,5 @@ pylab10b.twb-tech.com
 
 [servers:vars]
 ansible_connection=smart
-ansible_python_interpreter=/home/kbyers/applied_python/bin/python
+# You will need to update this to your Python
+ansible_python_interpreter=/home/kbyers/VENV/ansible/bin/python
