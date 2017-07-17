@@ -1,0 +1,12 @@
+---
+- name: IOS Example
+  hosts: pynet-rtr1
+  vars:
+    creds:
+      host: "{{ ansible_host }}"
+      username: testuser
+      ssh_keyfile:  ~/.ssh/test_rsa
+
+  tasks:
+    - ios_facts:
+        provider: "{{ creds }}"

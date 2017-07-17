@@ -1,0 +1,16 @@
+---
+- name: IOS Example
+  hosts: pynet-rtr1
+  vars:
+    creds:
+      host: "{{ ansible_host }}"
+      username: test1
+      password: "{{ password }}"
+
+  tasks:
+    - ios_facts:
+        provider: "{{ creds }}"
+
+    - ios_command:
+        provider: "{{ creds }}"
+        commands: show run
