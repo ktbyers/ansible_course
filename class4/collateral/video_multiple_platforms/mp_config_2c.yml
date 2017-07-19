@@ -1,6 +1,6 @@
 ---
 - name: IOS Config Change
-  hosts: cisco
+  hosts: pynet-rtr1
   gather_facts: False
   tasks:
     - ios_config:
@@ -8,7 +8,7 @@
         lines: "{{ global_config }}"
 
 - name: EOS Config Change
-  hosts: arista
+  hosts: pynet-sw5
   gather_facts: False
   tasks:
     - eos_config:
@@ -16,9 +16,10 @@
         lines: "{{ global_config }}"
 
 - name: NXOS Config Change
-  hosts: nxos
+  hosts: nxos1
   gather_facts: False
   tasks:
     - nxos_config:
         provider: "{{ creds_nxapi }}"
         lines: "{{ global_config }}"
+      tags: nxos
