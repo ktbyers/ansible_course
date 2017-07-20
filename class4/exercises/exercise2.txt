@@ -1,0 +1,65 @@
+$ ansible-playbook exercise2.yml 
+
+PLAY [EOS Configure Vlans] ****************************************************
+
+TASK [eos_config] *************************************************************
+ok: [pynet-sw8] => (item={u'vlan_name': u'blue0', u'vlan_id': 800})
+ok: [pynet-sw6] => (item={u'vlan_name': u'blue0', u'vlan_id': 800})
+ok: [pynet-sw7] => (item={u'vlan_name': u'blue0', u'vlan_id': 800})
+ok: [pynet-sw5] => (item={u'vlan_name': u'blue0', u'vlan_id': 800})
+ok: [pynet-sw8] => (item={u'vlan_name': u'blue1', u'vlan_id': 801})
+ok: [pynet-sw6] => (item={u'vlan_name': u'blue1', u'vlan_id': 801})
+ok: [pynet-sw7] => (item={u'vlan_name': u'blue1', u'vlan_id': 801})
+ok: [pynet-sw5] => (item={u'vlan_name': u'blue1', u'vlan_id': 801})
+ok: [pynet-sw8] => (item={u'vlan_name': u'blue2', u'vlan_id': 802})
+ok: [pynet-sw6] => (item={u'vlan_name': u'blue2', u'vlan_id': 802})
+ok: [pynet-sw7] => (item={u'vlan_name': u'blue2', u'vlan_id': 802})
+ok: [pynet-sw5] => (item={u'vlan_name': u'blue2', u'vlan_id': 802})
+ok: [pynet-sw8] => (item={u'vlan_name': u'blue3', u'vlan_id': 803})
+ok: [pynet-sw6] => (item={u'vlan_name': u'blue3', u'vlan_id': 803})
+ok: [pynet-sw5] => (item={u'vlan_name': u'blue3', u'vlan_id': 803})
+ok: [pynet-sw7] => (item={u'vlan_name': u'blue3', u'vlan_id': 803})
+
+PLAY RECAP ********************************************************************
+pynet-sw5                  : ok=1    changed=0    unreachable=0    failed=0   
+pynet-sw6                  : ok=1    changed=0    unreachable=0    failed=0   
+pynet-sw7                  : ok=1    changed=0    unreachable=0    failed=0   
+pynet-sw8                  : ok=1    changed=0    unreachable=0    failed=0   
+
+
+
+
+$ netmiko-show --cmd "show vlan" arista
+pynet_sw5.txt:VLAN  Name                             Status    Ports
+pynet_sw5.txt:----- -------------------------------- --------- -------------------------------
+pynet_sw5.txt:1     default                          active    Cpu, Et1, Et2, Et3, Et4, Et5
+pynet_sw5.txt:                                                 Et6, Et7
+pynet_sw5.txt:800   blue0                            active   
+pynet_sw5.txt:801   blue1                            active   
+pynet_sw5.txt:802   blue2                            active   
+pynet_sw5.txt:803   blue3                            active   
+pynet_sw6.txt:VLAN  Name                             Status    Ports
+pynet_sw6.txt:----- -------------------------------- --------- -------------------------------
+pynet_sw6.txt:1     default                          active    Cpu, Et1, Et2, Et3, Et4, Et5
+pynet_sw6.txt:                                                 Et6, Et7
+pynet_sw6.txt:800   blue0                            active   
+pynet_sw6.txt:801   blue1                            active   
+pynet_sw6.txt:802   blue2                            active   
+pynet_sw6.txt:803   blue3                            active   
+pynet_sw7.txt:VLAN  Name                             Status    Ports
+pynet_sw7.txt:----- -------------------------------- --------- -------------------------------
+pynet_sw7.txt:1     default                          active    Cpu, Et1, Et2, Et3, Et4, Et5
+pynet_sw7.txt:                                                 Et6, Et7
+pynet_sw7.txt:800   blue0                            active   
+pynet_sw7.txt:801   blue1                            active   
+pynet_sw7.txt:802   blue2                            active   
+pynet_sw7.txt:803   blue3                            active   
+pynet_sw8.txt:VLAN  Name                             Status    Ports
+pynet_sw8.txt:----- -------------------------------- --------- -------------------------------
+pynet_sw8.txt:1     default                          active    Cpu, Et1, Et2, Et3, Et4, Et5
+pynet_sw8.txt:                                                 Et6, Et7
+pynet_sw8.txt:800   blue0                            active   
+pynet_sw8.txt:801   blue1                            active   
+pynet_sw8.txt:802   blue2                            active   
+pynet_sw8.txt:803   blue3                            active   
+
