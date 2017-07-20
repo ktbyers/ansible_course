@@ -1,0 +1,8 @@
+---
+- name: Configure SNMP
+  hosts: cisco
+  gather_facts: False
+  tasks:
+    - ios_config:
+        provider: "{{ creds_ssh }}"
+        lines: "{{ snmp_config }}"

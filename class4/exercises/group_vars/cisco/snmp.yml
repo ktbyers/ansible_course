@@ -1,0 +1,4 @@
+---
+snmp_config:
+  - "snmp-server location Freemont, CA"
+  - "snmp-server contact Kirk Byers"

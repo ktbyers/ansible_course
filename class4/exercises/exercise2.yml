@@ -1,5 +1,5 @@
 ---
-# Needed hierarchy for idempotent
+# Needed hierarchy to be idempotent
 - name: EOS Configure Vlans
   hosts: arista
   gather_facts: False
