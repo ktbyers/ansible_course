@@ -13,9 +13,3 @@ creds_nxapi:
   use_ssl: yes
   validate_certs: no
   port: 8443
-
-global_config:
-  - "ip domain-name {{ default_domain }}"
-  - "ip name-server {{ name_server1 }} {{ name_server2 }}"
-  - "ntp server {{ ntp1 }}"
-  - "ntp server {{ ntp2 }}"
