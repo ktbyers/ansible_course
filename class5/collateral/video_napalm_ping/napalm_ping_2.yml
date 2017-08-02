@@ -1,0 +1,8 @@
+---
+- name: NAPALM PING
+  hosts: cisco
+  tasks:
+    - name: NAPALM ping
+      napalm_ping: 
+        provider: "{{ creds }}"
+        destination: 10.220.88.1
