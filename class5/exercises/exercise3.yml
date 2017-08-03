@@ -1,0 +1,31 @@
+---
+- name: NAPALM configure BGP on NX-OS switches
+  hosts: nxos
+  tasks:
+    - name: Configure BGP
+      napalm_install_config:
+        provider: "{{ creds }}"
+        config_file: "CFGS/{{ inventory_hostname }}-bgp.txt"
+        commit_changes: True
+        replace_config: False
+        diff_file: "DIFFS/{{ inventory_hostname }}.txt"
+
+    - name: Give BGP time to come up (delay 10s)
+      pause:
+        seconds: 10
+
+    - name: Verify BGP
+      napalm_get_facts:
+        provider: "{{ creds }}"
+        filter: "bgp_neighbors"
+
+    - debug:
+        msg: "{{ napalm_bgp_neighbors.global.peers }}"
+
+    - set_fact:
+        bgp_peer: "{{ napalm_bgp_neighbors.global.peers }}"
+
+    - assert:
+        that: "{{ bgp_peer[item].is_up }}"
+      with_items: "{{ bgp_peer }}"
+
