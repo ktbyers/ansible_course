@@ -1,0 +1,8 @@
+---
+- name: NAPALM Validation
+  hosts: pynet-sw6
+  tasks:
+    - name: NAPALM validate
+      napalm_validate: 
+        provider: "{{ creds }}"
+        validation_file: "{{ validate_file }}"

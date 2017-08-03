@@ -1,0 +1,11 @@
+---
+- get_facts:
+    model: "881"
+    os_version: "Version 15.4.2.T1"
+    vendor: Cisco
+    serial_number: FTX1512038X
+    hostname: pynet-rtr1
+
+- get_arp_table:
+    list:
+        - ip: 10.220.88.1
