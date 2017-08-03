@@ -1,0 +1,25 @@
+---
+- name: NAPALM LLDP Verification
+  hosts: cisco
+  tasks:
+    - name: LLDP
+      napalm_get_facts:
+        provider: "{{ creds }}"
+        filter: "lldp_neighbors"
+
+    - set_fact:
+        lldp_info: "{{ napalm_lldp_neighbors['FastEthernet4'][0] }}"
+
+    - name: Bonus where not hard-coding name (with_items will retrieve the key)
+      set_fact:
+        lldp_info_alt: "{{ napalm_lldp_neighbors[item][0] }}"
+      with_items: "{{ napalm_lldp_neighbors }}"
+
+    - debug:
+        var: lldp_info
+
+    - debug:
+        var: lldp_info_alt
+
+    - assert:
+        that: lldp_info.hostname == "twb-sf-hpsw1"
