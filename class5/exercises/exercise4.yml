@@ -1,0 +1,26 @@
+---
+- name: Full config load SW8 (diff only)
+  hosts: pynet-sw8
+  tasks:
+    - name: Baseline config
+      napalm_install_config:
+        provider: "{{ creds }}"
+        config_file: "CFGS/{{ inventory_hostname }}.txt"
+        commit_changes: False
+        replace_config: True
+        diff_file: "DIFFS/{{ inventory_hostname }}.txt"
+      register: diff_output
+
+    - name: "Print output when diff is not null string"
+      debug:
+        var: diff_output
+      when: diff_output.msg
+
+    - name: Load loopback interface config
+      napalm_install_config:
+        provider: "{{ creds }}"
+        config_file: "CFGS/{{ inventory_hostname }}-intf.txt"
+        commit_changes: True
+        replace_config: True
+        diff_file: "DIFFS/{{ inventory_hostname }}.txt"
+      when: not diff_output.msg
