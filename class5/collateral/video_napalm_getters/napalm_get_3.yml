@@ -1,0 +1,13 @@
+---
+- name: NAPALM on IOS
+  hosts: pynet-rtr1
+  vars:
+    creds:
+        hostname: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        dev_os: "ios"
+  tasks:
+    - name: NAPALM facts
+      napalm_get_facts: 
+        provider: "{{ creds }}"

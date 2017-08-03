@@ -1,0 +1,9 @@
+---
+
+- name: NAPALM on EOS
+  hosts: pynet-sw5
+  tasks:
+    - name: NAPALM config
+      napalm_get_facts: 
+        provider: "{{ creds }}"
+        filter: "config"
