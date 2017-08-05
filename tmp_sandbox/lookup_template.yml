@@ -1,0 +1,32 @@
+---
+- hosts: cisco
+  vars:
+    my_dict:
+        key1: value1
+        key2: value2
+        key3: value3
+        key4: value4
+        key5: value5
+        key6: value6
+    my_list:
+        - hello
+        - world
+        - some
+        - thing
+        - else
+
+  tasks:
+    - name: Just read data from template file
+      debug:
+        msg: "{{ lookup('template', './simple_template.j2') }}"
+      tags: simple_template
+
+    - name: Process list in a template
+      debug:
+        msg: "{{ lookup('template', './process_list.j2') }}"
+      tags: process_list
+
+    - name: Process dictionary in a template
+      debug:
+        msg: "{{ lookup('template', './process_dict.j2') }}"
+      tags: process_dict

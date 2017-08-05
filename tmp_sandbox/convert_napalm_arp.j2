@@ -1,0 +1,4 @@
+---
+{% for arp_entry in napalm_arp_table %}
+{{ arp_entry['ip'] }}: {{ arp_entry['mac'] }}
+{% endfor %}

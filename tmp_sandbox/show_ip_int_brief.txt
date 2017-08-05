@@ -1,0 +1,11 @@
+Protocol  Address          Age (min)  Hardware Addr   Type   Interface
+Internet  10.220.88.1             6   0062.ec29.70fe  ARPA   FastEthernet4
+Internet  10.220.88.20            -   c89c.1dea.0eb6  ARPA   FastEthernet4
+Internet  10.220.88.21           99   1c6a.7aaf.576c  ARPA   FastEthernet4
+Internet  10.220.88.29            7   5254.abbe.5b7b  ARPA   FastEthernet4
+Internet  10.220.88.30           88   5254.ab71.e119  ARPA   FastEthernet4
+Internet  10.220.88.37          159   0001.00ff.0001  ARPA   FastEthernet4
+Internet  10.220.88.38           70   0002.00ff.0001  ARPA   FastEthernet4
+Internet  10.220.88.39            1   6464.9be8.08c8  ARPA   FastEthernet4
+Internet  10.220.88.40          190   001c.c4bf.826a  ARPA   FastEthernet4
+Internet  10.220.88.41           52   001b.7873.5634  ARPA   FastEthernet4
