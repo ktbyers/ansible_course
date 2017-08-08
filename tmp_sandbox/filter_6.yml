@@ -1,0 +1,30 @@
+---
+- hosts: cisco
+  vars:
+    creds:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+    creds_napalm:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        dev_os: ios
+
+  tasks:
+    - napalm_get_facts:
+        provider: "{{ creds_napalm }}"
+        filter: "arp_table"
+
+    - debug:
+        msg: "{{ napalm_arp_table | map(attribute='ip') | list }}"
+
+    - set_fact:
+        my_dict: "{{ my_dict|default({}) | combine( {item.ip: item.mac} ) }}"
+      with_items: "{{ napalm_arp_table }}"
+
+    - debug:
+        var: my_dict
+
+#        msg: "{{ item | selectattr('ip') | list }} "
+#      with_items: "{{ arp_table }}"

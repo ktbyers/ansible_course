@@ -1,0 +1,31 @@
+--- 
+- hosts: local
+  vars:
+    var1: hello
+    var2: world
+    my_dict:
+        key1: zzzz
+        key2: yyyy
+        key3: whatever
+    my_list:
+        - hello
+        - world
+        - hello
+        - world
+        - hello
+        - world
+        - whatever
+    my_list2:
+        - world
+        - 3
+        - 77
+        - Arista
+    device: Cisco
+        
+  tasks:
+    - debug:
+        msg: "{{ my_dict | to_yaml }}" 
+
+    - debug:
+        msg: "{{ my_dict | to_nice_yaml }}" 
+
