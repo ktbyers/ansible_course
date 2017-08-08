@@ -1,0 +1,18 @@
+---
+- hosts: local
+  vars:
+    # File lookup
+    contents: "{{ lookup('file', './show_ip_int_brief.txt') }}"
+
+  tasks:
+    - name: Display ip interface table
+      debug: 
+        msg: "Routing table is:\n\n{{ contents }}"
+
+    - name: Display routing table (more readable)
+      debug:
+       var: contents.splitlines()
+
+    - name: Display routing table with some parsing
+      debug:
+       var: contents.splitlines()[3].split()

@@ -1,0 +1,18 @@
+---
+- hosts: local
+  vars:
+    # File lookup
+    who: "{{ lookup('pipe', 'whoami') }}"
+    show_arp: "{{ lookup('pipe', 'netmiko-show --cmd \"show arp\" pynet_rtr1') }}"
+
+  tasks:
+    - name: Display ip interface table
+      debug: 
+        msg: "Who Am I:\n\n{{ who }}"
+      tags: whoami
+
+    - name: Direct netmiko-show call
+      debug: 
+        var: show_arp.splitlines()
+      tags: netmiko
+
