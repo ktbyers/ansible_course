@@ -1,5 +1,5 @@
 ---
-- name: Test
+- name: Save and process show version output
   hosts: cisco
   vars:
     file_name: "./{{ inventory_hostname }}-show_version.txt"
