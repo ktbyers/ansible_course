@@ -1,0 +1,19 @@
+---
+- name: IOS Config Change
+  hosts: pynet-rtr1
+  gather_facts: False
+  roles:
+    - cisco_ios
+
+- name: EOS Config Change
+  hosts: pynet-sw7
+  gather_facts: False
+  roles:
+    - arista
+
+- name: NXOS Config Change
+  hosts: nxos2
+  gather_facts: False
+  roles:
+    - cisco_nxos
+
