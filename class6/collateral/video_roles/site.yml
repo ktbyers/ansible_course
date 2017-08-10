@@ -1,0 +1,8 @@
+---
+- hosts: pynet-rtr1
+  gather_facts: false
+  connection: local
+  
+  roles:
+    - acl_config
+

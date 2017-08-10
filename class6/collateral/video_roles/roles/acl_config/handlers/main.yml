@@ -1,0 +1,4 @@
+- name: wr mem
+  ios_command:
+    provider: "{{ creds }}"
+    commands: write mem
