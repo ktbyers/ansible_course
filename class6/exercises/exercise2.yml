@@ -1,0 +1,14 @@
+---
+- name: Test
+  hosts: pynet-sw8
+  tasks:
+    - napalm_get_facts:
+        provider: "{{ creds_napalm }}"
+        filter: "mac_address_table"
+
+    - set_fact:
+        mac_lookup: "{{ lookup('template', './convert_mac_table.j2') | from_yaml }}"
+
+    - debug:
+        var: mac_lookup
+

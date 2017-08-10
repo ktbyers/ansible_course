@@ -1,0 +1,34 @@
+---
+- name: Test
+  hosts: nxos1
+  vars:
+    ntp_servers:
+      - "ntp server 1.1.1.1"
+      - "ntp server 1.1.1.2"
+    extra_ntp_servers_no: []
+  tasks:
+    - nxos_config:
+        provider: "{{ creds_core_nxapi }}"
+        lines: "{{ ntp_servers }}"
+
+    - nxos_command:
+        provider: "{{ creds_core_ssh }}"
+        commands: "show run | inc ntp"
+      register: output
+
+    - set_fact:
+        current_ntp: "{{ output.stdout_lines[0] }}"
+
+    - name: Extra servers that should not be configured
+      set_fact:
+        extra_ntp_servers: "{{ current_ntp | difference(ntp_servers) | list }}"
+
+    - name: Convert ntp servers to no command
+      set_fact:
+        no_ntp_servers: "{{ lookup('template', './foo.j2') | from_yaml }}"
+
+    - nxos_config:
+        provider: "{{ creds_core_nxapi }}"
+        lines: "{{ no_ntp_servers }}"
+      when: no_ntp_servers
+
