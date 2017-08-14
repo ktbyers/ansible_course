@@ -1,0 +1,48 @@
+!
+transceiver qsfp default-mode 4x10G
+!
+hostname {{ hostname }}
+!
+ntp server {{ ntp1 }}
+!
+spanning-tree mode mstp
+!
+aaa authorization exec default local
+!
+no aaa root
+!
+{% for user in users %}
+{% if user.role is defined %}
+username {{ user.username }} privilege {{ user.privilege }} role {{ user.role }} secret 5 {{ user.secret }}
+{% elif user.privilege is not defined %}
+username {{ user.username }} secret 5 {{ user.secret }}
+{% else %}
+username {{ user.username }}} privilege {{ user.privilege }} secret 5 {{ user.secret }}
+username {{ user.username }}} privilege {{ user.privilege }} secret 5 {{ user.secret }}
+{% endif %}
+{% endfor %}
+!
+clock timezone America/Los_Angeles
+!
+interface Ethernet1
+   spanning-tree portfast
+!
+{% for intf_num in range(2, 8) %}
+interface Ethernet{{ intf_num }}
+!
+{% endfor %}
+interface Management1
+   shutdown
+!
+interface Vlan1
+   ip address {{ mgmt_ip_address }}/24
+!
+ip route 0.0.0.0/0 {{ default_gateway }}
+!
+ip routing
+!
+management api http-commands
+   no shutdown
+!
+!
+end
