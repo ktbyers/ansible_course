@@ -1,0 +1,8 @@
+{% for port_number in range(1, 8) %}
+interface Ethernet{{ port_number }}
+   switchport mode access
+   switchport access vlan 20
+   spanning-tree portfast
+   spanning-tree bpduguard enable
+!
+{% endfor %}
