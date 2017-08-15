@@ -93,4 +93,4 @@ ENV/
 *.retry
 
 # Generated files
-class7/collateral/CFGS/*.txt
+class7/collateral/video_templating_basics/CFGS/*.txt
