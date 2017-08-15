@@ -1,0 +1,9 @@
+{% if platform == "ios" %}
+ip name-server {{ name_server1 }}
+ip name-server {{ name_server2 }}
+{% elif platform == "eos" %}
+ip name-server vrf default {{ name_server1 }}
+ip name-server vrf default {{ name_server2 }}
+{% elif platform == "nxos" %}
+ip name-server {{ name_server1 }} {{ name_server2 }}
+{% endif %}
