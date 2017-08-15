@@ -91,3 +91,6 @@ ENV/
 
 # Ansible
 *.retry
+
+# Generated files
+class7/collateral/CFGS/*.txt
