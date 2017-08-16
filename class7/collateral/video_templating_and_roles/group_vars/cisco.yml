@@ -1,0 +1,15 @@
+---
+platform: ios
+
+creds_core_ssh:
+  host: "{{ ansible_host }}"
+  username: "{{ username }}"
+  password: "{{ password }}"
+  timeout: 60
+
+creds_napalm:
+  hostname: "{{ ansible_host }}"
+  username: "{{ username }}"
+  password: "{{ password }}"
+  dev_os: "ios"
+  optional_args: {}

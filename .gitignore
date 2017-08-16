@@ -95,3 +95,4 @@ ENV/
 # Generated files
 class7/collateral/video_templating_basics/CFGS/*.txt
 class7/collateral/video_templating_full_configs/CFGS_2/*.txt
+class7/collateral/video_templating_and_roles/CFGS/*.txt
