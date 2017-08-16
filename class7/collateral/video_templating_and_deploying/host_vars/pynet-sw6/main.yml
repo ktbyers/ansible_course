@@ -1,0 +1,4 @@
+---
+hostname: pynet-sw6
+mgmt_ip_address: 10.220.88.33
+eapi_secret: $1$ezGsMTgk$g5ROc4mDuF/4CnMJo0aPV0

@@ -1,0 +1,4 @@
+---
+hostname: pynet-sw8
+mgmt_ip_address: 10.220.88.35
+eapi_secret: $1$zBpvd4C5$LDS6j8PPt6rHikh79Hi46/
