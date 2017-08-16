@@ -1,0 +1,17 @@
+service timestamps debug datetime msec localtime show-timezone
+service timestamps log datetime msec localtime show-timezone
+!
+!
+{% include 'hostname.j2' %}
+!
+!
+ip default-gateway {{item.default_gateway}}
+!
+line con 0
+line vty 0 4 
+ login
+line vty 5 15
+ login
+!
+!
+end
