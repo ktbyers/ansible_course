@@ -1,0 +1,18 @@
+service timestamps debug datetime msec localtime show-timezone
+service timestamps log datetime msec localtime show-timezone
+!
+hostname {{ item.hostname }}
+!
+!
+{% include item.model_interfaces %}
+!
+ip default-gateway {{ item.default_gateway }}
+!
+line con 0
+line vty 0 4 
+ login
+line vty 5 15
+ login
+!
+!
+end

@@ -1,0 +1,14 @@
+---
+- name: Configuration templating using include statement
+  hosts: local
+  gather_facts: false
+  tasks:
+    - name: Generate configuration files
+      template: 
+        src: branch_office_2.j2 
+        dest: "CFGS/{{ item.hostname }}.txt"
+      with_items:
+        - {hostname: pynet-rtr1, default_gateway: 10.10.10.1, model_interfaces: 881_interfaces.j2,
+           ip_addr: 10.10.10.10, netmask: 255.255.255.0}
+        - {hostname: pynet-rtr2, default_gateway: 10.10.20.1, model_interfaces: 891_interfaces.j2,
+           ip_addr: 10.10.10.10, netmask: 255.255.255.0}
