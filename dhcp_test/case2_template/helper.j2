@@ -1,0 +1,11 @@
+---
+vlans_helper:
+{% for element in new_output.results %}
+{% for key, value in element.iteritems() %}
+{% if key == 'stdout' %}
+{% if 'helper' in value[0] %}
+  - {{ element.item }}
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endfor %}

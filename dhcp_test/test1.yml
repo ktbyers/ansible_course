@@ -1,0 +1,26 @@
+---
+- name: Configure ip-helper on single router
+  hosts: cisco1
+  vars:
+    creds:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+
+  tasks:
+    - ios_facts:
+        provider: "{{ creds }}"
+
+    - name: load new acl into device
+      ios_config:
+        provider: "{{ creds }}"
+        lines:
+          - permit ip host 1.1.1.1 any
+          - permit ip host 2.2.2.2 any
+          - permit ip host 3.3.3.3 any
+          - permit ip host 4.4.4.4 any
+          - permit ip host 5.5.5.5 any
+        parents: ip access-list extended test
+  #     before: no ip access-list extended test
+        match: exact
+        replace: block

@@ -1,0 +1,29 @@
+---
+- name: Test DHCP helper
+  hosts: cisco
+  vars:
+    creds:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+
+  tasks:
+    - ios_config:
+        provider: "{{ creds }}"
+        lines:
+          - ip helper-address 1.1.1.1
+        parents: interface {{ item }}
+      with_items: "{{ dhcp_interfaces }}"
+
+    - ios_command:
+        provider: "{{ creds }}"
+        commands: show run
+      register: show_run
+
+#    - debug:
+#        var: show_run
+ 
+    - assert:
+        that: '{{ show_run.stdout[0] | ip_helper | symmetric_difference(dhcp_interfaces) == [] }}'
+        msg: "Interface has 'ip helper' configured and shouldn't"
+

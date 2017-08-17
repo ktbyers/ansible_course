@@ -1,0 +1,58 @@
+---
+- name: Test DHCP helper
+  hosts: cisco
+  vars:
+    creds:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+
+    dhcp_interfaces:
+        - Vlan1
+
+  tasks:
+    - ios_facts:
+        provider: "{{ creds }}"
+
+#    - ios_command:
+#        provider: "{{ creds }}"
+#        commands:
+#          - "show run interface {{ item }}"
+#      with_items: "{{ dhcp_interfaces }}"
+#      register: output
+
+    - ios_config:
+        provider: "{{ creds }}"
+        lines:
+          - ip helper-address 1.1.1.1
+        parents: interface {{ item }}
+      with_items: "{{ dhcp_interfaces }}"
+
+#        match: line
+#      when: '"helper" not in item.stdout[0]'
+
+#    - ios_command:
+#        provider: "{{ creds }}"
+#        commands:
+#          - "show run interface {{ item }}"
+#      with_items: "{{ dhcp_interfaces }}"
+#      register: new_output
+#
+#    - name: Check for extra DHCP helpers
+#      ios_command:
+#        provider: "{{ creds }}"
+#        commands:
+#          - "show run interface {{ item }}"
+#      with_items: "{{ ansible_net_interfaces }}"
+#      register: new_output
+#
+#    - debug:
+##        msg: "***** {{ item.stdout[0] }} ******"
+##        msg: "***** {{ item.item }} ******"
+#        msg: "((item.item not in dhcp_interfaces) and ('"helper" in item.stdout[0]'))"
+#      with_items: "{{ new_output.results }}"
+#      # Must be an invalid interfaces and must have helper
+##      when: "((item.item not in dhcp_interfaces) and ('"helper" in item.stdout[0]'))
+##      when: ('"helper" in item.stdout[0] and item.item not in dhcp_interfaces')
+#      when: '"helper" in item.stdout[0]|bool'
+#

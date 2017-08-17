@@ -1,0 +1,140 @@
+---
+- name: Test DHCP helper
+  hosts: cisco
+  vars:
+    creds:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+
+  tasks:
+    - ios_facts:
+        provider: "{{ creds }}"
+
+    - ios_config:
+        provider: "{{ creds }}"
+        lines:
+          - ip helper-address 1.1.1.1
+        parents: interface {{ item }}
+      with_items: "{{ dhcp_interfaces }}"
+
+    - name: Check for extra DHCP helpers
+      ios_command:
+        provider: "{{ creds }}"
+        commands:
+          - "show run interface {{ item }}"
+      with_items: "{{ ansible_net_interfaces }}"
+      register: new_output
+
+#   - debug:
+#        var: new_output
+
+    - debug:
+        var: item
+      when: '"helper" in item.stdout[0]'
+      with_items: "{{ new_output.results }}"
+      register: new_output2
+
+    - assert:
+        that: '{{ new_output2.results | selectattr("skipped", "undefined") |  map(attribute="item.item") | list | symmetric_difference(dhcp_interfaces) }} == []'
+        msg: "Interface has 'ip helper' configured and shouldn't"
+
+
+#    - debug:
+#        msg: '{{ new_output2.results | selectattr("skipped", "undefined") |  map(attribute="item.item") | list | symmetric_difference(dhcp_interfaces) }}'
+
+#    - set_fact:
+#        test_var: '{{ new_output2.results | map(attribute="item.item") | list }}'
+#
+#    - debug:
+#        var: test_var
+
+#    - debug:
+#        msg: "{{ item.item }}"
+#      with_items: "{{ new_output.results }}"
+#      when: '"helper" in item.stdout[0]'
+#      register: new_output2
+#
+#
+###
+###
+###ok: [pynet-rtr2] => {
+###    "new_output": {
+###        "changed": false, 
+###        "msg": "All items completed", 
+###        "results": [
+###            {
+###                "_ansible_item_result": true, 
+###                "_ansible_no_log": false, 
+###                "_ansible_parsed": true, 
+###                "changed": false, 
+###                "invocation": {
+###                    "module_args": {
+###                        "auth_pass": null, 
+###                        "authorize": false, 
+###                        "commands": [
+###                            "show run interface Vlan99"
+###                        ], 
+###                        "host": "184.105.247.71", 
+###                        "interval": 1, 
+###                        "match": "all", 
+###                        "password": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER", 
+###                        "port": null, 
+###                        "provider": {
+###                            "host": "184.105.247.71", 
+###                            "password": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER", 
+###                            "username": "pyclass"
+###                        }, 
+###                        "retries": 10, 
+###                        "ssh_keyfile": null, 
+###                        "timeout": 10, 
+###                        "transport": null, 
+###                        "use_ssl": true, 
+###                        "username": "pyclass", 
+###                        "validate_certs": true, 
+###                        "wait_for": null
+###                    }, 
+###                    "module_name": "ios_command"
+###                }, 
+###                "item": "Vlan99", 
+###                "stdout": [
+###                    "Building configuration...\n\nCurrent configuration : 66 bytes\n!\ninterface Vlan99\n no ip address\n ip helper-address 1.1.1.1\nend\n"
+###                ], 
+###                "stdout_lines": [
+###                    [
+###                        "Building configuration...", 
+###                        "", 
+###                        "Current configuration : 66 bytes", 
+###                        "!", 
+###                        "interface Vlan99", 
+###                        " no ip address", 
+###                        " ip helper-address 1.1.1.1", 
+###                        "end", 
+###                        ""
+###                    ]
+###                ], 
+###                "warnings": []
+###            }, 
+###
+###
+####
+####    - debug:
+####        var: item.item.item
+####      with_items: "{{ new_output2.results }}"
+###
+###
+####    - set_fact:
+####        helper_configured: "{{ item.item }}"
+####      with_items: "{{ new_output.results }}"
+####      when: '"helper" in item.stdout[0]'
+###
+###
+####        msg: "{{ item.item }}"
+#####        msg: "***** {{ item.stdout[0] }} ******"
+#####        msg: "***** {{ item.item }} ******"
+####        msg: "((item.item not in dhcp_interfaces) and ('"helper" in item.stdout[0]'))"
+####      # Must be an invalid interfaces and must have helper
+#####      when: "((item.item not in dhcp_interfaces) and ('"helper" in item.stdout[0]'))
+#####      when: ('"helper" in item.stdout[0] and item.item not in dhcp_interfaces')
+####      when: '"helper" in item.stdout[0]|bool'
+###

@@ -1,0 +1,8 @@
+---
+dhcp_interfaces:
+  - interface: Vlan1
+    helper: 1.1.1.1
+  - interface: Vlan20
+    helper: 1.1.1.1
+  - interface: Vlan60
+    helper: 1.1.1.99
