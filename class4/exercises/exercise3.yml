@@ -1,0 +1,33 @@
+---
+- name: IOS Config Change
+  hosts: pynet-rtr1
+  gather_facts: False
+  tasks:
+    - ios_config:
+        provider: "{{ creds_ssh }}"
+        parents: ["interface Loopback0"]
+        lines: 
+          - "ip address {{ ipv4_address }} {{ ipv4_netmask }}"
+          - "ipv6 address {{ ipv6_address }}{{ ipv6_netmask }}"
+
+- name: EOS Config Change
+  hosts: pynet-sw5
+  gather_facts: False
+  tasks:
+    - eos_config:
+        provider: "{{ creds_eapi }}"
+        parents: ["interface Loopback0"]
+        lines: 
+          - "ip address {{ ipv4_address }}{{ ipv4_netmask }}"
+          - "ipv6 address {{ ipv6_address }}{{ ipv6_netmask }}"
+
+- name: NXOS Config Change
+  hosts: nxos1
+  gather_facts: False
+  tasks:
+    - nxos_config:
+        provider: "{{ creds_nxapi }}"
+        parents: ["interface loopback0"]
+        lines: 
+          - "ip address {{ ipv4_address }}{{ ipv4_netmask }}"
+          - "ipv6 address {{ ipv6_address }}{{ ipv6_netmask }}"

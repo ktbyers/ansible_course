@@ -1,0 +1,7 @@
+---
+- name: NAPALM Getters
+  hosts: arista:cisco:nxos:juniper
+  tasks:
+    - name: NAPALM facts
+      napalm_get_facts:
+        provider: "{{ creds }}"

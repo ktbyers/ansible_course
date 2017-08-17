@@ -1,0 +1,26 @@
+---
+- name: Save and process show version output
+  hosts: cisco
+  vars:
+    file_name: "./{{ inventory_hostname }}-show_version.txt"
+  tasks:
+    - ios_command:
+        provider: "{{ creds_core }}"
+        commands: "show version"
+      register: output
+
+    - set_fact:
+        show_version: "{{ output.stdout[0] }}"
+
+    - name: Write show version out to a file
+      copy:
+        content: "{{ show_version }}"
+        dest: "{{ file_name }}"
+
+    - name: Read data in from file
+      set_fact:
+        new_show_version: "{{ lookup('file', file_name) }}"
+
+    - name: Print out to screen
+      debug:
+        var: new_show_version

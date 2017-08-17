@@ -1,0 +1,32 @@
+---
+- hosts: cisco
+  vars:
+    creds:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+    creds_napalm:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        dev_os: ios
+
+  tasks:
+    - napalm_get_facts:
+        provider: "{{ creds_napalm }}"
+        filter: "arp_table"
+
+    - name: Retrieve as a string
+      debug:
+        msg: "{{ lookup('template', './convert_napalm_arp.j2') }}"
+
+    - name: Convert napalm data structure
+      debug:
+        msg: "{{ lookup('template', './convert_napalm_arp.j2') | from_yaml }}"
+
+    - set_fact:
+        new_arp: "{{ lookup('template', './convert_napalm_arp.j2') | from_yaml }}"
+
+    - debug:
+        var: new_arp['10.220.88.1']
+

@@ -1,0 +1,65 @@
+! Command: show running-config
+! device: pynet-sw5 (vEOS, EOS-4.15.4F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+transceiver qsfp default-mode 4x10G
+!
+logging buffered 50000
+!
+hostname pynet-sw5
+!
+ntp server 130.126.24.24
+!
+spanning-tree mode mstp
+!
+aaa authorization exec default local
+!
+no aaa root
+!
+username admin privilege 15 role network-admin secret 5 $1$aM6w809x$tgkc6ZGhcScvELVKVHq3n0
+username admin1 privilege 15 secret 5 $1$7kD0oS/t$wXhtTFwnWwnlPFKWwXoJ70
+username eapi secret 5 $1$Kt0.fwmk$5Q14WW76.w5xBIHwMHNX0/
+username pyclass privilege 15 secret 5 $1$C3VfUfcO$86t4iqCX60yW.NIR8d2Lh0
+!
+clock timezone America/Los_Angeles
+!
+!
+interface Ethernet1
+   spanning-tree portfast
+!
+interface Ethernet2
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Loopback0
+   ip address 1.1.1.102/32
+   ipv6 address 2001:db8::2/64
+!
+interface Management1
+   shutdown
+!
+interface Vlan1
+   ip address 10.220.88.32/24
+!
+ip route 0.0.0.0/0 10.220.88.1
+ip route 1.1.1.1/32 10.220.88.1
+ip route 1.1.1.2/32 10.220.88.1
+ip route 1.1.1.3/32 10.220.88.1
+ip route 1.1.1.4/32 10.220.88.1
+!
+ip routing
+!
+management api http-commands
+   no shutdown
+!
+!
+end

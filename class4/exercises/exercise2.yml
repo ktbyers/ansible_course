@@ -1,0 +1,17 @@
+---
+# Needed hierarchy to be idempotent
+- name: EOS Configure Vlans
+  hosts: arista
+  gather_facts: False
+  tasks:
+    - eos_config:
+        provider: "{{ creds_eapi }}"
+        parents: "vlan {{ item.vlan_id }}"
+        lines: 
+          - "name {{ item.vlan_name }}"
+      with_items:
+          - { vlan_id: 800, vlan_name: blue0 }
+          - { vlan_id: 801, vlan_name: blue1 }
+          - { vlan_id: 802, vlan_name: blue2 }
+          - { vlan_id: 803, vlan_name: blue3 }
+

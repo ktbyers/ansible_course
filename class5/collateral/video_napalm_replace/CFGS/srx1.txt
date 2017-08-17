@@ -1,0 +1,257 @@
+
+## Last commit: 2017-08-01 15:58:37 PDT by pyclass
+version 12.1X44-D35.5;
+# Reset configuration back to pynet standard config
+system {
+    host-name pynet-jnpr-srx1;
+    time-zone America/Los_Angeles;
+    location building "Fremont";
+    root-authentication {
+        encrypted-password "$1$97eUhFdU$86IvOyci.RPxQ8aIwpv41."; ## SECRET-DATA
+    }
+    name-server {
+        208.67.222.222;
+        208.67.220.220;
+    }
+    login {
+        user admin {
+            uid 2001;
+            class super-user;
+            authentication {
+                encrypted-password "$1$yoajmPix$8zbI8teGohrepw1Z/kdOF/"; ## SECRET-DATA
+            }
+        }
+        user pyclass {
+            uid 2000;
+            class super-user;
+            authentication {
+                encrypted-password "$1$xWmYoDJ4$paIkCzT9IbizmJbJiPD80/"; ## SECRET-DATA
+            }
+        }
+        password {
+            minimum-changes 0;
+        }
+    }
+    services {
+        ssh {
+            protocol-version v2;
+        }
+        netconf {
+            ssh;
+        }
+    }
+    syslog {
+        archive size 240k files 3;
+        user * {
+            any emergency;
+        }
+        file messages {
+            any critical;
+            authorization info;
+        }
+        file interactive-commands {
+            interactive-commands error;
+        }
+        log-rotate-frequency 5;
+    }
+    max-configurations-on-flash 5;
+    max-configuration-rollbacks 5;
+    license {
+        autoupdate {
+            url https://ae1.juniper.net/junos/key_retrieval;
+        }
+    }
+}
+interfaces {
+    fe-0/0/0 {
+        unit 0;
+    }
+    fe-0/0/1 {
+        unit 0 {
+            family ethernet-switching {
+                vlan {
+                    members vlan-trust;
+                }
+            }
+        }
+    }
+    fe-0/0/2 {
+        unit 0 {
+            family ethernet-switching {
+                vlan {
+                    members vlan-trust;
+                }
+            }
+        }
+    }
+    fe-0/0/3 {
+        unit 0 {
+            family ethernet-switching {
+                vlan {
+                    members vlan-trust;
+                }
+            }
+        }
+    }
+    fe-0/0/4 {
+        unit 0 {
+            family ethernet-switching {
+                vlan {
+                    members vlan-trust;
+                }
+            }
+        }
+    }
+    fe-0/0/5 {
+        unit 0 {
+            family ethernet-switching {
+                vlan {
+                    members vlan-trust;
+                }
+            }
+        }
+    }
+    fe-0/0/6 {
+        unit 0 {
+            family ethernet-switching {
+                vlan {
+                    members vlan-trust;
+                }
+            }
+        }
+    }
+    fe-0/0/7 {
+        unit 0 {
+            family ethernet-switching {
+                vlan {
+                    members vlan-trust;
+                }
+            }
+        }
+    }
+    vlan {
+        unit 0 {
+            description "Management Vlan 0";
+            family inet {
+                address 10.220.88.39/24;
+            }
+        }
+    }
+}
+routing-options {
+    static {
+        route 0.0.0.0/0 next-hop 10.220.88.1;
+    }
+}
+protocols {
+    lldp {
+        interface all;
+    }
+    stp;
+}
+security {
+    screen {
+        ids-option untrust-screen {
+            icmp {
+                ping-death;
+            }
+            ip {
+                source-route-option;
+                tear-drop;
+            }
+            tcp {
+                syn-flood {
+                    alarm-threshold 1024;
+                    attack-threshold 200;
+                    source-threshold 1024;
+                    destination-threshold 2048;
+                    timeout 20;
+                }
+                land;
+            }
+        }
+    }
+    nat {
+        source {
+            rule-set trust-to-untrust {
+                from zone trust;
+                to zone untrust;
+                rule source-nat-rule {
+                    match {
+                        source-address 0.0.0.0/0;
+                    }
+                    then {
+                        source-nat {
+                            interface;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    policies {
+        from-zone trust to-zone untrust {
+            policy trust-to-untrust {
+                match {
+                    source-address any;
+                    destination-address any;
+                    application any;
+                }
+                then {
+                    permit;
+                }
+            }
+        }
+    }
+    zones {
+        security-zone trust {
+            host-inbound-traffic {
+                system-services {
+                    all;
+                }
+                protocols {
+                    all;
+                }
+            }
+            interfaces {
+                vlan.0;
+            }
+        }
+        security-zone untrust {
+            screen untrust-screen;
+            interfaces {
+                fe-0/0/0.0 {
+                    host-inbound-traffic {
+                        system-services {
+                            dhcp;
+                            tftp;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+firewall {
+    family inet {
+        filter EXTERNAL-IN-V4 {
+            term BLOCK-SPOOFED {
+                from {
+                    source-address {
+                        17.255.254.0/23;
+                        17.255.252.0/22;
+                    }
+                }
+                then {
+                    discard;
+                }
+            }
+        }
+    }
+}
+vlans {
+    vlan-trust {
+        vlan-id 3;
+        l3-interface vlan.0;
+    }
+}

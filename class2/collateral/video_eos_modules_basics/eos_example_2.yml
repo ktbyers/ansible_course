@@ -1,6 +1,6 @@
 ---
 - name: EOS Example
-  hosts: pynet-sw1
+  hosts: pynet-sw5
   vars:
     ssh:
       host: "{{ ansible_host }}"
@@ -12,6 +12,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       transport: eapi
+      use_ssl: True
       validate_certs: no
 
   tasks:

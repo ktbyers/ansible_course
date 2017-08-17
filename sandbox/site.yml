@@ -1,0 +1,8 @@
+---
+- name: Templating using roles
+  hosts: cisco:nxos:arista
+  roles:
+    - {role: 'cisco_ios', when: platform == "ios"}
+    - {role: 'cisco_nxos', when: platform == "nxos"}
+    - {role: 'arista', when: platform == "eos"}
+  

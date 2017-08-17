@@ -1,0 +1,21 @@
+creds_ssh:
+  host: "{{ ansible_host }}"
+  username: "{{ username }}"
+  password: "{{ password }}"
+  transport: cli
+  timeout: 60
+
+creds_eapi:
+  host: "{{ ansible_host }}"
+  username: "{{ username }}"
+  password: "{{ password }}"
+  transport: eapi
+  use_ssl: True
+  validate_certs: no
+
+global_config:
+  - "ip domain-name {{ default_domain }}"
+  - "ip name-server vrf default {{ name_server1 }}"
+  - "ip name-server vrf default {{ name_server2 }}"
+  - "ntp server {{ ntp1 }}"
+  - "ntp server {{ ntp2 }}"

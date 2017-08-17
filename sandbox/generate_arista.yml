@@ -1,0 +1,15 @@
+---
+- name: Generate Default Arista Configurations
+  hosts: local
+  tasks:
+    - name: Generate Arista Configs
+      template: src=arista_sw.j2 dest=CFGS_2/{{ item.hostname }}.txt
+      with_items:
+        - { hostname: pynet-sw1, ip_address: 10.220.88.28, eapi_secret: $1$FIOFmaYx$FVZOCJ71hnXLN7HPXis3M. }
+        - { hostname: pynet-sw2, ip_address: 10.220.88.29, eapi_secret: $1$Ju4G77CG$ialRy.8iozRV/.YpAqlZw1 }
+        - { hostname: pynet-sw3, ip_address: 10.220.88.30, eapi_secret: $1$AUB.4YgZ$atUpFywcTwX84x2POAt9C0 }
+        - { hostname: pynet-sw4, ip_address: 10.220.88.31, eapi_secret: $1$kGsls/wg$brwRo1OGS0OaTdnKuWHQG/ }
+        - { hostname: pynet-sw5, ip_address: 10.220.88.32, eapi_secret: $1$Kt0.fwmk$5Q14WW76.w5xBIHwMHNX0/ }
+        - { hostname: pynet-sw6, ip_address: 10.220.88.33, eapi_secret: $1$ezGsMTgk$g5ROc4mDuF/4CnMJo0aPV0 }
+        - { hostname: pynet-sw7, ip_address: 10.220.88.34, eapi_secret: $1$jMZJZ7Ig$w6ajfFPHU1w5T9e3Rsc84. }
+        - { hostname: pynet-sw8, ip_address: 10.220.88.35, eapi_secret: $1$zBpvd4C5$LDS6j8PPt6rHikh79Hi46/ }

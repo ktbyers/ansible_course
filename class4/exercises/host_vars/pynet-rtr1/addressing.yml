@@ -1,0 +1,6 @@
+---
+ipv4_address: 1.1.1.101
+ipv4_netmask: 255.255.255.255
+
+ipv6_address: 2001:DB8::1
+ipv6_netmask: /64

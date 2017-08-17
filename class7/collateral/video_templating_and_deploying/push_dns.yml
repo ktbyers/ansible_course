@@ -1,0 +1,34 @@
+---
+- name: Generate configs for name-servers
+  hosts: cisco:nxos:arista
+  tasks:
+    - name: "Delete old config files"
+      file:
+        path: "./CFGS/{{ inventory_hostname }}.txt"
+        state: absent
+
+    - name: "Generating config files"
+      template:
+        src: gen_dns.j2
+        dest: "./CFGS/{{ inventory_hostname }}.txt"
+
+- name: Push IOS configs
+  hosts: cisco
+  tasks:
+    - ios_config:
+        provider: "{{ creds_core_ssh }}"
+        src: "./CFGS/{{ inventory_hostname }}.txt"
+
+- name: Push NX-OS configs
+  hosts: nxos
+  tasks:
+    - nxos_config:
+        provider: "{{ creds_core_ssh }}"
+        src: "./CFGS/{{ inventory_hostname }}.txt"
+
+- name: Push EOS configs
+  hosts: arista
+  tasks:
+    - eos_config:
+        provider: "{{ creds_core_ssh }}"
+        src: "./CFGS/{{ inventory_hostname }}.txt"

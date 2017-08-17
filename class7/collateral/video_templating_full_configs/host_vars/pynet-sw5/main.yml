@@ -1,0 +1,4 @@
+---
+hostname: pynet-sw5
+mgmt_ip_address: 10.220.88.32
+eapi_secret: $1$Kt0.fwmk$5Q14WW76.w5xBIHwMHNX0/

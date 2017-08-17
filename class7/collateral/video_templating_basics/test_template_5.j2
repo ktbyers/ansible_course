@@ -1,0 +1,10 @@
+{% for interface in napalm_interface_list %}
+{% if interface not in ["Management1", "Vlan1"]: %}
+interface {{ interface }}
+   switchport mode access
+   switchport access vlan 20
+   spanning-tree portfast
+   spanning-tree bpduguard enable
+!
+{% endif %}
+{% endfor %}

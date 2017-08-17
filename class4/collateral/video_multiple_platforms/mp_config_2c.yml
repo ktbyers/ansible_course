@@ -1,0 +1,25 @@
+---
+- name: IOS Config Change
+  hosts: pynet-rtr1
+  gather_facts: False
+  tasks:
+    - ios_config:
+        provider: "{{ creds_ssh }}"
+        lines: "{{ global_config }}"
+
+- name: EOS Config Change
+  hosts: pynet-sw5
+  gather_facts: False
+  tasks:
+    - eos_config:
+        provider: "{{ creds_eapi }}"
+        lines: "{{ global_config }}"
+
+- name: NXOS Config Change
+  hosts: nxos1
+  gather_facts: False
+  tasks:
+    - nxos_config:
+        provider: "{{ creds_nxapi }}"
+        lines: "{{ global_config }}"
+      tags: nxos

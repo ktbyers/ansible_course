@@ -1,0 +1,25 @@
+
+$ ansible-playbook exercise4.yml 
+
+PLAY [Configure SNMP] *********************************************************
+
+TASK [ios_config] *************************************************************
+ok: [pynet-rtr2]
+ok: [pynet-rtr1]
+
+PLAY RECAP ********************************************************************
+pynet-rtr1                 : ok=1    changed=0    unreachable=0    failed=0   
+pynet-rtr2                 : ok=1    changed=0    unreachable=0    failed=0   
+
+
+
+
+$ netmiko-show --cmd 'show run | inc snmp-server location' cisco
+pynet_rtr1.txt:snmp-server location Freemont, CA
+pynet_rtr2.txt:snmp-server location Freemont, CA
+
+
+$ netmiko-show --cmd 'show run | inc snmp-server contact' cisco
+pynet_rtr1.txt:snmp-server contact Kirk Byers
+pynet_rtr2.txt:snmp-server contact Kirk Byers
+

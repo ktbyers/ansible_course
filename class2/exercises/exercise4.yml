@@ -1,13 +1,14 @@
 ---
 
 - name: Arista process show arp
-  hosts: pynet-sw3
+  hosts: pynet-sw7
   vars:
     eapi:
       host: "{{ ansible_host }}"
       username: "{{ username }}"
       password: "{{ password }}"
       transport: eapi
+      use_ssl: True
       validate_certs: no
     
   tasks: 

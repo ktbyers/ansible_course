@@ -1,0 +1,5 @@
+system {
+  syslog {
+        archive size 240k files 3;
+  }
+}

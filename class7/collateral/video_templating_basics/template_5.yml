@@ -1,0 +1,15 @@
+---
+- name: Templating with a for loop
+  hosts: arista
+  tasks:
+    - name:  Retrieve facts about device
+      napalm_get_facts:
+        provider: "{{ creds_napalm }}"
+      tags: interface_tag
+
+    - debug:
+        var: napalm_interface_list
+
+    - template:
+        src: test_template_5.j2
+        dest: "./CFGS/{{ inventory_hostname }}.txt"

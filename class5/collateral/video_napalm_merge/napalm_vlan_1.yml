@@ -1,0 +1,11 @@
+---
+
+- name: Test napalm merge
+  hosts: arista:nxos
+  tasks:
+    - napalm_install_config:
+        provider: "{{ creds }}"
+        config_file: "CFGS/{{ creds['dev_os'] }}-vlans.txt"
+        commit_changes: False
+        replace_config: False
+        diff_file: "DIFFS/{{ inventory_hostname }}.txt"

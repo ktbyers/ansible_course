@@ -1,0 +1,20 @@
+interface FastEthernet0
+ no ip address
+!
+interface FastEthernet1
+ no ip address
+!
+interface FastEthernet2
+ no ip address
+!
+interface FastEthernet3
+ no ip address
+!
+interface FastEthernet4
+ ip address {{ item.ip_addr }} {{ item.netmask }}
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+

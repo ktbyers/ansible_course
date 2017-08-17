@@ -1,0 +1,53 @@
+
+$ ansible-playbook exercise3.yml 
+
+PLAY [IOS Config Change] ******************************************************
+
+TASK [ios_config] *************************************************************
+ok: [pynet-rtr1]
+
+PLAY [EOS Config Change] ******************************************************
+
+TASK [eos_config] *************************************************************
+ [WARNING]: argument transport has been deprecated and will be removed in a future version
+
+ok: [pynet-sw5]
+
+PLAY [NXOS Config Change] *****************************************************
+
+TASK [nxos_config] ************************************************************
+ok: [nxos1]
+
+PLAY RECAP ********************************************************************
+nxos1                      : ok=1    changed=0    unreachable=0    failed=0   
+pynet-rtr1                 : ok=1    changed=0    unreachable=0    failed=0   
+pynet-sw5                  : ok=1    changed=0    unreachable=0    failed=0   
+
+
+
+
+$ netmiko-show --cmd "show run int loop0" pynet_rtr1
+Building configuration...
+Current configuration : 111 bytes
+!
+interface Loopback0
+ ip address 1.1.1.101 255.255.255.255
+ no ip redirects
+ ipv6 address 2001:DB8::1/64
+end
+
+
+$ netmiko-show --cmd "show run int loop0" pynet_sw5
+interface Loopback0
+   ip address 1.1.1.102/32
+   ipv6 address 2001:db8::2/64
+
+
+$ netmiko-show --cmd "show run int loop0" nxos1
+!Command: show running-config interface loopback0
+!Time: Thu Jul 20 01:09:28 2017
+version 7.3(1)D1(1)
+interface loopback0
+  ip address 1.1.1.103/32
+  ipv6 address 2001:db8::3/64
+

@@ -1,0 +1,42 @@
+!
+transceiver qsfp default-mode 4x10G
+!
+hostname {{ hostname }}
+!
+ntp server {{ ntp1 }}
+!
+spanning-tree mode mstp
+!
+aaa authorization exec default local
+!
+no aaa root
+!
+username admin privilege 15 role network-admin secret 5 $1$aM6w809x$tgkc6ZGhcScvELVKVHq3n0
+username admin1 privilege 15 secret 5 $1$7kD0oS/t$wXhtTFwnWwnlPFKWwXoJ70
+username eapi secret 5 {{ eapi_secret }}
+username pyclass privilege 15 secret 5 $1$C3VfUfcO$86t4iqCX60yW.NIR8d2Lh0
+!
+clock timezone America/Los_Angeles
+!
+interface Ethernet1
+   spanning-tree portfast
+!
+{% for intf_num in range(2, 8) %}
+interface Ethernet{{ intf_num }}
+!
+{% endfor %}
+interface Management1
+   shutdown
+!
+interface Vlan1
+   ip address {{ mgmt_ip_address }}/24
+!
+ip route 0.0.0.0/0 {{ default_gateway }}
+!
+ip routing
+!
+management api http-commands
+   no shutdown
+!
+!
+end

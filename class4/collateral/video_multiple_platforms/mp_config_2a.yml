@@ -1,0 +1,31 @@
+---
+- name: IOS Config Change
+  hosts: pynet-rtr1
+  tasks:
+    - ios_config:
+        provider: "{{ creds_ssh }}"
+        lines: "{{ global_config }}"
+
+- name: EOS Config Change
+  hosts: pynet-sw5
+  tasks:
+    - eos_config:
+        provider: "{{ creds_eapi }}"
+        lines: 
+          - "ip domain-name {{ default_domain }}"
+          - "ip name-server vrf default {{ name_server1 }}"
+          - "ip name-server vrf default {{ name_server2 }}"
+          - "ntp server {{ ntp1 }}"
+          - "ntp server {{ ntp2 }}"
+
+- name: NXOS Config Change
+  hosts: nxos1
+  tasks:
+    - nxos_config:
+        provider: "{{ creds_nxapi }}"
+        lines: 
+          - "ip domain-name {{ default_domain }}"
+          - "ip name-server {{ name_server1 }} {{ name_server2 }}"
+          - "ntp server {{ ntp1 }}"
+          - "ntp server {{ ntp2 }}"
+      tags: nxos

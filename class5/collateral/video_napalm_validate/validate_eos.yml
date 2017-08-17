@@ -1,0 +1,20 @@
+---
+- get_facts:
+    os_version: "4.15.4F-2923910.4154F"
+    model: vEOS
+    vendor: Arista
+    interface_list:
+      - Ethernet1
+      - Ethernet2
+      - Ethernet3
+      - Ethernet4
+      - Ethernet5
+      - Ethernet6
+      - Ethernet7
+      - Management1
+      - Vlan1
+
+- get_arp_table:
+    list:
+        - ip: 10.220.88.1
+

@@ -1,0 +1,26 @@
+---
+- name: NAPALM Configure IP interface + Verify
+  hosts: nxos
+  tasks:
+    - name: Configure IP interface (not idempotent)
+      napalm_install_config:
+        provider: "{{ creds }}"
+        config_file: "CFGS/{{ inventory_hostname }}-merge.txt"
+        commit_changes: True
+        replace_config: False
+        diff_file: "DIFFS/{{ inventory_hostname }}.txt"
+
+    - name: Verify IP interface
+      napalm_get_facts:
+        provider: "{{ creds }}"
+        filter: "interfaces_ip"
+
+    - set_fact:
+        device_ip: "{{ napalm_interfaces_ip['Ethernet2/4']['ipv4'] }}"
+
+    - set_fact:
+        device_ip: "{{ item }}"
+      with_items: "{{ device_ip }}"
+
+    - assert:
+        that: device_ip in ["10.100.17.1", "10.100.17.2"]

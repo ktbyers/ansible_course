@@ -1,0 +1,7 @@
+---
+- name: Templating with a for loop
+  hosts: arista
+  tasks:
+    - template:
+        src: test_template_4.j2
+        dest: "./CFGS/{{ inventory_hostname }}.txt"

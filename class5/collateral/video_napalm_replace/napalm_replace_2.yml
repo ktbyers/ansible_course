@@ -1,0 +1,10 @@
+---
+- name: Test napalm replace 
+  hosts: pynet-rtr1
+  tasks:
+    - napalm_install_config:
+        provider: "{{ creds }}"
+        config_file: "CFGS/{{ inventory_hostname }}.txt"
+        commit_changes: True
+        replace_config: True
+        diff_file: "DIFFS/{{ inventory_hostname }}.txt"

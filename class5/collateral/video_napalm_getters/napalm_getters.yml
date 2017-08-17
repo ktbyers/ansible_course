@@ -1,0 +1,45 @@
+---
+
+- name: NAPALM on EOS
+  hosts: pynet-sw5
+  tasks:
+    - name: ARP
+      napalm_get_facts: 
+        provider: "{{ creds }}"
+        filter: "arp_table,mac_address_table"
+    - name: BGP
+      napalm_get_facts: 
+        provider: "{{ creds }}"
+        filter: "bgp_config,bgp_neighbors,bgp_neighbors_detail"
+    - name: Config
+      napalm_get_facts: 
+        provider: "{{ creds }}"
+        filter: "config,environment,facts"
+    - name: Interfaces
+      napalm_get_facts: 
+        provider: "{{ creds }}"
+        filter: "interfaces,interfaces_counters,interfaces_ip"
+    - name: LLDP
+      napalm_get_facts: 
+        provider: "{{ creds }}"
+        filter: "lldp_neighbors,lldp_neighbors_detail"
+    - name: Network Instances
+      napalm_get_facts: 
+        provider: "{{ creds }}"
+        filter: "network_instances"
+    - name: NTP
+      napalm_get_facts: 
+        provider: "{{ creds }}"
+        filter: "ntp_servers,ntp_stats"
+    - name: Optics
+      napalm_get_facts: 
+        provider: "{{ creds }}"
+        filter: "optics"
+    - name: SNMP
+      napalm_get_facts: 
+        provider: "{{ creds }}"
+        filter: "snmp_information"
+    - name: Users
+      napalm_get_facts: 
+        provider: "{{ creds }}"
+        filter: "users"

@@ -1,0 +1,7 @@
+---
+- name: Test templating
+  hosts: cisco:nxos:arista
+  tasks:
+    - template:
+        src: test_template_2.j2
+        dest: "./CFGS/{{ inventory_hostname }}.txt"

@@ -1,0 +1,16 @@
+- name: Configure test1 ACL
+  ios_config:
+    provider: "{{ creds }}"
+    lines:
+      - 10 permit ip host 1.1.1.1 any log 
+      - 20 permit ip host 2.2.2.2 any log 
+    parents: ip access-list extended test1
+    before: no ip access-list extended test1
+    match: exact
+  notify: wr mem 
+
+- name: templating tasks
+  #### Template ####
+  template:
+    src: test_template.j2
+    dest: ./outfile.txt

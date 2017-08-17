@@ -1,0 +1,6 @@
+---
+- name: Generate Default Arista Configurations
+  hosts: arista
+  tasks:
+    - name: Generate Arista Configs
+      template: src=arista_sw_3.j2 dest=CFGS_2/{{ hostname }}.txt

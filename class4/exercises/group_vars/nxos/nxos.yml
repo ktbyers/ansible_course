@@ -1,0 +1,15 @@
+---
+creds_ssh:
+  host: "{{ ansible_host }}"
+  username: "{{ username }}"
+  password: "{{ password }}"
+  transport: cli
+
+creds_nxapi:
+  host: "{{ ansible_host }}"
+  username: "{{ username }}"
+  password: "{{ password }}"
+  transport: nxapi
+  use_ssl: yes
+  validate_certs: no
+  port: 8443

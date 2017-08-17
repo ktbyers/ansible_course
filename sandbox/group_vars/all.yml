@@ -1,0 +1,8 @@
+---
+name_server1: 8.8.8.8
+name_server2: 8.8.4.4
+
+default_domain: bogus1.com
+
+ntp1: 130.126.24.24
+ntp2: 152.2.21.1

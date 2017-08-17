@@ -1,0 +1,15 @@
+---
+- name: Test NAPALM on IOS
+  hosts: pynet-rtr1
+  tasks:
+    - name: NAPALM facts
+      napalm_get_facts: 
+            hostname: "{{ ansible_host }}"
+            username: "{{ username }}"
+            password: "{{ password }}"
+            dev_os: "ios"
+            filter: "facts,interfaces,bgp_neighbors"
+
+    - debug:
+        var: napalm_model
+

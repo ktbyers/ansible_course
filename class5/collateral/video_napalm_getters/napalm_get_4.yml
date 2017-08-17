@@ -1,0 +1,7 @@
+---
+- name: NAPALM on IOS
+  hosts: pynet-rtr1
+  tasks:
+    - name: NAPALM facts
+      napalm_get_facts: 
+        provider: "{{ creds }}"

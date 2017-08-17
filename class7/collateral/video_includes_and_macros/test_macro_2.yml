@@ -1,0 +1,27 @@
+---
+- name: Configuration templating using include statement
+  hosts: localhost
+  gather_facts: false
+  tasks:
+
+  - name: Generate configuration files
+    template: src=access_switch_2.j2 dest=CFGS/{{ item.hostname }}.txt
+    with_items:
+      - {hostname: pynet-sw1, default_gateway: 10.10.10.1,
+         ip_addr: 10.10.10.10, netmask: 255.255.255.0, 
+         interfaces: [
+            {name: FastEthernet0, switchport_mode: access},
+            {name: FastEthernet1, switchport_mode: access},
+            {name: FastEthernet2, switchport_mode: access},
+            {name: FastEthernet3, switchport_mode: trunk},
+            {name: FastEthernet4, switchport_mode: trunk}
+        ]}
+      - {hostname: pynet-sw2, default_gateway: 10.10.20.1,
+         ip_addr: 10.10.10.10, netmask: 255.255.255.0,
+         interfaces: [
+            {name: FastEthernet0, switchport_mode: access},
+            {name: FastEthernet1, switchport_mode: access},
+            {name: FastEthernet2, switchport_mode: access},
+            {name: FastEthernet3, switchport_mode: trunk},
+            {name: FastEthernet4, switchport_mode: trunk}
+        ]}

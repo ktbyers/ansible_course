@@ -1,0 +1,37 @@
+---
+- name: Configure NTP servers with validation
+  hosts: nxos1
+  vars:
+    ntp_servers:
+      - "ntp server 10.1.1.1"
+      - "ntp server 10.1.1.2"
+    extra_ntp_servers_no: []
+  tasks:
+    - name: Configure NTP Servers
+      nxos_config:
+        provider: "{{ creds_core_nxapi }}"
+        lines: "{{ ntp_servers }}"
+
+    - name: Obtain current NTP Servers
+      nxos_command:
+        provider: "{{ creds_core_ssh }}"
+        commands: "show run | inc ntp"
+      register: output
+
+    - set_fact:
+        current_ntp: "{{ output.stdout_lines[0] }}"
+
+    - name: Find extra NTP servers that should not be configured
+      set_fact:
+        extra_ntp_servers: "{{ current_ntp | difference(ntp_servers) | list }}"
+
+    - name: "Construct the 'no ntp...' command to remove unneeded servers"
+      set_fact:
+        no_ntp_servers: "{{ lookup('template', './no_ntp_servers.j2') | from_yaml }}"
+
+    - name: Remove unneeded NTP servers
+      nxos_config:
+        provider: "{{ creds_core_nxapi }}"
+        lines: "{{ no_ntp_servers }}"
+      when: no_ntp_servers
+

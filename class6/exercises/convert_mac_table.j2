@@ -1,0 +1,4 @@
+---
+{% for element in napalm_mac_address_table %}
+{{ element['mac'] }}: {{ element['interface'] }}
+{% endfor %}

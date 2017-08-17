@@ -1,0 +1,18 @@
+---
+- name: Generate Default Arista Configurations
+  hosts: arista
+  tasks:
+    - name: Generate Arista Configs
+      template: 
+        src: arista_sw_4.j2
+        dest: "CFGS_2/{{ hostname }}.txt"
+      tags: generate_cfgs
+
+    - name: NAPALM push configs to devices
+      napalm_install_config: 
+        provider: "{{ creds_napalm }}"
+        config_file: "CFGS_2/{{ hostname }}.txt"
+        commit_changes: False
+        replace_config: True
+        diff_file: "DIFFS/{{ inventory_hostname }}.txt"
+      tags: push_cfgs

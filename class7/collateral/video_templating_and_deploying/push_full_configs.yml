@@ -1,0 +1,24 @@
+---
+- name: Generate full configs for Arista
+  hosts: arista
+  tasks:
+    - name: "Delete old config files"
+      file:
+        path: "./CFGS/{{ inventory_hostname }}.txt"
+        state: absent
+      tags: generate_cfgs
+
+    - name: Generate Arista Configs
+      template: 
+        src: arista_gen_config.j2
+        dest: "CFGS/{{ inventory_hostname }}.txt"
+      tags: generate_cfgs
+
+    - name: NAPALM push configs to devices
+      napalm_install_config: 
+        provider: "{{ creds_napalm }}"
+        config_file: "CFGS/{{ inventory_hostname }}.txt"
+        commit_changes: False
+        replace_config: True
+        diff_file: "DIFFS/{{ inventory_hostname }}.txt"
+      tags: push_cfgs
