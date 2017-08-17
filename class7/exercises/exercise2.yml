@@ -1,0 +1,16 @@
+---
+- name: Generate BGP Configurations
+  hosts: nxos
+  tasks:
+    - name: Generate BGP Config
+      template:
+        src: ipv6_bgp.j2
+        dest: "./CFGS/{{ inventory_hostname }}-bgp.txt"
+
+    - name: "Push configs using NAPALM: Merge"
+      napalm_install_config: 
+        provider: "{{ creds_napalm }}"
+        config_file: "./CFGS/{{ inventory_hostname }}-bgp.txt"
+        commit_changes: True
+        replace_config: False
+        diff_file: "DIFFS/{{ inventory_hostname }}.txt"

@@ -1,0 +1,9 @@
+---
+intf_number: Ethernet2/4
+intf_ipv6_addr: 2001:db8:800:200c::2
+intf_ipv6_mask: 64
+
+intf_vrf_name: red1
+intf_vrf_number: Ethernet2/3
+intf_vrf_ip: 10.100.83.2
+intf_vrf_mask: 24

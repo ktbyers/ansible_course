@@ -1,0 +1,39 @@
+---
+- name: "Ansible Core: Cisco IOS Connectivity"
+  hosts: cisco
+  tasks:
+    - ios_facts:
+        provider: "{{ creds_core_ssh }}"
+
+- name: "Ansible Core: Cisco NX-OS Connectivity"
+  hosts: nxos
+  tasks:
+    - nxos_facts:
+        provider: "{{ creds_core_ssh }}"
+    - nxos_facts:
+        provider: "{{ creds_core_nxapi }}"
+  tags: nxos
+
+- name: "Ansible Core: Arista Connectivity "
+  hosts: arista
+  tasks:
+    - eos_facts:
+        provider: "{{ creds_core_ssh }}"
+    - eos_facts:
+        provider: "{{ creds_core_eapi }}"
+
+- name: "Ansible Core: Juniper Connectivity"
+  hosts: juniper
+  tasks:
+    - junos_facts:
+        provider: "{{ creds_core_ssh }}"
+    - junos_facts:
+        provider: "{{ creds_core_netconf }}"
+  tags: juniper
+
+- name: "Check NAPALM connectivity"
+  hosts: cisco:nxos:arista:juniper
+  tasks:
+    - napalm_get_facts:
+        provider: "{{ creds_napalm }}"
+  tags: napalm

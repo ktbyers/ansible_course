@@ -1,0 +1,13 @@
+{% for vrf in vrf_list %}
+vrf context {{ vrf }}
+{% endfor %}
+
+interface {{ intf_vrf_number }}
+  vrf member {{ intf_vrf_name }}
+  ip address {{ intf_vrf_ip }}/{{ intf_vrf_mask }}
+
+router bgp {{ local_bgp_asn }}
+  vrf {{ intf_vrf_name }}
+    address-family ipv4 unicast
+    neighbor {{ bgp_peer_vrf }} remote-as {{ local_bgp_asn }}
+

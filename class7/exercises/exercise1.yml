@@ -1,0 +1,37 @@
+---
+- name: Generate Global Configuration Items
+  hosts: cisco:nxos:arista
+  tasks:
+    - name: Generate global configuration
+      template:
+        src: global_config.j2
+        dest: "./CFGS/{{ inventory_hostname }}-global.txt"
+      tags: 
+        - ios
+        - nxos
+        - eos
+
+- name: Deploy configuration using Ansible Core (IOS)
+  hosts: cisco
+  tasks:
+    - ios_config:
+        provider: "{{ creds_core_ssh }}"
+        src: "./CFGS/{{ inventory_hostname }}-global.txt"
+      tags: ios
+
+- name: Deploy configuration using Ansible Core (NX-OS)
+  hosts: nxos
+  tasks:
+    - nxos_config:
+        provider: "{{ creds_core_ssh }}"
+        src: "./CFGS/{{ inventory_hostname }}-global.txt"
+      tags: nxos
+
+- name: Deploy configuration using Ansible Core (Arista)
+  hosts: arista
+  tasks:
+    - eos_config:
+        provider: "{{ creds_core_ssh }}"
+        src: "./CFGS/{{ inventory_hostname }}-global.txt"
+      tags: eos
+

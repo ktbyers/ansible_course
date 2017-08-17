@@ -1,0 +1,5 @@
+---
+local_bgp_asn: 22
+
+bgp_peer1: 2001:db8:800:200c::1
+bgp_peer_vrf: 10.100.83.1
