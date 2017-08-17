@@ -1,0 +1,37 @@
+---
+- name: Configure ip-helper on single router
+  hosts: pynet-rtr1
+  vars:
+    creds:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+
+    dhcp_interfaces:
+      - interface: Vlan1
+        helper: 1.1.1.1
+      - interface: Vlan20
+        helper: 1.1.1.1
+      - interface: Vlan60
+        helper: 1.1.1.99
+
+  tasks:
+    - ios_config:
+        provider: "{{ creds }}"
+        lines:
+          - ip helper-address {{ item.helper }}
+        parents: interface {{ item.interface }}
+      with_items: "{{ dhcp_interfaces }}"
+
+#    - ios_facts:
+#        provider: "{{ creds }}"
+
+#    - ios_command:
+#        provider: "{{ creds }}"
+#        commands: show run
+#      register: show_run
+#
+#    - assert:
+#        that: '{{ show_run.stdout[0] | ip_helper | symmetric_difference(dhcp_interfaces) }} == []'
+#        msg: "Interface has 'ip helper' configured and shouldn't"
+#

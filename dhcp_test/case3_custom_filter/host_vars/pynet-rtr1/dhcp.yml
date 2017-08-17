@@ -1,0 +1,5 @@
+---
+dhcp_interfaces:
+  - Vlan1
+  - Vlan20
+  - Vlan60

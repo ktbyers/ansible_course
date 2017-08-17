@@ -1,0 +1,34 @@
+---
+# Single router
+# Single VLAN
+# Tests show run on each interface in dhcp_interfaces
+- name: Test DHCP helper
+  hosts: pynet-rtr1
+  vars:
+    creds:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+
+    dhcp_interfaces:
+        - Vlan1
+
+  tasks:
+    - ios_facts:
+        provider: "{{ creds }}"
+      tags: facts_only
+
+    - debug:
+        var: ansible_net_interfaces
+      tags: facts_only
+
+    - ios_command:
+        provider: "{{ creds }}"
+        commands:
+          - "show run interface {{ item }}"
+      with_items: "{{ dhcp_interfaces }}"
+      register: output
+
+    - debug:
+        var: output
+

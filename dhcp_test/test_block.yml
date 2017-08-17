@@ -1,0 +1,24 @@
+---
+- name: Test DHCP helper
+  hosts: cisco
+  vars:
+    creds:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+
+  tasks:
+    - block:
+        - ios_facts:
+            provider: "{{ creds }}"
+
+        - name: Check for extra DHCP helpers
+          ios_command:
+            provider: "{{ creds }}"
+            commands:
+              - "show run interface {{ item }}"
+          with_items: "{{ ansible_net_interfaces }}"
+          register: new_output
+
+      tags: test_block
+      when: True

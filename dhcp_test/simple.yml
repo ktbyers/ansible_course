@@ -1,0 +1,52 @@
+---
+- name: Test DHCP helper
+  hosts: local
+  vars:
+    creds:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+
+    new_output: 
+        changed: false
+        msg: "All items completed"
+        results:
+          - item: Vlan99
+            stdout: ["Building configuration...\n\nCurrent configuration : 66 bytes\n!\ninterface Vlan99\n no ip address\n ip helper-address 1.1.1.1\nend\n",]
+            warnings: []
+          - item: Vlan1
+            stdout: ["Building configuration...\n\nCurrent configuration : 66 bytes\n!\ninterface Vlan99\n no ip address\n ip helper-address 1.1.1.1\nend\n",]
+            warnings: []
+          - item: Vlan10
+            stdout: ["Building configuration...\n\nCurrent configuration : 66 bytes\n!\ninterface Vlan99\n no ip address\nend\n",]
+            warnings: []
+          - item: Vlan20
+            stdout: ["Building configuration...\n\nCurrent configuration : 66 bytes\n!\ninterface Vlan99\n no ip address\n ip helper-address 1.1.1.1\nend\n",]
+            warnings: []
+
+    test_list:
+        - apple
+        - apple2
+        - orange
+
+  tasks:
+    - template:
+        src: helper.j2
+        dest: ./blah.yml
+
+    - set_fact:
+        new_var: "{{ lookup('template', 'helper.j2') | from_yaml }}"
+
+#    - debug:
+#        msg: "{{ new_var }}"
+
+    - set_fact:
+        my_var: "{{ my_var|default([]) + [item.item] }}"
+      with_items: "{{ new_output.results }}"
+
+    - debug:
+        var: my_var
+    
+    
+#    - command: print.stdout
+#      with_items: test_list
