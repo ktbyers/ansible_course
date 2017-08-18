@@ -1,0 +1,8 @@
+---
+- name: Generate BGP + VRF Configurations
+  hosts: nxos
+  tasks:
+    - name: Generate BGP + VRF Configs
+      template:
+        src: nxos-base.j2
+        dest: "./CFGS/{{ inventory_hostname }}-interfaces.txt"

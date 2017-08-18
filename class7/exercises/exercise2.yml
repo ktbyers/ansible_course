@@ -1,13 +1,13 @@
 ---
-- name: Generate BGP Configurations
+- name: Generate and Deploy BGP Configurations
   hosts: nxos
   tasks:
-    - name: Generate BGP Config
+    - name: Generate BGP Configs (part2)
       template:
-        src: ipv6_bgp.j2
+        src: bgp_ipv6.j2
         dest: "./CFGS/{{ inventory_hostname }}-bgp.txt"
 
-    - name: "Push configs using NAPALM: Merge"
+    - name: "Push Configs using NAPALM: Merge (part2b)"
       napalm_install_config: 
         provider: "{{ creds_napalm }}"
         config_file: "./CFGS/{{ inventory_hostname }}-bgp.txt"

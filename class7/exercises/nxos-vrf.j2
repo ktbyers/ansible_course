@@ -1,0 +1,5 @@
+vrf context management
+  ip route 0.0.0.0/0 {{ mgmt_default_gw }}
+{% for vrf in vrf_list %}
+vrf context {{ vrf }}
+{% endfor %}

@@ -1,0 +1,8 @@
+---
+- name: Generate NX-OS Configuration Files Macro
+  hosts: nxos
+  tasks:
+    - name: Generate NX-OS Configuration Files Macro
+      template:
+        src: nxos-interfaces-macro.j2
+        dest: "./CFGS/{{ inventory_hostname }}-interfaces.txt"

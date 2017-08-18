@@ -1,9 +1,8 @@
 ---
-- name: Generate BGP + VRF Configurations
+- name: Generate NX-OS Configuration Files
   hosts: nxos
   tasks:
-    - name: Generate BGP + VRF Configs
+    - name: Generate NX-OS Configuration Files
       template:
-        src: vrf.j2
-        dest: "./CFGS/{{ inventory_hostname }}-vrf.txt"
-
+        src: nxos-interfaces.j2
+        dest: "./CFGS/{{ inventory_hostname }}-interfaces.txt"

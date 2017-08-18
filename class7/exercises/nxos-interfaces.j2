@@ -1,0 +1,51 @@
+
+vrf context management
+  ip route 0.0.0.0/0 {{ mgmt_default_gw }}
+{% for vrf in vrf_list %}
+vrf context {{ vrf }}
+{% endfor %}
+
+interface mgmt0
+  vrf member management
+  ip address {{ mgmt_ip }}/{{ mgmt_mask }}
+
+interface Vlan1
+
+interface Ethernet2/1
+  no switchport
+  mac-address {{ mac_address }}
+  ip address {{ eth2_1_ip }}/{{ eth2_1_mask }}
+  no shutdown
+
+interface Ethernet2/2
+  no switchport
+  mac-address {{ mac_address }}
+  ip address {{ eth2_2_ip }}/{{ eth2_2_mask }}
+  no shutdown
+
+interface Ethernet2/3
+  no switchport
+  mac-address {{ mac_address }}
+  ip address {{ eth2_3_ip }}/{{ eth2_3_mask }}
+  no shutdown
+
+interface Ethernet2/4
+  no switchport
+  mac-address {{ mac_address }}
+  ip address {{ eth2_4_ip }}/{{ eth2_4_mask }}
+  no shutdown
+
+{% for port_number in range(5, 8) %}
+interface Ethernet2/{{ port_number }}
+  no switchport
+  mac-address {{ mac_address }}
+  no shutdown
+
+{% endfor %}
+{% for port_number in range(8, 49) %}
+interface Ethernet2/{{ port_number }}
+  shutdown
+  no switchport
+  mac-address {{ mac_address }}
+
+{% endfor %}
