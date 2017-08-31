@@ -1,0 +1,19 @@
+---
+- name: Failure testing
+  hosts: cisco
+  tasks:
+    - name: Working fact gathering
+      ios_facts:
+        provider: "{{ creds_core_ssh }}"
+
+    - name: Invalid module argument
+      ios_command:
+        provider: "{{ creds_core_ssh }}"
+        command: "show version"
+      tags: argument
+
+    - name: Invalid Cisco command
+      ios_command:
+        provider: "{{ creds_core_ssh }}"
+        commands: "show versionx"
+      tags: ios_cmd_invalid 

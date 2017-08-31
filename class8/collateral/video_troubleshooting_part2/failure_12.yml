@@ -1,0 +1,56 @@
+---
+- name: NAPALM Example
+  hosts: cisco
+  vars:
+    creds_napalm_pass:
+      hostname: "{{ ansible_host }}"
+      username: "{{ username }}"
+      password: "bogus1"
+      dev_os: "ios"
+      optional_args: {}
+    creds_napalm_host:
+      hostname: "cisco11.twb-tech.com"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      dev_os: "ios"
+      optional_args: {}
+
+  tasks:
+    - name: Invalid password
+      napalm_get_facts:
+        provider: "{{ creds_napalm_pass }}"
+      tags: invalid_pwd
+
+    - name: Invalid host
+      napalm_get_facts:
+        provider: "{{ creds_napalm_host }}"
+      tags: invalid_host
+
+- name: Test napalm replace 
+  hosts: pynet-rtr1
+  vars:
+    creds_napalm_no_enable:
+      hostname: "{{ ansible_host }}"
+      username: "test9"
+      password: "{{ password }}"
+      dev_os: "ios"
+      optional_args: {}
+
+  tasks:
+    - name: No enable mode
+      napalm_install_config:
+        provider: "{{ creds_napalm_no_enable }}"
+        config_file: "CFGS/{{ inventory_hostname }}.txt"
+        commit_changes: False
+        replace_config: True
+        diff_file: "DIFFS/{{ inventory_hostname }}.txt"
+      tags: no_enable
+
+    - name: No archive configured
+      napalm_install_config:
+        provider: "{{ creds_napalm }}"
+        config_file: "CFGS/{{ inventory_hostname }}.txt"
+        commit_changes: False
+        replace_config: True
+        diff_file: "DIFFS/{{ inventory_hostname }}.txt"
+      tags: no_archive

@@ -1,0 +1,18 @@
+---
+- name: Invalid host
+  hosts: cisco
+  vars:
+    creds_core_broke:
+      host: cisco10.twb-tech.com
+      username: "{{ username }}"
+      password: "{{ password }}"
+      timeout: 60
+  tasks:
+    - name: Test IOS
+      ios_facts:
+        provider: "{{ creds_core_broke }}"
+      tags: facts_only
+
+    - debug:
+        msg: "{{ ansible_net_model }}"
+
