@@ -1,0 +1,62 @@
+---
+- name: Config validation
+  hosts: cisco
+  vars:
+    name_servers:
+          - ip name-server {{ name_server1 }}
+          - ip name-server {{ name_server2 }}
+    cfg_dns:
+          - ip domain name {{ default_domain }}
+          - ip domain lookup
+
+  tasks:
+    - name: Check connectivity
+      ios_facts:
+        provider: "{{ creds_core_ssh }}"
+
+    - name: Make config changes
+      ios_config:
+        provider: "{{ creds_core_ssh }}"
+        lines: "{{ cfg_dns }} + {{ name_servers }}"
+
+    - name: Determine DNS Servers Configured
+      ios_command:
+        provider: "{{ creds_core_ssh }}"
+        commands: "show run | inc name-server"
+      register: dns_servers
+
+    - set_fact:
+        dns_servers_proc: "{{ dns_servers.stdout_lines[0] }}"
+
+    - set_fact:
+        extra_dns_srvs: "{{ dns_servers_proc | difference(name_servers) | list }}"
+
+    - debug:
+        var: extra_dns_srvs
+
+    - debug:
+        msg: DNS Servers are correct
+      when: extra_dns_srvs == []
+
+    - name: Remove extra DNS Servers
+      ios_config:
+        provider: "{{ creds_core_ssh }}"
+        lines: "no {{ item }}"
+      with_items: "{{ extra_dns_srvs }}"
+
+    - name: Test ping
+      ios_command:
+        provider: "{{ creds_core_ssh }}"
+        commands: ping google.com
+      register: ping_output
+
+    - name: PING successful using DNS name
+      debug:
+        msg: PING successful
+      when: "'!!!!' in ping_output.stdout[0]"
+
+    - name: PING failed using DNS name
+      debug:
+        var: ping_output
+      failed_when: "'!!!!' not in ping_output.stdout[0]"
+      # when: "'!!!!' not in ping_output.stdout[0]"
