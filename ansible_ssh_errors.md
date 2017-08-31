@@ -22,9 +22,3 @@ http://docs.ansible.com/ansible/latest/network_debug_troubleshooting.html#enable
     p=19840 u=kbyers |  (14, 'Bad address')
     
 'Bad address' = Entry not found in SSH known_hosts (there could be other causes for this message)
-
-If you see the 'Bad address' message, you can further search for 'known hosts':
-
-    done running TaskExecutor() for pynet-rtr1/TASK: Missing SSH known hosts
-    
-The second message should occur at close to the same time (but will use 'inventory_hostname' and not the IP address or DNS name (and the logs are very verbose so it might be hard to correlate the two messages).
