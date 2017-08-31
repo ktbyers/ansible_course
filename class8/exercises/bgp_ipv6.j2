@@ -1,0 +1,6 @@
+interface {{ intf_number }}
+  ipv6 address {{ intf_ipv6_addr }}/{{ intf_ipv6_mask }}
+
+router bgp {{ local_bgp_asn }}
+  neighbor {{ bgp_peer1 }} remote-as {{ local_bgp_asn }}
+    address-family ipv6 unicast

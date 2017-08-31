@@ -1,0 +1,45 @@
+---
+- name: Generate and Deploy BGP Configurations
+  hosts: nxos
+  tasks:
+    - name: Generate BGP Configs
+      template:
+        src: bgp_ipv6.j2
+        dest: "./CFGS/{{ inventory_hostname }}-bgp.txt"
+
+    - name: "Push Configs using NAPALM: Merge"
+      napalm_install_config: 
+        provider: "{{ creds_napalm }}"
+        config_file: "./CFGS/{{ inventory_hostname }}-bgp.txt"
+        commit_changes: True
+        replace_config: False
+        diff_file: "DIFFS/{{ inventory_hostname }}.txt"
+
+    - name: "Verify ping between interfaces"
+      nxos_command:
+        provider: "{{ creds_core_ssh }}"
+        commands: "ping6 {{ bgp_peer1 }}"
+      register: ping_output
+
+    - name: PING6 across interfaces working successfully
+      debug:
+        msg: PING6 across interfaces working successfully
+      when: "'5 packets received' in ping_output.stdout[0] or '4 packets received' in ping_output.stdout[0]"
+
+    - name: PING6 failed
+      debug:
+        var: ping_output
+      failed_when: "'5 packets received' not in ping_output.stdout[0] and '4 packets received' not in ping_output.stdout[0]"
+      when: "'5 packets received' not in ping_output.stdout[0] and '4 packets received' not in ping_output.stdout[0]"
+
+    - name: Get interface config
+      nxos_command: 
+        provider: "{{ creds_core_ssh }}"
+        commands: "show run int {{ intf_number }} | inc 'ipv6 address'"
+      register: ipv6_address
+
+    - name: There can be only one
+      debug:
+        msg: "{{ ipv6_address.stdout_lines[0] }}"
+#        msg: "{{ ipv6_address.stdout_lines[0] | length }}"
+      failed_when: "ipv6_address.stdout_lines[0] | length != 1"

@@ -1,0 +1,6 @@
+vlan 1
+  name default
+vlan 333
+  name blue333
+vlan 334
+  name blue334
