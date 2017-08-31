@@ -1,0 +1,23 @@
+---
+- name: Vault test
+  hosts: cisco
+  tasks:
+    - name: Check connectivity
+      ios_facts:
+        provider: "{{ creds_core_ssh }}"
+
+- name: Vault test (Arista)
+  hosts: arista
+  tasks:
+    - name: Check connectivity
+      eos_facts:
+        provider: "{{ creds_core_eapi }}"
+  tags: arista
+
+- name: Vault test (NX-OS)
+  hosts: nxos
+  tasks:
+    - name: Check connectivity
+      nxos_facts:
+        provider: "{{ creds_core_nxapi }}"
+  tags: nxos
