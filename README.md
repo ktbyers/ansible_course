@@ -1,2 +1,4 @@
 # ansible_course
-Ansible for Network Engineers
+Ansible Network Automation Course
+
+https://pynet.twb-tech.com/class-ansible.html
