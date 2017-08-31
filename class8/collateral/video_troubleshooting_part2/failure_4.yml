@@ -1,0 +1,8 @@
+---
+- name: NAPALM Example
+  hosts: cisco
+  tasks:
+    - name: Module path failure example
+      napalm_get_facts:
+        provider: "{{ creds_napalm }}"
+

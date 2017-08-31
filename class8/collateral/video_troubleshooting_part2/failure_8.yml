@@ -1,0 +1,12 @@
+---
+- name: Missing SSH known hosts
+  hosts: cisco
+  tasks:
+    - name: Missing SSH known hosts
+      ios_facts:
+        provider: "{{ creds_core_ssh }}"
+      tags: facts_only
+
+    - debug:
+        msg: "{{ ansible_net_model }}"
+
