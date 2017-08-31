@@ -1,0 +1,12 @@
+---
+- name: IOS Example
+  hosts: cisco
+  tasks:
+    - name: Test IOS
+       ios_facts:
+        provider: "{{ creds_core_ssh }}"
+      tags: facts_only
+
+    - debug:
+        var: ansible_net_model
+
