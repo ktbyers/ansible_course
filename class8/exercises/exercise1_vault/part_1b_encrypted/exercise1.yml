@@ -1,10 +1,11 @@
 ---
-- name: Vault test
+- name: Vault test (IOS)
   hosts: cisco
   tasks:
     - name: Check connectivity
       ios_facts:
         provider: "{{ creds_core_ssh }}"
+  tags: ios
 
 - name: Vault test (Arista)
   hosts: arista
