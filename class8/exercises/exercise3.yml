@@ -1,26 +1,23 @@
 ---
-
-# Configure and validate 7 VLANs on arista-sw7
-
-- name: Test Arista Vlans
+- name: Configure and Validate VLANs
   hosts: pynet-sw7
   vars:
     vlans:
-        - vlan_id: 1
+        - vlan_id: "1"
           vlan_name: default
-        - vlan_id: 333
+        - vlan_id: "333"
           vlan_name: blue333
-        - vlan_id: 335
+        - vlan_id: "335"
           vlan_name: blue335
-        - vlan_id: 336
+        - vlan_id: "336"
           vlan_name: blue336
-        - vlan_id: 337
+        - vlan_id: "337"
           vlan_name: blue337
-        - vlan_id: 338
+        - vlan_id: "338"
           vlan_name: blue338
 
   tasks:
-    - name: Verify napalm connectivity
+    - name: Verify NAPALM connectivity
       napalm_get_facts:
         provider: "{{ creds_napalm }}"
 
@@ -33,94 +30,34 @@
       napalm_install_config:
         provider: "{{ creds_napalm }}"
         config_file: "./CFGS/{{ inventory_hostname }}-vlans.txt"
-        commit_changes: False
+        commit_changes: True
         replace_config: False
         diff_file: "DIFFS/{{ inventory_hostname }}.txt"
 
-    - name: Verify only these vlans are configured
+    - name: Verify only specified VLANs are configured
       eos_command:
         provider: "{{ creds_core_eapi }}"
         commands: show vlan
       register: current_vlans
 
-    - debug:
-        msg: "{{ current_vlans.stdout[0].vlans }}"
-
-    - set_fact:
+    - name: Process output show vlan data from switch
+      set_fact:
         current_vlans: "{{ current_vlans.stdout[0].vlans }}"
 
-    - set_fact:
+    - name: Construct list of VLANs currently configured
+      set_fact:
         vlan_list: "{{ vlan_list | default([]) + [ item ] }}"
       with_items: "{{ current_vlans.keys() }}"
 
-    - debug:
-        var: vlan_list
+    - name: VLANs that should be configured
+      set_fact:
+        vlans_intended: "{{ vlans | map(attribute='vlan_id') | list }}"
 
-##    - name: "Use template to 
-##       set_fact:
-##         no_ntp_servers: "{{ lookup('template', './no_ntp_servers.j2') | from_yaml }}"
+    - name: VLANs configured and intended should be identical
+      set_fact:
+        vlan_error: "{{ vlans_intended | symmetric_difference(vlan_list) | list }}"
 
-###
-###    "stdout": [
-###        {
-###            "sourceDetail": "", 
-###            "vlans": {
-###                "1": {
-###                    "dynamic": false, 
-###                    "interfaces": {
-###
-###
-###
-###
-###        "sourceDetail": "", 
-###            "vlans": {
-###                "1": {
-###                    "dynamic": false, 
-###                    "interfaces": {
-###                        "Cpu": {
-###                            "privatePromoted": false
-###                        }, 
-###                        "Ethernet1": {
-###                            "privatePromoted": false
-###                        }, 
-###                        "Ethernet2": {
-###                            "privatePromoted": false
-###                        }, 
-###                        "Ethernet3": {
-###                            "privatePromoted": false
-###                        }, 
-###                        "Ethernet4": {
-###                            "privatePromoted": false
-###                        }, 
-###                        "Ethernet5": {
-###                            "privatePromoted": false
-###                        }, 
-###                        "Ethernet6": {
-###                            "privatePromoted": false
-###                        }, 
-###                        "Ethernet7": {
-###                            "privatePromoted": false
-###                        }
-###                    }, 
-###                    "name": "default", 
-###                    "status": "active"
-###                }, 
-###                "300": {
-###                    "dynamic": false, 
-###                    "interfaces": {}, 
-###                    "name": "BLUE00", 
-###                    "status": "active"
-###                }, 
-###                "301": {
-###                    "dynamic": false, 
-###                    "interfaces": {}, 
-###                    "name": "BLUE01", 
-###                    "status": "active"
-###                }, 
-###                "302": {
-###                    "dynamic": false, 
-###                    "interfaces": {}, 
-###                    "name": "BLUE02", 
-###                    "status": "active"
-###                }, 
-###
+    - name: Test whether VLANs are identical
+      assert:
+        that:
+          - "vlan_error == []"
