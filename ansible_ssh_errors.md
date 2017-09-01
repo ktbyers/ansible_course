@@ -34,7 +34,7 @@ http://docs.ansible.com/ansible/latest/network_debug_troubleshooting.html#enable
 
 'Name or service not known' this will occur when your specified hostname is not in DNS.
 
-    p=18487 u=kbyers |  connecting to host cisco1.twb-tech.com returned an error
+    p=18487 u=kbyers |  connecting to host cisco1.domain.com returned an error
     p=18487 u=kbyers |  No authentication methods available
     
 'No authentication methods available' will occur if you do not have a password specified in your provider (and don't provide a password from the command line.
