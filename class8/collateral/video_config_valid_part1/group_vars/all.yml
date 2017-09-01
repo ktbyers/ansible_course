@@ -6,3 +6,5 @@ default_domain: bogus1.com
 
 ntp1: 130.126.24.24
 ntp2: 152.2.21.1
+#ntp1: 10.10.24.24
+#ntp2: 10.2.21.1

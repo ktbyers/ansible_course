@@ -1,0 +1,39 @@
+---
+- name: Config validation
+  hosts: cisco
+  vars:
+    cfg_ntp:
+          - ntp server {{ ntp1 }}
+          - ntp server {{ ntp2 }}
+
+  tasks:
+    - name: Check connectivity
+      ios_facts:
+        provider: "{{ creds_core_ssh }}"
+
+    - name: Make config changes
+      ios_config:
+        provider: "{{ creds_core_ssh }}"
+        lines: "{{ cfg_ntp }}"
+
+#    - name: Determine NTP Servers Configured
+#      ios_command:
+#        provider: "{{ creds_core_ssh }}"
+#        commands: "show run | inc ntp"
+#      register: ntp_servers
+#
+#    - set_fact:
+#        ntp_servers_proc: "{{ ntp_servers.stdout_lines[0] }}"
+#
+#    - set_fact:
+#        extra_ntp_srvs: "{{ ntp_servers_proc | difference(cfg_ntp) | list }}"
+#
+#    - debug:
+#        msg: NTP Servers are correct
+#      when: extra_ntp_srvs == []
+#
+#    - name: Remove extra NTP Servers
+#      ios_config:
+#        provider: "{{ creds_core_ssh }}"
+#        lines: "no {{ item }}"
+#      with_items: "{{ extra_ntp_srvs }}"
