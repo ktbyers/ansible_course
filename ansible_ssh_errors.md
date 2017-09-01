@@ -23,7 +23,8 @@ http://docs.ansible.com/ansible/latest/network_debug_troubleshooting.html#enable
     
 'Bad address' = Entry not found in SSH known_hosts (there could be other causes for this message)
 
+    paramiko.transport Authentication (password) failed.
     p=27514 u=kbyers |  connecting to host cisco1.domain.com returned an error
     p=27514 u=kbyers |  Authentication failed.
 
-'Authentication Failed' will occur when your password is not valid
+'Authentication Failed' will occur when your password is not valid and there should be a 'paramiko' password failed message close to this in the log.
