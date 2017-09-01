@@ -38,3 +38,8 @@ http://docs.ansible.com/ansible/latest/network_debug_troubleshooting.html#enable
     p=18487 u=kbyers |  No authentication methods available
     
 'No authentication methods available' will occur if you do not have a password specified in your provider (and don't provide a password from the command line.
+
+    p=27885 u=kbyers |  connecting to host 10.10.10.10 returned an error
+    p=27885 u=kbyers |  timed out
+    
+'connecting to host <ip_address> returned an error' occurs when you specify an IP address that is not listening on SSH.
