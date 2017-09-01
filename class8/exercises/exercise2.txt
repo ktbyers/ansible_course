@@ -1,0 +1,86 @@
+--- Remove SSH key ---
+$ ssh-keygen -R cisco1.twb-tech.com
+# Host cisco1.twb-tech.com found: line 20 type RSA
+/home/kbyers/.ssh/known_hosts updated.
+Original contents retained as /home/kbyers/.ssh/known_hosts.old
+
+
+--- Verify SSH key missing (don't save it) ---
+$ ssh -l pyclass cisco1.twb-tech.com
+The authenticity of host 'cisco1.twb-tech.com (184.105.247.70)' can't be established.
+RSA key fingerprint is 9c:08:9e:db:c0:28:1a:51:cc:23:f6:0d:6c:c5:a4:0e.
+Are you sure you want to continue connecting (yes/no)? ^C
+
+
+--- Verify .ansible.cfg set to host_key_checking = True (the default) ---
+$ cat ~/.ansible.cfg | grep host_key
+# host_key_checking = True
+
+
+--- Verify simple playbook fails for pynet-rtr1 ---
+$ ansible-playbook exercise2.yml 
+
+PLAY [SSH Errors] ************************************************************************************************************************************
+
+TASK [Check connectivity] ****************************************************************************************************************************
+ok: [pynet-rtr2]
+fatal: [pynet-rtr1]: FAILED! => {"changed": false, "failed": true, "msg": "unable to open shell. Please see: https://docs.ansible.com/ansible/network_debug_troubleshooting.html#unable-to-open-shell", "rc": 255}
+
+PLAY RECAP *******************************************************************************************************************************************
+pynet-rtr1                 : ok=0    changed=0    unreachable=0    failed=1   
+pynet-rtr2                 : ok=1    changed=0    unreachable=0    failed=0   
+
+
+--- Turn on Ansible debugging/logging ---
+$ export ANSIBLE_DEBUG=True
+$ export ANSIBLE_LOG_PATH=~/ansible.log
+$ ansible-playbook exercise2.yml -vvvv
+
+
+--- Ansible logfile and cisco1.twb-tech.com message ---
+$ vi ~/ansible.log
+2017-08-31 17:06:31,774 p=25450 u=kbyers |  connecting to host cisco1.twb-tech.com returned an error
+2017-08-31 17:06:31,774 p=25450 u=kbyers |  (14, 'Bad address')
+
+
+--- Set host_key_checking = False in .ansible.cfg ---
+$ vi ~/.ansible.cfg
+...
+# Added this line
+host_key_checking = False
+
+
+--- Re-execute playbook (now works) ---
+$ ansible-playbook exercise2.yml 
+
+PLAY [SSH Errors] ************************************************************************************************************************************
+
+TASK [Check connectivity] ****************************************************************************************************************************
+ok: [pynet-rtr2]
+ok: [pynet-rtr1]
+
+PLAY RECAP *******************************************************************************************************************************************
+pynet-rtr1                 : ok=1    changed=0    unreachable=0    failed=0   
+pynet-rtr2                 : ok=1    changed=0    unreachable=0    failed=0   
+
+
+--- Save SSH host key for cisco1.twb-tech.com in known hosts ---
+$ ssh -l pyclass cisco1.twb-tech.com
+The authenticity of host 'cisco1.twb-tech.com (184.105.247.70)' can't be established.
+RSA key fingerprint is 9c:08:9e:db:c0:28:1a:51:cc:23:f6:0d:6c:c5:a4:0e.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'cisco1.twb-tech.com' (RSA) to the list of known hosts.
+Password: 
+
+
+--- Re-enable host_key_checking in .ansible.cfg (optional) ---
+$ vi ~/.ansible.cfg
+...
+# The below line is commented out
+# host_key_checking = True
+
+
+--- unset those Ansible environment variables ---
+$ unset ANSIBLE_DEBUG
+$ unset ANSIBLE_LOG_PATH
+

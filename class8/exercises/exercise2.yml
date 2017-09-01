@@ -1,0 +1,7 @@
+---
+- name: SSH Errors
+  hosts: cisco
+  tasks:
+    - name: Check connectivity
+      ios_facts:
+        provider: "{{ creds_core_ssh }}"
