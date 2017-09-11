@@ -103,3 +103,6 @@ class7/exercises/CFGS/*.txt
 class7/exercises/DIFFS/*.txt
 class8/collateral/video_troubleshooting_part2/CFGS/*.txt
 class8/exercises/DIFFS/*.txt
+bonus1/collateral/videos_switchport_example/CFGS/pynet-sw6/*.txt
+bonus1/collateral/videos_switchport_example/CFGS/*.txt
+bonus1/collateral/videos_switchport_example/DIFFS/*.txt
