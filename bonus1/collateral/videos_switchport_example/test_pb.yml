@@ -1,0 +1,36 @@
+---
+- name: Configuring Switchports
+  hosts: pynet-sw6
+  tasks:
+    - name: Testing connectivity (NAPALM)
+      napalm_get_facts:
+        provider: "{{ creds_napalm }}"
+
+    - name: Generate the VLAN configs
+      template:
+        src: vlans.j2
+        dest: "CFGS/{{ inventory_hostname }}/1-vlans.txt"
+      tags:
+        gen_template
+
+    - name: Generate Switchport configs
+      template:
+        src: switchport.j2
+        dest: "CFGS/{{ inventory_hostname }}/2-switchport.txt"
+      tags:
+        gen_template
+
+    - assemble:
+        src: "CFGS/{{ inventory_hostname }}/"
+        dest: "CFGS/{{ inventory_hostname }}.txt"
+      tags:
+        gen_template
+
+    - name: Install VLANs + Switchport
+      napalm_install_config:
+        provider: "{{ creds_napalm }}"
+        config_file: "CFGS/{{ inventory_hostname }}.txt"
+        commit_changes: True
+        replace_config: False
+        diff_file: "DIFFS/{{ inventory_hostname }}.txt"
+

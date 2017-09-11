@@ -1,0 +1,23 @@
+---
+ports:
+  - port_name: Ethernet2
+    mode: access
+    access_vlan: 700
+  - port_name: Ethernet3
+    mode: trunk
+    native_vlan: 1
+    trunk_allowed: all
+  - port_name: Ethernet4
+    mode: access
+    access_vlan: 705
+  - port_name: Ethernet5
+    mode: access
+    access_vlan: 702
+  - port_name: Ethernet6
+    mode: trunk
+    native_vlan: 1
+    trunk_allowed: 701-706
+  - port_name: Ethernet7
+    mode: trunk
+    native_vlan: 700
+    trunk_allowed: 700,701

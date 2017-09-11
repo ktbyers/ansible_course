@@ -1,0 +1,16 @@
+---
+vlans:
+  - vlan_id: 700
+    vlan_name: green700
+  - vlan_id: 701
+    vlan_name: green701
+  - vlan_id: 702
+    vlan_name: green702
+  - vlan_id: 703
+    vlan_name: green703
+  - vlan_id: 704
+    vlan_name: green704
+  - vlan_id: 705
+    vlan_name: green705
+  - vlan_id: 706
+    vlan_name: green706
