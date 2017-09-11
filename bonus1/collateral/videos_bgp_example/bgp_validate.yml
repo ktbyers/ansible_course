@@ -7,13 +7,14 @@
         provider: "{{ creds_napalm }}"
         filter: bgp_neighbors
 
-    - debug:
-        msg: "{{ napalm_bgp_neighbors.global.peers }}"
+#    - debug:
+#        msg: "{{ napalm_bgp_neighbors.global.peers }}"
 
     - set_fact:
         bgp_oper_neighbors: "{{ napalm_bgp_neighbors.global.peers }}"
 
-    - set_fact:
+    - name: Current Neighbors
+      set_fact:
         bgp_cur_neighbors: "{{ bgp_cur_neighbors | default([]) + [ item.key ] }}"
       with_dict: "{{ bgp_oper_neighbors }}"
 
