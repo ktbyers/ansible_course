@@ -1,0 +1,12 @@
+---
+- name: Configuring Switchports
+  hosts: pynet-sw6
+  tasks:
+    - name: Testing connectivity (core)
+      eos_facts:
+        provider: "{{ creds_core_eapi }}"
+
+    - name: Switchport verification
+      eos_command:
+        provider: "{{ creds_core_eapi }}"
+        commands: show interfaces status
