@@ -8,10 +8,16 @@
         state: absent
       tags: remove_files
 
-    - name: Remove files from CFGs directory
+    - name: Recreate the CFGS directory
       file:
         path: "CFGS/{{ inventory_hostname }}"
         state: directory
+      tags: remove_files
+
+    - name: "Add empty file so that directories exist in Git"
+      copy:
+        src: "./invalid"
+        dest: "CFGS/{{ inventory_hostname }}/invalid"
       tags: remove_files
 
     - name: Testing connectivity (NAPALM)

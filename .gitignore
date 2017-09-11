@@ -106,3 +106,9 @@ class8/exercises/DIFFS/*.txt
 bonus1/collateral/videos_switchport_example/CFGS/pynet-sw6/*.txt
 bonus1/collateral/videos_switchport_example/CFGS/*.txt
 bonus1/collateral/videos_switchport_example/DIFFS/*.txt
+
+bonus1/collateral/videos_bgp_example/CFGS/*.txt
+bonus1/collateral/videos_bgp_example/CFGS/pynet-rtr1/*.txt
+bonus1/collateral/videos_bgp_example/CFGS/pynet-sw5/*.txt
+bonus1/collateral/videos_bgp_example/CFGS/pynet-sw6/*.txt
+bonus1/collateral/videos_bgp_example/DIFFS/*.txt
