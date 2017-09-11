@@ -1,0 +1,28 @@
+---
+- name: Verify BGP
+  hosts: pynet-sw5:pynet-rtr1:pynet-sw6
+  tasks:
+    - name: Verify BGP
+      napalm_get_facts:
+        provider: "{{ creds_napalm }}"
+        filter: bgp_neighbors
+
+    - debug:
+        msg: "{{ napalm_bgp_neighbors.global.peers }}"
+
+    - set_fact:
+        bgp_oper_neighbors: "{{ napalm_bgp_neighbors.global.peers }}"
+
+    - set_fact:
+        bgp_cur_neighbors: "{{ bgp_cur_neighbors | default([]) + [ item.key ] }}"
+      with_dict: "{{ bgp_oper_neighbors }}"
+
+    - name: Intended Neighbors
+      set_fact:
+        bgp_intended: "{{ bgp_peers | map(attribute='peer_ip') | list }}"
+
+    - name: Verify BGP Neighbors
+      assert:
+        that:
+          - "{{ bgp_intended | symmetric_difference(bgp_cur_neighbors) }} == []"
+           

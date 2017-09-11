@@ -1,0 +1,14 @@
+!
+router bgp {{ bgp_as }}
+{% for peer in bgp_peers %}
+   neighbor {{ peer.peer_ip }} remote-as {{ peer.peer_as }}
+   neighbor {{ peer.peer_ip }} maximum-routes {{ peer.maximum_routes }}
+{% endfor %}
+{% for route in announced_routes %}
+   network {{ route.prefix }}/{{ route.mask }}
+{% endfor %}
+!
+{% for static_route in static_routes %}
+ip route {{ static_route.prefix }}/{{ static_route.mask }} {{ static_route.next_hop }}
+{% endfor %}
+!

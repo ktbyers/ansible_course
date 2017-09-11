@@ -1,0 +1,24 @@
+---
+bgp_as: 42
+
+bgp_peers:
+  - peer_ip: 10.220.88.32
+    peer_as: 18
+    maximum_routes: ""
+  - peer_ip: 10.220.88.33
+    peer_as: 18
+    maximum_routes: ""
+
+announced_routes:
+  - prefix: 1.1.50.0
+    mask: 255.255.255.0
+  - prefix: 1.1.51.0
+    mask: 255.255.255.0
+
+static_routes:
+  - prefix: 1.1.50.0
+    mask: 255.255.255.0
+    next_hop: Null0
+  - prefix: 1.1.51.0
+    mask: 255.255.255.0
+    next_hop: Null0

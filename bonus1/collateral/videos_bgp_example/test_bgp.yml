@@ -1,0 +1,40 @@
+---
+- name: Configuring BGP
+  hosts: pynet-sw5:pynet-rtr1:pynet-sw6
+  tasks:
+    - name: Remove files from CFGs directory
+      file:
+        path: "CFGS/{{ inventory_hostname }}"
+        state: absent
+      tags: remove_files
+
+    - name: Remove files from CFGs directory
+      file:
+        path: "CFGS/{{ inventory_hostname }}"
+        state: directory
+      tags: remove_files
+
+    - name: Testing connectivity (NAPALM)
+      napalm_get_facts:
+        provider: "{{ creds_napalm }}"
+
+    - name: Generate the BGP config
+      template:
+        src: "bgp-{{ platform }}.j2"
+        dest: "CFGS/{{ inventory_hostname }}/3-bgp.txt"
+      tags:
+        gen_template
+
+    - assemble:
+        src: "CFGS/{{ inventory_hostname }}/"
+        dest: "CFGS/{{ inventory_hostname }}.txt"
+      tags:
+        gen_template
+
+    - name: Install BGP Config
+      napalm_install_config:
+        provider: "{{ creds_napalm }}"
+        config_file: "CFGS/{{ inventory_hostname }}.txt"
+        commit_changes: True
+        replace_config: False
+        diff_file: "DIFFS/{{ inventory_hostname }}.txt"

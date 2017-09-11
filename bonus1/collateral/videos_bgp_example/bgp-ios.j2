@@ -1,0 +1,13 @@
+!
+router bgp {{ bgp_as }}
+{% for route in announced_routes %}
+ network {{ route.prefix }} mask {{ route.mask }}
+{% endfor %}
+{% for peer in bgp_peers %}
+ neighbor {{ peer.peer_ip }} remote-as {{ peer.peer_as }}
+{% endfor %}
+!
+{% for static_route in static_routes %}
+ip route {{ static_route.prefix }} {{ static_route.mask }} {{ static_route.next_hop }}
+{% endfor %}
+!
