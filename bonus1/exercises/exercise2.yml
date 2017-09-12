@@ -1,0 +1,43 @@
+---
+- name: Exercise2
+  hosts: pynet-rtr1
+  tasks:
+    - name: Staging ericlab1 user
+      ios_config:
+        provider: "{{ creds_core_ssh }}"
+        lines:
+          - alias exec my_conft config terminal
+          - username ericlab1 secret 5 $1$ZIM7$rt0JgPlkTP3NgR7JxO0EI/
+      tags: stage_config
+      when: True
+      notify: wr mem
+
+    - name: View current users
+      ios_command:
+        provider: "{{ creds_core_ssh }}"
+        commands: "show run | inc ericlab1"
+      register: eric_user
+
+    - set_fact:
+        eric_user: "{{ eric_user.stdout[0] }}"
+
+    - name: Displaying eric_user
+      debug:
+        var: eric_user
+
+    - name: Remove the user
+      ios_command:
+        provider: "{{ creds_core_ssh }}"
+        commands:
+          - my_conft
+          - { command: no username ericlab1, prompt: "Do you want to continue", answer: y }
+      when: eric_user != ''
+      changed_when: True
+      notify: wr mem
+
+  handlers:
+    - name: wr mem
+      ios_command:
+        provider: "{{ creds_core_ssh }}"
+        commands: "write mem"
+      changed_when: True
