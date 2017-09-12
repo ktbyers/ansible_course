@@ -1,0 +1,12 @@
+---
+- name: Exercise3
+  hosts: pynet-rtr2
+  tasks:
+    - name: Configure a login banner
+      ios_banner:
+        provider: "{{ creds_core_ssh }}"
+        banner: login
+        text: |
+            Test configuration a multiline banner
+            on IOS (configured from Ansible)
+        state: present
