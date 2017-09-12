@@ -1,0 +1,49 @@
+---
+- name: Exercise1
+  hosts: localhost
+  vars:
+    bgp_peers:
+      peer_sw5: 10.220.88.32
+      peer_sw6: 10.220.88.33
+      peer_iosxr: 10.220.88.38
+    ntp_servers:
+      - ntp server 1.1.1.1
+      - ntp server 2.2.2.2
+      - ntp server 3.3.3.3
+
+  tasks:
+    - name: Print out bgp_peers (1a)
+      debug:
+        var: bgp_peers
+
+    - name: Print out ntp_servers (1a)
+      debug:
+        msg: "{{ ntp_servers }}"
+
+    - name: Prefix with no (1b)
+      debug:
+        msg: "no {{ item }}"
+      with_items: "{{ ntp_servers }}"
+
+    - name: Use with_dict and bgp_peers (1c)
+      debug:
+        msg: "{{ item.key }} >>>>>> {{ item.value }}"
+      with_dict: "{{ bgp_peers }}"
+
+    - name: Create new remove_ntp_servers list (1d)
+      set_fact:
+        remove_ntp_servers: "{{ remove_ntp_servers | default([]) + [ 'no ' + item ] }}"
+      with_items: "{{ ntp_servers }}"
+
+    - name: Display remove_ntp_servers (1d)
+      debug:
+        var: remove_ntp_servers
+
+    - name: Create list of BGP peer IPs (1e)
+      set_fact:
+        peer_ips: "{{ peer_ips | default([]) + [ item.value ] }}"
+      with_dict: "{{ bgp_peers }}"
+
+    - name: Display peer_ips (1e)
+      debug:
+        var: peer_ips
