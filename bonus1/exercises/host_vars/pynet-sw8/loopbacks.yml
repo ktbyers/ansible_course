@@ -1,19 +1,19 @@
 loopbacks:
   - intf_number: 201
-    ip_addr: 172.32.20.1
+    ip_addr: 172.31.20.1
     mask: 32
   - intf_number: 202
-    ip_addr: 172.32.20.2
+    ip_addr: 172.31.20.2
     mask: 32
   - intf_number: 203
-    ip_addr: 172.32.20.3
+    ip_addr: 172.31.20.3
     mask: 32
   - intf_number: 204
-    ip_addr: 172.32.20.4
+    ip_addr: 172.31.20.4
     mask: 32
   - intf_number: 205
-    ip_addr: 172.32.20.5
+    ip_addr: 172.31.20.5
     mask: 32
   - intf_number: 206
-    ip_addr: 172.32.20.6
+    ip_addr: 172.31.20.6
     mask: 32
