@@ -1,6 +1,6 @@
 ---
-- name: Configuring BGP
-  hosts: pynet-sw5:pynet-rtr1:pynet-sw6
+- name: Ensure clean configuration directory
+  hosts: pynet-sw8
   tasks:
     - name: "Remove the CFGs/device directory"
       file:
@@ -20,27 +20,38 @@
         dest: "CFGS/{{ inventory_hostname }}/invalid"
       tags: remove_files
 
-    - name: Testing connectivity (NAPALM)
-      napalm_get_facts:
-        provider: "{{ creds_napalm }}"
+- name: Push OSPF configuration to pynet-rtr1
+  hosts: pynet-rtr1
+  tasks: 
+    - ios_config:
+        provider: "{{ creds_core_ssh }}"
+        parents: router ospf 42
+        lines:
+          - network 10.220.88.0 0.0.0.255 area 0
 
-    - name: Generate the BGP config
-      template:
-        src: "bgp-{{ platform }}.j2"
-        dest: "CFGS/{{ inventory_hostname }}/3-bgp.txt"
-      tags:
-        gen_template
+- name: Generate loopback configs
+  hosts: pynet-sw8
+  tasks:
+    - template:
+        src: ./loopbacks.j2
+        dest: "./CFGS/{{ inventory_hostname }}/1-loopbacks.txt"
+      tags: config_gen
+
+    - template:
+        src: ./ospf.j2
+        dest: "./CFGS/{{ inventory_hostname }}/2-ospf.txt"
+      tags: config_gen
 
     - assemble:
-        src: "CFGS/{{ inventory_hostname }}/"
-        dest: "CFGS/{{ inventory_hostname }}.txt"
-      tags:
-        gen_template
+        src: "./CFGS/{{ inventory_hostname }}/"
+        dest: "./CFGS/{{ inventory_hostname }}.txt"
+      tags: config_gen
 
-    - name: Install BGP Config
+    - name: Install Config
       napalm_install_config:
         provider: "{{ creds_napalm }}"
         config_file: "CFGS/{{ inventory_hostname }}.txt"
         commit_changes: True
         replace_config: False
         diff_file: "DIFFS/{{ inventory_hostname }}.txt"
+

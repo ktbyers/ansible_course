@@ -1,0 +1,7 @@
+!
+router ospf {{ ospf_process }}
+   network 10.220.88.0/24 area 0.0.0.0
+{% for net in loopbacks %}
+   network {{ net.ip_addr }}/{{ net.mask }} area 0.0.0.{{ net.intf_number }}
+{% endfor %}
+!

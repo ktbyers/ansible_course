@@ -1,0 +1,5 @@
+{% for intf in loopbacks %}
+interface Loopback{{ intf.intf_number }}
+   ip address {{ intf.ip_addr }}/{{ intf.mask }}
+!
+{% endfor %}
