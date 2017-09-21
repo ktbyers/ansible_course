@@ -1,0 +1,7 @@
+---
+- name: Configuring Switchports
+  hosts: pynet-sw6
+  tasks:
+    - eos_facts:
+        provider: "{{ creds_core_eapi }}"
+

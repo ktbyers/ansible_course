@@ -1,0 +1,14 @@
+vlan 700
+   name green700
+vlan 701
+   name green701
+vlan 702
+   name green702
+vlan 703
+   name green703
+vlan 704
+   name green704
+vlan 705
+   name green705
+vlan 706
+   name green706

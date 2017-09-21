@@ -1,0 +1,19 @@
+---
+- name: Configuring Switchports
+  hosts: pynet-sw6
+  tasks:
+    - name: Testing connectivity (Ansible Core)
+      eos_facts:
+        provider: "{{ creds_core_eapi }}"
+
+    - name: Testing connectivity (NAPALM)
+      napalm_get_facts:
+        provider: "{{ creds_napalm }}"
+
+    - name: Install VLANs
+      napalm_install_config:
+        provider: "{{ creds_napalm }}"
+        config_file: "CFGS/{{ inventory_hostname }}-vlans-1.ref"
+        commit_changes: False
+        replace_config: False
+        diff_file: "DIFFS/{{ inventory_hostname }}.txt"
