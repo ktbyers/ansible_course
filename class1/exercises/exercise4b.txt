@@ -1,5 +1,5 @@
 
-$ ansible all -m ping -i ./ex4a_my-inventory 
+$ ansible all -m ping -i ./ex4_my-inventory 
 pynet-rtr2 | SUCCESS => {
     "changed": false, 
     "ping": "pong"

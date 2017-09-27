@@ -2,7 +2,7 @@
 # Inventory file that you created in step 3a. Use the '-i ./my-inventory' arguments to specify 
 # the inventory file to use.
 
-$ ansible local -m ping -i ./ex3a_my-inventory 
+$ ansible local -m ping -i ./ex3_my-inventory 
 localhost | SUCCESS => {
     "changed": false, 
     "ping": "pong"

@@ -1,5 +1,5 @@
 
-$ ansible-playbook exercise3c.yml -i ./ex3a_my-inventory -v
+$ ansible-playbook exercise3c.yml -i ./ex3_my-inventory -v
 Using /home/kbyers/.ansible.cfg as config file
 
 PLAY [Exercise 3c] *******************************************************************************************************************************************************************************
