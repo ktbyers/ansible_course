@@ -115,3 +115,5 @@ bonus1/collateral/videos_bgp_example/DIFFS/*.txt
 bonus1/exercises/CFGS/*.txt
 bonus1/exercises/CFGS/pynet-sw8/*.txt
 bonus1/exercises/DIFFS/*.txt
+
+_test/
