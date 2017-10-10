@@ -40,6 +40,52 @@ CLASS2_PROGRAMS = [
                 ] 
             }
         }),
+
+    ('/home/kbyers/ansible_course/class2/exercises/exercise2.yml', 
+        {'addl_args': ("--tags", "2b"),
+         'tests':
+            {
+                'return_code': 0,
+                'return_strings': [
+                    'pynet-rtr1                 : ok=2    changed=0    unreachable=0    failed=0',
+                    'pynet-rtr2                 : ok=2    changed=0    unreachable=0    failed=0',
+                    'FastEthernet0',
+                    'FastEthernet1',
+                    'FastEthernet2',
+                    'FastEthernet3',
+                    'FastEthernet4',
+                    'Vlan1',
+                ]
+            }
+        }),
+
+    ('/home/kbyers/ansible_course/class2/exercises/exercise2.yml', 
+        {'addl_args': ("--tags", "2c"),
+         'tests':
+            {
+                'return_code': 0,
+                'return_strings': [
+                    'Active Interface: FastEthernet4',
+                    'pynet-rtr1                 : ok=2    changed=0    unreachable=0    failed=0',
+                    'pynet-rtr2                 : ok=2    changed=0    unreachable=0    failed=0',
+                ]
+            }
+        }),
+
+    ('/home/kbyers/ansible_course/class2/exercises/exercise2.yml', 
+        {'addl_args': ("--tags", "2d"),
+         'tests':
+            {
+                'return_code': 0,
+                'return_strings': [
+                    'pynet-rtr1                 : ok=2    changed=0    unreachable=0    failed=0',
+                    'pynet-rtr2                 : ok=2    changed=0    unreachable=0    failed=0',
+                    'ansible_net_model',
+                    '881 (MPC8300) processor'
+                ]
+            }
+        }),
+
 ]
 
 PROGRAMS = CLASS2_PROGRAMS
