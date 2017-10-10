@@ -10,7 +10,8 @@ debug = False
 
 # DEFINE ANSIBLE VERSION
 ANSIBLE_2_3 = "/home/kbyers/VENV/py27_venv/bin/ansible-playbook"
-#ANSIBLE_2_4 = "/home/kbyers/VENV/ans_2_4/bin/ansible-playbook"
+ANSIBLE_2_4 = "/home/kbyers/VENV/ans_2_4/bin/ansible-playbook"
+ACTIVE_VERSION = ANSIBLE_2_3
 
 # DEFINE TEST CASES
 CLASS2_PROGRAMS = [
@@ -86,6 +87,33 @@ CLASS2_PROGRAMS = [
             }
         }),
 
+    ('/home/kbyers/ansible_course/class2/exercises/exercise3.yml', 
+        {'tests':
+            {
+                'return_code': 0,
+                'return_strings': [
+                    'pynet-rtr1                 : ok=5    changed=0    unreachable=0    failed=0',
+                    'pynet-rtr2                 : ok=5    changed=0    unreachable=0    failed=0',
+                    'Internet  10.220.88.20            -   c89c.1dea.0eb6  ARPA   FastEthernet4',
+                    'Internet  10.220.88.21            -   1c6a.7aaf.576c  ARPA   FastEthernet4',
+                    '''"item": "Internet  10.220.88.1''',
+                    '''"item": "Internet  10.220.88.1''',
+                ]
+            }
+        }),
+    ('/home/kbyers/ansible_course/class2/exercises/exercise4.yml', 
+        {'tests':
+            {
+                'return_code': 0,
+                'return_strings': [
+                    'pynet-sw7                  : ok=5    changed=0    unreachable=0    failed=0',
+                    'TASK [Run show arp]',
+                    'TASK [Create mac_table variable]',
+                    '''"gateway_mac": "0062.ec29.70fe"'''
+                ]
+            }
+        }),
+
 ]
 
 PROGRAMS = CLASS2_PROGRAMS
@@ -103,7 +131,7 @@ def main():
     print("\n")
     print("-" * 80)
     print("Testing Ansible Network Automation: Class2")
-    for ansible in [ANSIBLE_2_3,]:
+    for ansible in [ACTIVE_VERSION,]:
         ansible_version = get_ansible_version(ansible)
         print("Testing Ansible Version: {}".format(ansible_version))
 
