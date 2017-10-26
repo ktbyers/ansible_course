@@ -1,0 +1,4 @@
+no router bgp 22
+
+interface Ethernet 2/4
+ no ip address
