@@ -58,5 +58,5 @@
     - name: PING failed using DNS name
       debug:
         var: ping_output
-      failed_when: "'!!!!' not in ping_output.stdout[0]"
-      # when: "'!!!!' not in ping_output.stdout[0]"
+      #failed_when: "'!!!!' not in ping_output.stdout[0]"
+      when: "'!!!!' not in ping_output.stdout[0]"
