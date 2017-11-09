@@ -15,44 +15,44 @@ ACTIVE_VERSION = ANSIBLE_2_3
 
 # DEFINE TEST CASES
 EXERCISES = [
-###    ('/home/kbyers/ansible_course/class7/exercises/exercise1.yml', 
-###        {'tests': 
-###            {
-###                'return_code': 0,
-###                'return_strings': [
-###                    'nxos1                      : ok=4',
-###                    'nxos2                      : ok=4',
-###                    'pynet-rtr1                 : ok=4',
-###                    'pynet-rtr2                 : ok=4',
-###                    'pynet-sw5                  : ok=4',
-###                    'pynet-sw6                  : ok=4',
-###                    'pynet-sw7                  : ok=4',
-###                    'pynet-sw8                  : ok=4',
-###                    'TASK [Generate global configuration]',
-###                    'PLAY [Generate Global Configuration Items (Part1)]',
-###                    'PLAY [Deploy configuration using Ansible Core (IOS): Part1b]',
-###                    'TASK [ios_config]',
-###                    'PLAY [Deploy configuration using Ansible Core (NX-OS): Part1b]',
-###                    'TASK [nxos_config]',
-###                    'PLAY [Deploy configuration using Ansible Core (Arista): Part1b]',
-###                    'TASK [eos_config]',
-###                ]
-###            }
-###        }),
-###    ('/home/kbyers/ansible_course/class7/exercises/exercise2.yml', 
-###        {'tests': 
-###            {
-###                'return_code': 0,
-###                'return_strings': [
-###                    'nxos1                      : ok=3',
-###                    'nxos2                      : ok=3',
-###                    'PLAY [Generate and Deploy BGP Configurations]', 
-###                    'TASK [Gathering Facts]',
-###                    'TASK [Generate BGP Configs (part2)]', 
-###                    'TASK [Push Configs using NAPALM: Merge (part2b)]',
-###                ]
-###            }
-###        }),
+    ('/home/kbyers/ansible_course/class7/exercises/exercise1.yml', 
+        {'tests': 
+            {
+                'return_code': 0,
+                'return_strings': [
+                    'nxos1                      : ok=4',
+                    'nxos2                      : ok=4',
+                    'pynet-rtr1                 : ok=4',
+                    'pynet-rtr2                 : ok=4',
+                    'pynet-sw5                  : ok=4',
+                    'pynet-sw6                  : ok=4',
+                    'pynet-sw7                  : ok=4',
+                    'pynet-sw8                  : ok=4',
+                    'TASK [Generate global configuration]',
+                    'PLAY [Generate Global Configuration Items (Part1)]',
+                    'PLAY [Deploy configuration using Ansible Core (IOS): Part1b]',
+                    'TASK [ios_config]',
+                    'PLAY [Deploy configuration using Ansible Core (NX-OS): Part1b]',
+                    'TASK [nxos_config]',
+                    'PLAY [Deploy configuration using Ansible Core (Arista): Part1b]',
+                    'TASK [eos_config]',
+                ]
+            }
+        }),
+    ('/home/kbyers/ansible_course/class7/exercises/exercise2.yml', 
+        {'tests': 
+            {
+                'return_code': 0,
+                'return_strings': [
+                    'nxos1                      : ok=3',
+                    'nxos2                      : ok=3',
+                    'PLAY [Generate and Deploy BGP Configurations]', 
+                    'TASK [Gathering Facts]',
+                    'TASK [Generate BGP Configs (part2)]', 
+                    'TASK [Push Configs using NAPALM: Merge (part2b)]',
+                ]
+            }
+        }),
     ('/home/kbyers/ansible_course/class7/exercises/exercise3.yml', 
         {'tests': 
             {
