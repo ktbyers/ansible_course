@@ -5,7 +5,7 @@
     creds:
       host: 184.105.247.70
       username: pyclass
-      password: invalid
+      password: "[THIS PASSWORD NEEDS TO BE CHANGED]"
   tasks:
     - ios_facts:
         provider: "{{ creds }}"

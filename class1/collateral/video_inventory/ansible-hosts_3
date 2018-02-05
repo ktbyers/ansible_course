@@ -1,6 +1,6 @@
 [all:vars]
 ansible_connection=local
-# You will need to update this to your Python
+# !!! You will need to update this to your Python !!!
 ansible_python_interpreter=/home/kbyers/VENV/ansible/bin/python
 
 [local]
@@ -12,7 +12,7 @@ pynet-rtr2 ansible_host=184.105.247.71
 
 [cisco:vars]
 username=pyclass
-password=invalid
+password="[THIS PASSWORD NEEDS TO BE CHANGED]"
 
 [arista]
 pynet-sw1 ansible_host=184.105.247.72
@@ -22,4 +22,4 @@ pynet-sw4 ansible_host=184.105.247.75
 
 [arista:vars]
 username=pyclass
-password=invalid
+password="[THIS PASSWORD NEEDS TO BE CHANGED]"

@@ -7,7 +7,7 @@ pynet-rtr2 ansible_host=184.105.247.71
 
 [cisco:vars]
 username=pyclass
-password=invalid
+password="[THIS PASSWORD NEEDS TO BE CHANGED]"
 ansible_connection=local
-# You will need to update this to your Python
+# !!! You will need to update this to your Python !!!
 ansible_python_interpreter=/home/kbyers/VENV/ansible/bin/python
