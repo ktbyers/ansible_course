@@ -9,9 +9,9 @@ env = TestFileEnvironment('./_test')
 debug = False
 
 # DEFINE ANSIBLE VERSION
-ANSIBLE_2_3 = "/home/kbyers/VENV/py27_venv/bin/ansible-playbook"
-ANSIBLE_2_4 = "/home/kbyers/VENV/ans_2_4/bin/ansible-playbook"
-ACTIVE_VERSION = ANSIBLE_2_3
+ANSIBLE_2_4 = "/home/kbyers/VENV/py27_venv/bin/ansible-playbook"
+#ANSIBLE_2_4 = "/home/kbyers/VENV/ans_2_4/bin/ansible-playbook"
+ACTIVE_VERSION = ANSIBLE_2_4
 
 # DEFINE TEST CASES
 CLASS2_PROGRAMS = [
