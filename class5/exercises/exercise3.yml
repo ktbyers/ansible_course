@@ -25,7 +25,7 @@
     - set_fact:
         bgp_peer: "{{ napalm_bgp_neighbors.global.peers }}"
 
+    # Note, this will fail if there are any BGP peers that are not up
     - assert:
         that: "{{ bgp_peer[item].is_up }}"
       with_items: "{{ bgp_peer }}"
-
