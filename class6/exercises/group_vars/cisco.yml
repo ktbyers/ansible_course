@@ -1,6 +1,6 @@
 ---
 creds_core:
-  hostname: "{{ ansible_host }}"
+  host: "{{ ansible_host }}"
   username: "{{ username }}"
   password: "{{ password }}"
 
