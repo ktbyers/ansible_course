@@ -1,0 +1,24 @@
+---
+# Executed as follows:
+# ansible-playbook provider_example_extra_args.yml -i ./ansible-hosts_no_user_no_password 
+#   --extra-vars="my_user=pyclass" -k
+- name: Ansible2.5 using provider (demonstrates passing in username via extra-args)
+  gather_facts: no
+  hosts: cisco
+  vars:
+    creds:
+        host: "{{ ansible_host }}"
+        username: "{{ my_user }}"
+        password: "{{ ansible_ssh_pass }}"
+
+  tasks:
+    - name: Obtain show arp output
+      debug:
+        msg: "{{ my_user }}"
+
+    - name: Obtain show arp output
+      ios_command:
+        provider: "{{ creds }}"
+        commands: show arp
+      register: show_arp
+

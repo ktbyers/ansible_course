@@ -1,0 +1,20 @@
+---
+# Executed as (if password embedded in inventory):
+# ansible-playbook provider_example.yml -i ./ansible-hosts
+# 
+# Executed as (if password passed in at execution):
+# ansible-playbook provider_example.yml -i ./ansible-hosts_no_password -k
+- name: Ansible2.5 using provider
+  gather_facts: no
+  hosts: cisco
+  vars:
+    creds:
+        host: "{{ ansible_host }}"
+        username: "{{ ansible_user }}"
+        password: "{{ ansible_ssh_pass }}"
+
+  tasks:
+    - name: Obtain show arp output
+      ios_command:
+        provider: "{{ creds }}"
+        commands: show arp
