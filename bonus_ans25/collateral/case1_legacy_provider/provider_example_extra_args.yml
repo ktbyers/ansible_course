@@ -1,7 +1,7 @@
 ---
 # Executed as follows:
-# ansible-playbook provider_example_extra_args.yml -i ./ansible-hosts_no_user_no_password 
-#   --extra-vars="my_user=pyclass" -k
+# $ ansible-playbook provider_example_extra_args.yml -i ./ansible-hosts_no_user_no_password 
+#      --extra-vars="my_user=pyclass" -k
 - name: Ansible2.5 using provider (demonstrates passing in username via extra-args)
   gather_facts: no
   hosts: cisco

@@ -1,9 +1,9 @@
 ---
 # Executed as (if password embedded in inventory):
-# ansible-playbook provider_example.yml -i ./ansible-hosts
+# $ ansible-playbook provider_example.yml -i ./ansible-hosts
 # 
 # Executed as (if password passed in at execution):
-# ansible-playbook provider_example.yml -i ./ansible-hosts_no_password -k
+# $ ansible-playbook provider_example.yml -i ./ansible-hosts_no_password -k
 - name: Ansible2.5 using provider
   gather_facts: no
   hosts: cisco
