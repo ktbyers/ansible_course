@@ -1,0 +1,13 @@
+---
+# Shows Ansible 2.5, no provider, passing username and password via command-line
+#
+# To Execute:
+# $ ansible-playbook no_provider_creds.yml -i ./ansible-hosts-1 -k -u pyclass
+- name: Ansible2.5 no provider
+  gather_facts: no
+  hosts: cisco
+
+  tasks:
+    - name: Obtain show arp output
+      ios_command:
+        commands: show arp

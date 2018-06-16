@@ -1,0 +1,14 @@
+---
+# Shows Ansible 2.5, no provider
+#
+# To Execute:
+# $ ansible-playbook no_provider.yml -i ./ansible-hosts
+# Note, the password in ansible-hosts will need set correctly for the lab environment
+- name: Ansible2.5 no provider
+  gather_facts: no
+  hosts: cisco
+
+  tasks:
+    - name: Obtain show arp output
+      ios_command:
+        commands: show arp
