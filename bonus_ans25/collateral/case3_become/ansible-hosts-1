@@ -1,0 +1,14 @@
+[local]
+localhost ansible_connection=local
+
+[cisco]
+pynet-rtr1 ansible_host=cisco1.twb-tech.com
+
+[cisco:vars]
+ansible_network_os=ios 
+ansible_user=test9
+ansible_ssh_pass=CHANGEME_THIS_PASSWORD_IS_NOT_VALID
+ansible_connection=network_cli
+ansible_become=yes
+ansible_become_method=enable
+ansible_become_pass=CHANGEME_THIS_PASSWORD_IS_NOT_VALID

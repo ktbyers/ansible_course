@@ -1,0 +1,19 @@
+---
+# Shows Ansible 2.5, no provider, using become
+#
+# This will fail (no become variables in inventory)
+# $ ansible-playbook become_example.yml -i ./ansible-hosts 
+#
+# This will work (become variables present in inventory)
+# $ ansible-playbook become_example.yml -i ./ansible-hosts-1
+#
+# Note, the password in ansible-hosts will need set correctly for the lab environment
+
+- name: Ansible2.5 become
+  gather_facts: no
+  hosts: cisco
+
+  tasks:
+    - name: Obtain show run
+      ios_command:
+        commands: show run
