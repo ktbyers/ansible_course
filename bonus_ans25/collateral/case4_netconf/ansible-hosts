@@ -1,0 +1,11 @@
+[local]
+localhost ansible_connection=local
+
+[juniper]
+srx1 ansible_host=srx1.twb-tech.com
+
+[juniper:vars]
+ansible_connection=netconf
+ansible_network_os=junos 
+ansible_user=pyclass
+ansible_ssh_pass=CHANGEME_THIS_PASSWORD_IS_NOT_VALID

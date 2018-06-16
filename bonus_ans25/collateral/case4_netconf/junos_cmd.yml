@@ -1,0 +1,17 @@
+---
+
+# Shows Ansible 2.5, no provider, using ansible_connection=netconf
+#
+# To Execute:
+# $ ansible-playbook junos_cmd.yml -i ./ansible-hosts
+#
+# Note, the password in ansible-hosts will need set correctly for the lab environment
+
+- name: Ansible2.5 junos
+  gather_facts: no
+  hosts: juniper
+
+  tasks:
+    - name: show interfaces terse
+      junos_command:
+        commands: show interfaces terse
