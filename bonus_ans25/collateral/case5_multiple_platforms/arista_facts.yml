@@ -1,0 +1,16 @@
+---
+# Example using eAPI and Arista
+# Still requires a provider
+#
+# To Execute:
+# $ ansible-playbook arista_facts.yml -i ./ansible-hosts
+#
+#
+- name: Ansible2.5 Arista eapi using provider
+  gather_facts: no
+  hosts: arista
+
+  tasks:
+    - name: Arista facts
+      eos_facts:
+        provider: "{{ creds_core_eapi }}"

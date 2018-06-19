@@ -1,0 +1,39 @@
+---
+# Example using multiple platforms some using NX-API, and eAPI that require a provider and
+# some using network_cli and netconf.
+#
+#
+# To Execute:
+# $ ansible-playbook multiple_platforms.yml -i ./ansible-hosts
+#
+#
+- name: Ansible2.5 Arista eapi using provider
+  gather_facts: no
+  hosts: arista
+  tasks:
+    - name: Arista facts
+      eos_facts:
+        provider: "{{ creds_core_eapi }}"
+
+- name: Ansible2.5 NX-OS nxapi using provider
+  gather_facts: no
+  hosts: nxos 
+  tasks:
+    - name: NX-OS facts
+      nxos_facts:
+        provider: "{{ creds_core_nxapi }}"
+
+- name: Ansible2.5 junos (no provider)
+  gather_facts: no
+  hosts: juniper
+  tasks:
+    - name: Obtain junos facts
+      junos_facts:
+
+- name: Ansible2.5 ios (no provider)
+  gather_facts: no
+  hosts: cisco
+  tasks:
+    - name: Obtain show arp output
+      ios_command:
+        commands: show arp
