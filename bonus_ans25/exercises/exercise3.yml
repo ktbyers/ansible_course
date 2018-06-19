@@ -1,0 +1,26 @@
+---
+#
+# a. Use eos_command with implied arguments to execute 'show vlan' on all four of the Arista
+#    switches (using network_cli). Pass in the password via the command-line.
+#
+# b. Use eos_config module to configure a VLAN and VLAN name. Once again use implied arguments
+#
+#
+# To Execute:
+# $ ansible-playbook exercise3.yml -i ./ansible-hosts-3 -k
+#
+- name: Use EOS Facts and implied arguments
+  gather_facts: no
+  hosts: arista
+
+  tasks:
+    - name: Arista EOS show vlan
+      eos_command:
+        commands: show vlan
+
+    - name: Configure a VLAN
+      eos_config:
+        lines: 
+          - vlan 400
+          - name blue400
+        match: exact
