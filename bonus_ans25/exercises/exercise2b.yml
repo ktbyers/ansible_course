@@ -1,7 +1,8 @@
 ---
 #
-# Repeat exercise2a playbook except remove the username and password variables from
-# inventory and pass these arguments via the command-line
+# Repeat exercise2a except remove the username and password variables from the inventory and pass
+# these arguments via the command-line
+#
 #
 # To Execute:
 # $ ansible-playbook exercise2b.yml -i ./ansible-hosts-2b -u pyclass -k

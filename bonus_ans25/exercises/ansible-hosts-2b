@@ -1,0 +1,10 @@
+[local]
+localhost ansible_connection=local
+
+[cisco]
+pynet-rtr1 ansible_host=cisco1.twb-tech.com
+pynet-rtr2 ansible_host=cisco2.twb-tech.com
+
+[cisco:vars]
+ansible_connection=network_cli
+ansible_network_os=ios 
