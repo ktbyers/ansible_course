@@ -1,0 +1,23 @@
+---
+#
+# Using implied arguments from inventory (i.e. do not specify a 'provider') gather
+# junos_facts from the Juniper SRX. Use the 'netconf' connection type.
+#
+# Print out the 'ansible_net_serialnum' variable.
+#
+#
+# To Execute:
+# $ ansible-playbook exercise2a.yml -i ./ansible-hosts-2a
+#
+#
+- name: Juniper facts using netconf
+  gather_facts: no
+  hosts: juniper
+
+  tasks:
+    - name: Juniper facts using netconf
+      junos_facts:
+
+    - name: Print out the ansible_net_serialnum variable
+      debug:
+        var: ansible_net_serialnum
