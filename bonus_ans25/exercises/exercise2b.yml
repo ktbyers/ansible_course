@@ -1,0 +1,20 @@
+---
+#
+# Repeat exercise2a playbook except remove the username and password variables from
+# inventory and pass these arguments via the command-line
+#
+# To Execute:
+# $ ansible-playbook exercise2b.yml -i ./ansible-hosts-2b -u pyclass -k
+#
+#
+- name: Use IOS Facts and implied arguments
+  gather_facts: no
+  hosts: cisco
+
+  tasks:
+    - name: Cisco IOS Facts
+      ios_facts:
+
+    - name: Print out the ansible_net_all_ipv4_addresses variable
+      debug:
+        var: ansible_net_all_ipv4_addresses

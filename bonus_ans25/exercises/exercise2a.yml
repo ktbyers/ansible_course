@@ -1,0 +1,23 @@
+---
+#
+# Use ios_facts and implied arguments from inventory (i.e. do not specify a 'provider') to gather
+# ios_facts from the two Cisco routers. Print out the 'ansible_net_all_ipv4_addresses' variable for
+# both routers.
+# 
+#
+# To Execute:
+# $ ansible-playbook exercise2a.yml -i ./ansible-hosts-2a
+#
+# Note, the password in ansible-hosts will need set correctly for the lab environment
+#
+- name: Use IOS Facts and implied arguments
+  gather_facts: no
+  hosts: cisco
+
+  tasks:
+    - name: Cisco IOS Facts
+      ios_facts:
+
+    - name: Print out the ansible_net_all_ipv4_addresses variable
+      debug:
+        var: ansible_net_all_ipv4_addresses
