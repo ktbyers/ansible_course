@@ -1,0 +1,19 @@
+---
+#
+# Repeat exercise4a except add the 'become' arguments to inventory to cause the device to go into
+# enable' mode. Verify that 'show run' executes properly. Pass both the SSH password and the enable
+# password via command-line arguments
+#
+#
+# To Execute:
+# ansible-playbook exercise4b.yml -i ./ansible-hosts-4b -k --ask-become-pass
+#
+#
+- name: Successful execution of show run
+  gather_facts: no
+  hosts: cisco
+
+  tasks:
+    - name: Successful execution of show run
+      ios_command:
+        commands: show run

@@ -1,0 +1,19 @@
+---
+#
+# Using the 'test9' username (which only has privilege 1) connect to pynet-rtr1. Using the
+# ios_command module verify that 'show run' fails (i.e. you don't have permissions to execute 
+# 'show run').
+# 
+#
+# To Execute:
+# $ ansible-playbook exercise4a.yml -i ./ansible-hosts-4a
+#
+#
+- name: Failed execution of show run
+  gather_facts: no
+  hosts: cisco
+
+  tasks:
+    - name: Failed execution of show run
+      ios_command:
+        commands: show run
