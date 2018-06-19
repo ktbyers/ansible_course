@@ -1,0 +1,21 @@
+---
+# Declarative Intent and verifying vlan binding is correct
+#
+#
+# To Execute:
+# $ ansible-playbook eos_vlan.yml -i ./ansible-hosts
+#
+
+- name: Configure interface
+  hosts: pynet-sw6
+  gather_facts: no
+
+  tasks:
+    - name: Check interfaces associated with VLAN
+      eos_vlan:
+        vlan_id: 403
+        state: present
+        associated_interfaces:
+          # - Ethernet5
+          - Ethernet6
+          - Ethernet7

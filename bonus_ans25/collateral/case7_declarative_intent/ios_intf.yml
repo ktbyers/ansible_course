@@ -1,0 +1,29 @@
+---
+#
+# Declarative Intent and verifying interface state
+#
+#
+# To Execute:
+# $ ansible-playbook ios_intf.yml -i ./ansible-hosts
+#
+
+- name: Configure interface
+  hosts: pynet-rtr1
+  gather_facts: no
+
+  tasks:
+    - name: configure interface FA0
+      ios_interface:
+          name: FastEthernet0
+          description: "Testing ANS2.4"
+          state: down
+          enabled: True
+
+    - name: configure interface FA4
+      ios_interface:
+          name: FastEthernet4
+          description: "Testing ANS2.4 (Fa4)"
+          state: up
+          # neighbors:
+          #  - host: "twb-sf-hpsw1"
+          #    port: "15"
