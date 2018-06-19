@@ -1,0 +1,21 @@
+---
+# Aggregate and purge
+#
+#
+# To Execute:
+# $ ansible-playbook eos_vlan2.yml -i ./ansible-hosts
+#
+
+- name: Configure interface
+  hosts: pynet-sw6
+  gather_facts: no
+
+  tasks:
+    - name: Create vlan using aggregate
+      eos_vlan:
+        aggregate:
+          - {vlan_id: 403, name: red403}
+          - {vlan_id: 404, name: red404}
+          - {vlan_id: 405, name: red405}
+        purge: True
+      tags: aggr

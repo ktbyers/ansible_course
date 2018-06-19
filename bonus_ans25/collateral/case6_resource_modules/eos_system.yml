@@ -1,0 +1,23 @@
+---
+# Some new Ansible 2.4 resource modules
+#
+#
+# To Execute:
+# $ ansible-playbook eos_system.yml -i ./ansible-hosts
+#
+
+- name: Configure interface
+  hosts: pynet-sw5
+  gather_facts: no
+
+  tasks:
+    - name: configure hostname and domain-name
+      eos_system:
+        hostname: eos05_test
+        domain_name: test.example.com
+
+    - name: configure name servers
+      eos_system:
+        name_servers:
+          - 8.8.8.8
+          - 8.8.4.4

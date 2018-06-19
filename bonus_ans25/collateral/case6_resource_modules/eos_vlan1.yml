@@ -1,0 +1,47 @@
+---
+# Aggregate and eos_vlan module
+#
+#
+# To Execute:
+# $ ansible-playbook eos_vlan1.yml -i ./ansible-hosts
+#
+
+- name: Configure VLANs
+  hosts: pynet-sw6
+  gather_facts: no
+
+  tasks:
+    - name: Create vlan
+      eos_vlan:
+        vlan_id: 400
+        name: blue400
+        state: present
+
+    - name: Create vlan
+      eos_vlan:
+        vlan_id: 401
+        name: blue401
+        state: present
+
+    - name: Create vlan
+      eos_vlan:
+        vlan_id: 402
+        name: blue402
+        state: present
+
+    - name: Create vlan using aggregate
+      eos_vlan:
+        aggregate:
+          - {vlan_id: 403, name: red403}
+          - {vlan_id: 404, name: red404}
+          - {vlan_id: 405, name: red405}
+      tags: aggr
+
+    - name: Assign interface to Vlan
+      eos_vlan:
+        vlan_id: 403
+        interfaces:
+          - Ethernet6
+          - Ethernet7
+      tags: assign
+
