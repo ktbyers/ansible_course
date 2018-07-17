@@ -35,6 +35,7 @@
       register: result
       ignore_errors: True
 
+    # The previous form using a filter was deprecated
     - debug:
         msg: "Hello world"
       when: result is failed
