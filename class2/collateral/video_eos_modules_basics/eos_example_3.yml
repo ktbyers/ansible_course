@@ -4,22 +4,25 @@
   vars:
     ssh:
       host: "{{ ansible_host }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
+      username: "{{ ansible_user }}"
+      password: "{{ ansible_ssh_pass }}"
       transport: cli
       timeout: 60
 
     eapi:
       host: "{{ ansible_host }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
+      username: "{{ ansible_user }}"
+      password: "{{ ansible_ssh_pass }}"
       transport: eapi
       use_ssl: True
       validate_certs: no
 
   tasks:
+    # Had to remove interfaces as eos_facts would fail on LLDP
     - eos_facts:
         provider: "{{ ssh }}"
+        gather_subset:
+          - "!interfaces"
 
     - eos_facts:
         provider: "{{ eapi }}"

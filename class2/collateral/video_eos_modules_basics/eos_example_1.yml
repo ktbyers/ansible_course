@@ -4,11 +4,14 @@
   vars:
     ssh:
       host: "{{ ansible_host }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
+      username: "{{ ansible_user }}"
+      password: "{{ ansible_ssh_pass }}"
       transport: cli
 
   tasks:
+    # Had to remove interfaces as eos_facts would fail on LLDP
     - eos_facts:
         provider: "{{ ssh }}"
+        gather_subset:
+          - "!interfaces"
 

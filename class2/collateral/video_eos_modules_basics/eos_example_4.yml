@@ -4,15 +4,15 @@
   vars:
     ssh:
       host: "{{ ansible_host }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
+      username: "{{ ansible_user }}"
+      password: "{{ ansible_ssh_pass }}"
       transport: cli
       timeout: 60
 
     eapi:
       host: "{{ ansible_host }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
+      username: "{{ ansible_user }}"
+      password: "{{ ansible_ssh_pass }}"
       transport: eapi
       use_ssl: True
       validate_certs: no
@@ -21,6 +21,8 @@
     - name: SSH Fact Gathering
       eos_facts:
         provider: "{{ ssh }}"
+        gather_subset:
+          - "!interfaces"
 
     - name: EAPI Fact Gathering
       eos_facts:
