@@ -8,8 +8,8 @@
   vars:
     creds:
         host: "{{ ansible_host }}"
-        username: "{{ username }}"
-        password: "{{ password }}"
+        username: "{{ ansible_user }}"
+        password: "{{ ansible_ssh_pass }}"
 
   tasks:
     - ios_facts:
