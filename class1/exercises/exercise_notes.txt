@@ -1,0 +1,54 @@
+
+# Steps to run the exercises:
+
+Exercise1:
+
+  $ python exercise1.py
+
+
+
+Exercise2:
+
+  $ python exercise2.py
+
+
+
+Exercise3b:
+
+  $ ansible local -m ping -i ./ex3_my-inventory 
+
+
+
+Excercise3c:
+
+  $ ansible-playbook exercise3c.yml -i ./ex3_my-inventory -v
+
+
+
+Exercise4b:
+
+  $ ansible all -m ping -i ./ex4_my-inventory
+
+
+
+Exercse5a:
+
+  $ ansible-playbook exercise5a.yml -i ./ex5_inventory 
+
+
+
+Exercise5b:
+
+  $ ansible-playbook exercise5b.yml -i ./ex5_inventory 
+
+
+
+Exercise5c:
+
+  $ ansible-playbook exercise5c.yml -i ./ex5_inventory 
+
+
+
+Exercise5d:
+
+  $ ansible-playbook exercise5d.yml -i ./ex5_inventory 
