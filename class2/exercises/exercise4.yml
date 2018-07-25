@@ -1,7 +1,7 @@
 ---
 
 - name: Arista process show arp
-  hosts: pynet-sw4
+  hosts: pynet-sw8
   vars:
     eapi:
       host: "{{ ansible_host }}"

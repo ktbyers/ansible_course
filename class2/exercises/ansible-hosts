@@ -22,10 +22,10 @@ ansible_user=pyclass
 ansible_ssh_pass="[THIS PASSWORD NEEDS TO BE CHANGED]"
 
 [arista]
-pynet-sw1 ansible_host=184.105.247.72
-pynet-sw2 ansible_host=184.105.247.73
-pynet-sw3 ansible_host=184.105.247.74
-pynet-sw4 ansible_host=184.105.247.75
+pynet-sw5 ansible_host=arista5.twb-tech.com
+pynet-sw6 ansible_host=arista6.twb-tech.com
+pynet-sw7 ansible_host=arista7.twb-tech.com
+pynet-sw8 ansible_host=arista8.twb-tech.com
 
 [arista:vars]
 ansible_user=pyclass

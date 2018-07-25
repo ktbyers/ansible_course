@@ -1,0 +1,37 @@
+
+# Steps to run the exercises:
+
+
+
+Exercise 1a:
+
+  $ ansible-playbook exercise1.yml --limit pynet-rtr2
+
+Exercise 1b:
+
+  $ ansible-playbook exercise1.yml --tags facts_only
+
+
+
+Exercise 2a through 2d
+
+  $ ansible-playbook exercise2.yml --tags 2a
+
+  $ ansible-playbook exercise2.yml --tags 2b
+
+  $ ansible-playbook exercise2.yml --tags 2c
+
+  $ ansible-playbook exercise2.yml --tags 2d
+
+
+
+Exercise 3:
+
+  $ ansible-playbook exercise3.yml
+
+
+
+Excercise 4:
+
+  $ ansible-playbook exercise4.yml
+
