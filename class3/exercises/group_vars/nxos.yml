@@ -1,15 +1,15 @@
 ---
 provider_ssh:
   host: "{{ ansible_host }}"
-  username: "{{ username }}"
-  password: "{{ password }}"
+  username: "{{ ansible_user }}"
+  password: "{{ ansible_ssh_pass }}"
   transport: cli
   timeout: 30
 
 provider_nxapi:
   host: "{{ ansible_host }}"
-  username: "{{ username }}"
-  password: "{{ password }}"
+  username: "{{ ansible_user }}"
+  password: "{{ ansible_ssh_pass }}"
   transport: nxapi
   use_ssl: yes
   validate_certs: no
