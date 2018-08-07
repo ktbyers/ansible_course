@@ -1,4 +1,4 @@
 creds_ssh:
   host: "{{ ansible_host }}"
-  username: "{{ username }}"
-  password: "{{ password }}"
+  username: "{{ ansible_user }}"
+  password: "{{ ansible_ssh_pass }}"

@@ -9,8 +9,6 @@ ok: [pynet-rtr1]
 PLAY [EOS Config Change] ******************************************************
 
 TASK [eos_config] *************************************************************
- [WARNING]: argument transport has been deprecated and will be removed in a future version
-
 ok: [pynet-sw5]
 
 PLAY [NXOS Config Change] *****************************************************

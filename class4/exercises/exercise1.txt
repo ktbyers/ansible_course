@@ -3,7 +3,6 @@ $ ansible-playbook exercise1.yml
 PLAY [EOS Config Vlans] *******************************************************
 
 TASK [eos_config] *************************************************************
- [WARNING]: argument transport has been deprecated and will be removed in a future version
 
 ok: [pynet-sw5]
 
