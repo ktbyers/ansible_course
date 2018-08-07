@@ -118,3 +118,4 @@ bonus1/exercises/CFGS/pynet-sw8/*.txt
 bonus1/exercises/DIFFS/*.txt
 
 _test/
+*.swp
