@@ -1,7 +1,7 @@
 creds_ssh:
   host: "{{ ansible_host }}"
-  username: "{{ username }}"
-  password: "{{ password }}"
+  username: "{{ ansible_user }}"
+  password: "{{ ansible_ssh_pass }}"
 
 name_server1: 8.8.8.8
 name_server2: 8.8.4.4

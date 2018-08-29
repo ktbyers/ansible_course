@@ -1,0 +1,25 @@
+
+# Steps to run the exercises:
+
+
+
+Exercise 1:
+
+  $ ansible-playbook exercise1.yml
+
+
+Exercise 2:
+
+  $ ansible-playbook exercise2.yml
+
+
+Exercise 3:
+
+  $ ansible-playbook exercise3.yml
+
+
+Exercise 4:
+
+  $ cd exercise4 
+  $ ansible-playbook site.yml
+
