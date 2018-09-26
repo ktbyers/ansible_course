@@ -10,7 +10,6 @@
           - username ericlab1 secret 5 $1$ZIM7$rt0JgPlkTP3NgR7JxO0EI/
       tags: stage_config
       when: True
-      notify: wr mem
 
     - name: View current users
       ios_command:
@@ -32,12 +31,4 @@
           - my_conft
           - { command: no username ericlab1, prompt: "Do you want to continue", answer: y }
       when: eric_user != ''
-      changed_when: True
-      notify: wr mem
-
-  handlers:
-    - name: wr mem
-      ios_command:
-        provider: "{{ creds_core_ssh }}"
-        commands: "write mem"
       changed_when: True
