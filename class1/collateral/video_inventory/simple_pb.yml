@@ -5,6 +5,6 @@
     - debug:
         msg: "{{ ansible_host }}"
     - debug:
-        msg: "{{ username }}"
+        msg: "{{ ansible_user }}"
     - debug:
-        msg: "{{ password }}"
+        msg: "{{ ansible_ssh_pass }}"
