@@ -32,5 +32,5 @@
       debug:
         var: item
       with_items: "{{ show_arp_new }}"
-      when: "'10.220.88.1' in item"
+      when: "'10.220.88.1 ' in item"
 
