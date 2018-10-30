@@ -11,8 +11,8 @@ pynet-rtr1 ansible_host=184.105.247.70
 pynet-rtr2 ansible_host=184.105.247.71 
 
 [cisco:vars]
-username=pyclass
-password="[THIS PASSWORD NEEDS TO BE CHANGED]"
+ansible_user=pyclass
+ansible_ssh_pass="[THIS PASSWORD NEEDS TO BE CHANGED]"
 
 [arista]
 pynet-sw1 ansible_host=184.105.247.72
@@ -21,5 +21,5 @@ pynet-sw3 ansible_host=184.105.247.74
 pynet-sw4 ansible_host=184.105.247.75
 
 [arista:vars]
-username=pyclass
-password="[THIS PASSWORD NEEDS TO BE CHANGED]"
+ansible_user=pyclass
+ansible_ssh_pass="[THIS PASSWORD NEEDS TO BE CHANGED]"
