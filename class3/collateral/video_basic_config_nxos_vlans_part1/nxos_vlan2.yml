@@ -4,14 +4,14 @@
   vars:
     ssh:
       host: "{{ ansible_host }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
+      username: "{{ ansible_user }}"
+      password: "{{ ansible_ssh_pass }}"
       transport: cli
 
     nxapi:
       host: "{{ ansible_host }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
+      username: "{{ ansible_user }}"
+      password: "{{ ansible_ssh_pass }}"
       transport: nxapi
       use_ssl: yes
       validate_certs: no
