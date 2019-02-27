@@ -3,17 +3,6 @@
   hosts: nxos
   tasks:
 
-    # Old solution: 'nxos_ip_interface' has been deprecated by Ansible
-    # - name: Configure IPv4 and IPv6 interfaces
-    #   nxos_ip_interface:
-    #     provider: "{{ provider_ssh }}"
-    #     interface: "{{ item.name }}"
-    #     version: "{{ item.type }}"
-    #     addr: "{{ item.addr }}"
-    #     mask: "{{ item.mask }}"
-    #   with_items: "{{ ip_interfaces }}"
-    #   notify: write mem
-
     - name: Configure IPv4 interfaces
       nxos_l3_interface:
         provider: "{{ provider_ssh }}"
