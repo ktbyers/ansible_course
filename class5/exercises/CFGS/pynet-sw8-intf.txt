@@ -1,11 +1,7 @@
-! Command: show running-config
-! device: pynet-sw8 (vEOS, EOS-4.15.4F)
-!
-! boot system flash:/vEOS-lab.swi
 !
 transceiver qsfp default-mode 4x10G
 !
-hostname pynet-sw8
+hostname arista8
 !
 ntp server 130.126.24.24
 !
@@ -24,6 +20,7 @@ clock timezone America/Los_Angeles
 !
 interface Ethernet1
    spanning-tree portfast
+   spanning-tree cost 1
 !
 interface Ethernet2
 !
