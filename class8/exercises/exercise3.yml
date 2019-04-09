@@ -5,6 +5,18 @@
     vlans:
         - vlan_id: "1"
           vlan_name: default
+        - vlan_id: "2"
+          vlan_name: default
+        - vlan_id: "3"
+          vlan_name: default
+        - vlan_id: "4"
+          vlan_name: default
+        - vlan_id: "5"
+          vlan_name: default
+        - vlan_id: "6"
+          vlan_name: default
+        - vlan_id: "7"
+          vlan_name: default
         - vlan_id: "333"
           vlan_name: blue333
         - vlan_id: "335"
@@ -46,8 +58,7 @@
 
     - name: Construct list of VLANs currently configured
       set_fact:
-        vlan_list: "{{ vlan_list | default([]) + [ item ] }}"
-      with_items: "{{ current_vlans.keys() }}"
+        vlan_list: "{{ current_vlans.keys() | list }}"
 
     - name: VLANs that should be configured
       set_fact:
