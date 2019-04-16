@@ -1,18 +1,16 @@
 ---
-mgmt_ip: 10.0.0.71
-mgmt_mask: 24
-mgmt_default_gw: 10.0.0.2
+mgmt_default_gw: 10.0.2.2
 mac_address: 2cc2.604f.feb2
 
-intf_number: Ethernet2/4
+intf_number: Ethernet1/4
 intf_ipv6_addr: 2001:db8:800:200c::1
 intf_ipv6_mask: 64
 
-eth2_1_ip: 10.10.10.1
-eth2_1_mask: 24
-eth2_2_ip: 10.10.20.1
-eth2_2_mask: 24
-eth2_3_ip: 10.12.13.14
-eth2_3_mask: 24
-eth2_4_ip: 10.10.40.1
-eth2_4_mask: 24
+eth1_1_ip: 10.10.10.1
+eth1_1_mask: 24
+eth1_2_ip: 10.10.20.1
+eth1_2_mask: 24
+eth1_3_ip: 10.12.13.14
+eth1_3_mask: 24
+eth1_4_ip: 10.10.40.1
+eth1_4_mask: 24
