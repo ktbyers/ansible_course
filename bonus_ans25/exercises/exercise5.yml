@@ -7,7 +7,7 @@
 #
 #
 # To Execute:
-# $ ansible-playbook exercise2a.yml -i ./ansible-hosts-2a
+# $ ansible-playbook exercise2a.yml -i ./ansible-hosts-5
 #
 #
 - name: Juniper facts using netconf
@@ -17,6 +17,7 @@
   tasks:
     - name: Juniper facts using netconf
       junos_facts:
+        gather_subset: '!hardware'
 
     - name: Print out the ansible_net_serialnum variable
       debug:
