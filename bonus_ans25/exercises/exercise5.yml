@@ -7,7 +7,7 @@
 #
 #
 # To Execute:
-# $ ansible-playbook exercise2a.yml -i ./ansible-hosts-2a
+# $ ansible-playbook exercise5.yml -i ./ansible-hosts-5 -k
 #
 #
 - name: Juniper facts using netconf
@@ -15,8 +15,10 @@
   hosts: juniper
 
   tasks:
+    # Recent ansible issue required us to exclude hardware fact gathering on this SRX
     - name: Juniper facts using netconf
       junos_facts:
+        gather_subset: '!hardware'
 
     - name: Print out the ansible_net_serialnum variable
       debug:
