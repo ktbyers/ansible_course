@@ -7,7 +7,7 @@ vrf context red3
 
 interface mgmt0
   vrf member management
-  ip address dhhcp
+  ip address dhcp
 
 interface Vlan1
 
