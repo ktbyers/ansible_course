@@ -16,7 +16,7 @@
         filter: "interfaces_ip"
 
     - set_fact:
-        device_ip: "{{ napalm_interfaces_ip['Ethernet2/4']['ipv4'] }}"
+        device_ip: "{{ napalm_interfaces_ip['Ethernet1/4']['ipv4'] }}"
 
     - set_fact:
         device_ip: "{{ item }}"
