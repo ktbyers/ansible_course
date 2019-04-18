@@ -1,22 +1,28 @@
 $ ansible-playbook exercise2.yml
 
-PLAY [Exercise2] **************************************************************************************************************************************************************
+PLAY [Exercise2] *************************************************************************************************************
 
-TASK [Gathering Facts] ********************************************************************************************************************************************************
-ok: [nxos2]
+TASK [Gathering Facts] *******************************************************************************************************
 ok: [nxos1]
+ok: [nxos2]
 
-TASK [Configure IPv4 and IPv6 interfaces] *************************************************************************************************************************************
-changed: [nxos1] => (item={u'type': u'v4', u'mask': 24, u'addr': u'10.1.1.1', u'name': u'Ethernet 2/4', u'remote_addr': u'10.1.1.2'})
-changed: [nxos2] => (item={u'type': u'v4', u'mask': 24, u'addr': u'10.1.1.2', u'name': u'Ethernet 2/4', u'remote_addr': u'10.1.1.1'})
-changed: [nxos1] => (item={u'type': u'v6', u'mask': 64, u'addr': u'2001::db8:800:200c:1', u'name': u'Ethernet 2/4', u'remote_addr': u'2001::db8:800:200c:2'})
-changed: [nxos2] => (item={u'type': u'v6', u'mask': 64, u'addr': u'2001::db8:800:200c:2', u'name': u'Ethernet 2/4', u'remote_addr': u'2001::db8:800:200c:1'})
+TASK [Configure IPv4 interfaces] *********************************************************************************************
+changed: [nxos2] => (item={'name': 'Ethernet 1/4', 'type': 'v4', 'addr': '10.1.1.2', 'remote_addr': '10.1.1.1', 'mask': 24})
+skipping: [nxos2] => (item={'name': 'Ethernet 1/4', 'type': 'v6', 'addr': '2001:db8:800:200c::2', 'remote_addr': '2001:db8:800:200c::1', 'mask': 64})
+changed: [nxos1] => (item={'name': 'Ethernet 1/4', 'type': 'v4', 'addr': '10.1.1.1', 'remote_addr': '10.1.1.2', 'mask': 24})
+skipping: [nxos1] => (item={'name': 'Ethernet 1/4', 'type': 'v6', 'addr': '2001:db8:800:200c::1', 'remote_addr': '2001:db8:800:200c::2', 'mask': 64})
 
-RUNNING HANDLER [write mem] ***************************************************************************************************************************************************
-changed: [nxos2]
+TASK [Configure IPv6 interfaces] *********************************************************************************************
+skipping: [nxos1] => (item={'name': 'Ethernet 1/4', 'type': 'v4', 'addr': '10.1.1.1', 'remote_addr': '10.1.1.2', 'mask': 24})
+skipping: [nxos2] => (item={'name': 'Ethernet 1/4', 'type': 'v4', 'addr': '10.1.1.2', 'remote_addr': '10.1.1.1', 'mask': 24})
+changed: [nxos1] => (item={'name': 'Ethernet 1/4', 'type': 'v6', 'addr': '2001:db8:800:200c::1', 'remote_addr': '2001:db8:800:200c::2', 'mask': 64})
+changed: [nxos2] => (item={'name': 'Ethernet 1/4', 'type': 'v6', 'addr': '2001:db8:800:200c::2', 'remote_addr': '2001:db8:800:200c::1', 'mask': 64})
+
+RUNNING HANDLER [write mem] **************************************************************************************************
 changed: [nxos1]
+changed: [nxos2]
 
-PLAY RECAP ********************************************************************************************************************************************************************
-nxos1                      : ok=3    changed=2    unreachable=0    failed=0   
-nxos2                      : ok=3    changed=2    unreachable=0    failed=0   
+PLAY RECAP *******************************************************************************************************************
+nxos1                      : ok=4    changed=3    unreachable=0    failed=0
+nxos2                      : ok=4    changed=3    unreachable=0    failed=0
 

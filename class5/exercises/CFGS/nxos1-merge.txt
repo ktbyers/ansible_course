@@ -1,2 +1,2 @@
-interface Ethernet 2/4
+interface Ethernet 1/4
  ip address 10.100.17.1/24
