@@ -11,7 +11,7 @@ from pprint import pprint
 
 def read_yaml(filename):
     with open(filename) as f:
-        return yaml.load(f)
+        return yaml.safe_load(f)
 
 
 if __name__ == "__main__":

@@ -3,7 +3,7 @@ import yaml
 
 def read_yaml(filename):
     with open(filename) as f:
-        return yaml.load(f)
+        return yaml.safe_load(f)
 
 def write_yaml(filename, output, style=None):
     with open(filename, "wt") as f:
